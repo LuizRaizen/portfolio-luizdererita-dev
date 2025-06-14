@@ -1,0 +1,76 @@
+{% extends "blogs/base.html" %}
+
+{% block title %}
+  {{ post.titulo }} | {{ projeto }} | Luiz R. Dererita
+{% endblock %}
+
+{% block styles %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/blogs/style.css') }}">
+{% endblock %}
+
+{% block posts %}
+  <ul>
+    {% for p in posts %}
+      <li>
+        <a href="{{ url_for('ver_post', projeto=ficha_tecnica.projeto, nome=p.nome_arquivo) }}">
+          [{{ p.data | data_curta }}] {{ p.titulo }}
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}
+
+{% block content %}
+  <!-- Título do post -->
+  <h2 class="section-title mt-4" id="postagens">{{ post.titulo }}</h2>
+
+  <!-- Imagem do post (caso exista) -->
+  {% if post.imagem %}
+    <div class="preview-img-wrapper mb-4">
+      <img src="{{ url_for('static', filename=post.imagem) }}"
+           alt="Imagem de {{ post.titulo }}"
+           class="preview-img">
+    </div>
+  {% endif %}
+
+  <!-- Conteúdo principal do post -->
+  <div class="post-body">
+    {{ post.conteudo | safe }}
+  </div>
+
+  <!-- Seção de Comentários -->
+  <h2 class="section-title mt-4">💬 Comentários</h2>
+  <div id="disqus_thread"></div>
+
+  <script>
+    // Configuração do Disqus
+    var disqus_config = function () {
+      this.page.url = "{{ url_for('ver_post', projeto=projeto, nome=post.nome_arquivo, _external=True) }}";
+      this.page.identifier = "{{ projeto }}/{{ post.nome_arquivo }}";
+      this.language = "pt_BR";
+    };
+
+    // Carregamento do Disqus
+    (function () {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://luiz-dererita-dev.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+
+    // Substituição do texto placeholder do campo de comentário
+    window.addEventListener('load', function () {
+      const interval = setInterval(() => {
+        const placeholder = document.querySelector('.notranslate.postbox .textarea-wrapper .placeholder');
+        if (placeholder && placeholder.textContent.includes('What do you think')) {
+          placeholder.textContent = 'O que você achou?';
+          clearInterval(interval);
+        }
+      }, 500);
+    });
+  </script>
+
+  <noscript>
+    Ative o JavaScript para ver os comentários via Disqus.
+  </noscript>
+{% endblock %}

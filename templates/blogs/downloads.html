@@ -1,0 +1,65 @@
+{% extends "blogs/base.html" %}
+
+{% block title %}{{ ficha_tecnica.nome }} | Downloads{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/blogs/style.css') }}">
+<style>
+  .download-item {
+    background-color: #1a1a1a;
+    padding: 1.2rem;
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+    border-left: 4px solid #5ec1ff;
+  }
+
+  .download-item h5 {
+    color: #5ec1ff;
+    margin-bottom: 0.5rem;
+  }
+
+  .download-item p {
+    color: #ccc;
+    font-size: 0.95rem;
+  }
+
+  .download-item a.btn-download {
+    margin-top: 0.8rem;
+    display: inline-block;
+  }
+
+  .no-downloads {
+    text-align: center;
+    color: #888;
+    margin-top: 3rem;
+    font-size: 1rem;
+  }
+
+  .no-downloads i {
+    margin-right: 8px;
+    color: #666;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<h2 class="section-title mt-4">📦 Downloads</h2>
+
+{% if downloads and downloads|length > 0 %}
+  {% for item in downloads %}
+    <div class="download-item">
+      <h5>{{ item.nome }}</h5>
+      {% if item.descricao %}
+        <p>{{ item.descricao }}</p>
+      {% endif %}
+      <a href="{{ url_for('static', filename=item.arquivo) }}" class="btn btn-outline-light btn-sm btn-download" download>
+        <i class="fas fa-download"></i> Baixar
+      </a>
+    </div>
+  {% endfor %}
+{% else %}
+  <p class="no-downloads">
+    <i class="fas fa-box-open"></i> Nenhum conteúdo para download foi disponibilizado ainda.
+  </p>
+{% endif %}
+{% endblock %}
