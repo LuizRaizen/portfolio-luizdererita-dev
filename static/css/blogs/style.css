@@ -60,15 +60,23 @@ body {
   z-index: 100;
 }
 
+/* Estilo base da navegação */
 .nav-section-link {
-  color: #ccc;
-  text-decoration: none;
-  padding: 0.5rem 1rem;
-  margin: 0 0.25rem;
+  font-size: 1.1rem;
   font-weight: 500;
-  font-size: 0.95rem;
-  border-radius: 8px;
-  transition: all 0.2s ease-in-out;
+  text-decoration: none;
+  color: white;
+  position: relative;
+  padding: 0 0.5rem;
+}
+
+/* Adiciona separador */
+.nav-section-link:not(:last-child)::after {
+  content: "|";
+  position: absolute;
+  right: -0.6rem;
+  color: #ccc;
+  font-weight: normal;
 }
 
 .nav-section-link:hover,
@@ -264,12 +272,23 @@ footer {
   }
 }
 
+/* Reduz fonte e espaçamento em telas pequenas */
 @media (min-width: 768px) {
   .btn-contact {
     width: auto;
   }
 }
 @media (max-width: 576px) {
+  .nav-links-responsive {
+    gap: 0.5rem !important;
+  }
+  .nav-section-link {
+    font-size: 0.85rem;
+    padding: 0 0.3rem;
+  }
+  .nav-section-link:not(:last-child)::after {
+    right: -0.4rem;
+  }
   #contato ul.list-inline {
     display: flex;
     flex-direction: column;

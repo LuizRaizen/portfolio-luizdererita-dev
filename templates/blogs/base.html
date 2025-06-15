@@ -59,14 +59,14 @@
   </section>
 
   <!-- Navegação entre seções do blog -->
-    <nav class="section-nav shadow-sm">
-      <div class="container-fluid d-flex flex-wrap justify-content-center">
-        <a class="nav-section-link" href="{{ url_for('blog_index', projeto=projeto) }}">Sobre</a>
-        <a class="nav-section-link" href="{{ url_for('galeria_imagens', projeto=projeto) }}">Imagens</a>
-        <a class="nav-section-link" href="{{ url_for('galeria_videos', projeto=projeto) }}">Vídeos</a>
-        <a class="nav-section-link" href="{{ url_for('galeria_downloads', projeto=projeto) }}">Downloads</a>
-      </div>
-    </nav>
+  <nav class="section-nav shadow-sm py-2">
+    <div class="container-fluid d-flex flex-wrap justify-content-center gap-3 nav-links-responsive">
+      <a class="nav-section-link" href="{{ url_for('blog_index', projeto=projeto) }}">Sobre</a>
+      <a class="nav-section-link" href="{{ url_for('galeria_imagens', projeto=projeto) }}">Imagens</a>
+      <a class="nav-section-link" href="{{ url_for('galeria_videos', projeto=projeto) }}">Vídeos</a>
+      <a class="nav-section-link" href="{{ url_for('galeria_downloads', projeto=projeto) }}">Downloads</a>
+    </div>
+  </nav>
 
   <!-- Conteúdo principal -->
   <div class="container-fluid py-5">
@@ -97,7 +97,7 @@
 
         <!-- Seção de Contato -->
         <div class="container my-4">
-          <h2 class="text-white">📬 Contato</h2>
+          <h2 class="section-title mt-4" id="contato">📬 Contato</h2>
           <p class="text-white">Você pode falar comigo pelas redes abaixo:</p>
 
           <div class="d-flex flex-column flex-md-row flex-wrap gap-2 justify-content-md-start">
