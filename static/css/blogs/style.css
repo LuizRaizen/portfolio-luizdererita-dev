@@ -60,24 +60,25 @@ body {
   z-index: 100;
 }
 
-/* Link padrão da navegação */
-.nav-section-link {
+/* Estilo padrão dos links */
+.nav-links-responsive {
+  gap: 0.75rem;
   font-size: 1.1rem;
   font-weight: 500;
-  text-decoration: none;
-  color: white;
-  position: relative;
-  padding: 0 0.75rem;
 }
 
-/* Separador visual (|), exceto no último link */
-.nav-section-link:not(:last-child)::after {
-  content: "|";
-  position: absolute;
-  right: -0.5rem;
+.nav-section-link a {
   color: white;
+  text-decoration: none;
+  padding: 0 0.3rem;
+}
+
+/* Separador visual */
+.separator {
+  color: #ccc;
   font-weight: normal;
-  font-size: 1rem;
+  padding: 0 0.2rem;
+  font-size: 1.1rem;
 }
 
 .nav-section-link:hover,
@@ -281,15 +282,17 @@ footer {
 }
 @media (max-width: 576px) {
   .nav-links-responsive {
-    gap: 0.25rem !important;
-  }
-  .nav-section-link {
+    gap: 0.2rem;
     font-size: 0.85rem;
-    padding: 0 0.4rem;
   }
-  .nav-section-link:not(:last-child)::after {
-    right: -0.3rem;
+
+  .nav-section-link a {
+    padding: 0 0.2rem;
+  }
+
+  .separator {
     font-size: 0.85rem;
+    padding: 0 0.15rem;
   }
   #contato ul.list-inline {
     display: flex;

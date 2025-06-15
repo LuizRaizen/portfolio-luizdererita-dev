@@ -60,11 +60,22 @@
 
   <!-- Navegação entre seções do blog -->
   <nav class="section-nav shadow-sm py-2">
-    <div class="container-fluid d-flex flex-wrap justify-content-center gap-3 nav-links-responsive">
-      <a class="nav-section-link" href="{{ url_for('blog_index', projeto=projeto) }}">Sobre</a>
-      <a class="nav-section-link" href="{{ url_for('galeria_imagens', projeto=projeto) }}">Imagens</a>
-      <a class="nav-section-link" href="{{ url_for('galeria_videos', projeto=projeto) }}">Vídeos</a>
-      <a class="nav-section-link" href="{{ url_for('galeria_downloads', projeto=projeto) }}">Downloads</a>
+    <div class="container-fluid d-flex flex-wrap justify-content-center align-items-center nav-links-responsive">
+      <span class="nav-section-link">
+        <a href="{{ url_for('blog_index', projeto=projeto) }}">Sobre</a>
+      </span>
+      <span class="separator">|</span>
+      <span class="nav-section-link">
+        <a href="{{ url_for('galeria_imagens', projeto=projeto) }}">Imagens</a>
+      </span>
+      <span class="separator">|</span>
+      <span class="nav-section-link">
+        <a href="{{ url_for('galeria_videos', projeto=projeto) }}">Vídeos</a>
+      </span>
+      <span class="separator">|</span>
+      <span class="nav-section-link">
+        <a href="{{ url_for('galeria_downloads', projeto=projeto) }}">Downloads</a>
+      </span>
     </div>
   </nav>
 
