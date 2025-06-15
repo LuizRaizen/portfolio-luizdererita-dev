@@ -22,25 +22,6 @@ def portfolio():
     return render_template("index.html")
 
 
-def get_reacoes_disqus(identifier):
-    """Obtém o total de reações (likes, points) via API pública do Disqus."""
-    try:
-        response = requests.get(
-            "https://disqus.com/api/3.0/threads/ratingsSummary.json",
-            params={
-                "api_key": DISQUS_API_KEY,
-                "forum": DISQUS_FORUM,
-                "thread:ident": identifier
-            },
-            timeout=3
-        )
-        data = response.json().get("response", {})
-        return data.get("likes", 0) + data.get("points", 0)
-    except Exception as e:
-        print(f"Erro ao obter reações do Disqus para {identifier}: {e}")
-        return 0
-    
-    
 @app.route("/blogs/<projeto>", endpoint="blog_index")
 def blog_index(projeto):
     """Renderiza a página inicial do blog de um projeto específico."""
@@ -61,7 +42,6 @@ def blog_index(projeto):
     for post in posts_paginados:
         post["visualizacoes"] = obter_visualizacoes(projeto, post["nome_arquivo"])
         identifier = f"{projeto}/{post['nome_arquivo']}"
-        post["reacoes"] = get_reacoes_disqus(identifier)
 
     return render_template(
         "blogs/index.html",

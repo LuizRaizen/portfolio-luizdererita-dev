@@ -224,10 +224,6 @@ main > *:not(:last-child) {
   display: none !important;
 }
 
-#disqus_thread .reaction-wrapper {
-  display: none !important;
-}
-
 
 /* === Paginação === */
 .blog-pagination {

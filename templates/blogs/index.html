@@ -52,14 +52,10 @@
     <div class="preview-separator"></div>
 
     <div class="post-meta d-flex justify-content-start align-items-center gap-4 mt-2">
+      <!-- Visualizações -->
       <span><i class="far fa-eye"></i> {{ post.visualizacoes or 0 }}</span>
-      <span class="disqus-reactions d-flex align-items-center gap-2" data-disqus-identifier="{{ projeto }}/{{ post.nome_arquivo }}">
-
-        <i class="fas fa-bolt text-warning"></i>
-        <span class="reactions-count">0</span>
-      </span>
+      <!-- Comentários -->
       <span><i class="far fa-comment"></i> <span id="contador-{{ post.nome_arquivo }}">0</span></span>
-
       <!-- Disqus contador invisível para pegar os dados -->
       <a href="{{ url_for('ver_post', projeto=projeto, nome=post.nome_arquivo) }}#disqus_thread"
         class="disqus-comment-count d-none"

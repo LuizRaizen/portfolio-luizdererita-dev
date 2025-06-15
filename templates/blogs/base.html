@@ -179,29 +179,5 @@
       }, 800);
     });
   </script>
-<script>
-  window.addEventListener('load', function () {
-    // Atualizar reações favoritas (ícone de coração) com base na API Disqus
-    const reactionSpans = document.querySelectorAll('.reactions-count');
-
-    reactionSpans.forEach(span => {
-      const identifier = span.getAttribute('data-disqus-identifier');
-
-      // URL da API de favoritos (reactions)
-      const url = `https://disqus.com/api/3.0/threads/details.json?api_key=d9Xyuw0drMVNiX9Ab8TQb2sO1YoPAm1BoJ6wlGYTcvGnkQ0PNlczo0TeopohwpTG&forum=luiz-dererita-dev&thread:ident=${identifier}`;
-
-      fetch(url)
-        .then(res => res.json())
-        .then(data => {
-          const likes = data.response.likes || 0;
-          span.textContent = likes;
-        })
-        .catch((err) => {
-          console.warn("Erro ao buscar reações no Disqus:", err);
-          span.textContent = 0;
-        });
-    });
-  });
-</script>
 </body>
 </html>
