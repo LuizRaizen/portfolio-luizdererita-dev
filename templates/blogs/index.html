@@ -26,7 +26,7 @@
       <a href="#" class="share-icon-top" title="Compartilhar este post">
         <i class="fas fa-share-nodes"></i>
       </a>
-      
+
       <h5 class="card-title">{{ post.titulo }}</h5>
       <p class="meta-info post-data">
         Postado em <strong>{{ post.data|data_extensa }}</strong> por <strong>{{ post.autor }}</strong>
@@ -67,6 +67,19 @@
     </div>
   </div>
 {% endfor %}
+
+<!-- Popup de Compartilhamento -->
+<div id="share-overlay" class="d-none"></div>
+<div id="share-popup" class="share-popup d-none">
+  <button class="btn-close-popup" title="Fechar">&times;</button>
+  <p class="mb-2">Compartilhar este post:</p>
+  <div class="share-buttons">
+    <a id="share-whatsapp" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    <a id="share-facebook" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
+    <a id="share-twitter" target="_blank" title="Twitter"><i class="fab fa-x-twitter"></i></a>
+    <button id="share-copy" title="Copiar link"><i class="fas fa-link"></i></button>
+  </div>
+</div>
 
 <!-- Paginação -->
 {% if total_paginas > 1 %}
