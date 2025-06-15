@@ -197,6 +197,50 @@ main > *:not(:last-child) {
 }
 
 
+/* === Popup para compartilhar um post === */
+.share-popup {
+  position: fixed;
+  bottom: 100px;
+  right: 20px;
+  background: #1a1a1a;
+  color: white;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #000;
+  z-index: 9999;
+}
+
+.share-popup .share-buttons {
+  display: flex;
+  gap: 15px;
+  margin-top: 0.5rem;
+}
+
+.share-popup .share-buttons a,
+.share-popup .share-buttons button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.share-popup .btn-close-popup {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  color: white;
+  cursor: pointer;
+}
+
+.d-none {
+  display: none;
+}
+
+
 /* === Disqus: Contador formatado com ícone === */
 .disqus-comment-count {
   display: inline-flex;

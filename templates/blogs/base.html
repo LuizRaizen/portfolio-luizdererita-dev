@@ -179,5 +179,30 @@
       }, 800);
     });
   </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const popup = document.getElementById("share-popup");
+      const btnClose = document.querySelector(".btn-close-popup");
+      const shareButtons = document.querySelectorAll(".btn-share");
+
+      shareButtons.forEach(btn => {
+        btn.addEventListener("click", () => {
+          const url = btn.getAttribute("data-url");
+          document.getElementById("share-whatsapp").href = `https://wa.me/?text=${encodeURIComponent(url)}`;
+          document.getElementById("share-facebook").href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+          document.getElementById("share-twitter").href = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}`;
+          document.getElementById("share-copy").onclick = () => {
+            navigator.clipboard.writeText(url);
+            alert("Link copiado!");
+          };
+          popup.classList.remove("d-none");
+        });
+      });
+
+      btnClose.addEventListener("click", () => {
+        popup.classList.add("d-none");
+      });
+    });
+  </script>
 </body>
 </html>
