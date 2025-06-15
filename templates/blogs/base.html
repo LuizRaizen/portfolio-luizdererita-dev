@@ -68,8 +68,8 @@
   </nav>
 
   <!-- Conteúdo principal -->
-  <div class="container-xl py-5">
-    <div class="row gx-5">
+  <div class="container-fluid py-5">
+    <div class="row justify-content-center">
 
       <!-- Barra lateral (Histórico de Postagens) -->
       <aside class="col-lg-3 d-none d-lg-block">
@@ -125,7 +125,6 @@
         <div class="support-box mt-4">
           <p>Este blog é um projeto pessoal e independente. Se ele foi útil para você ou te inspirou de alguma forma, considere <a href="#">apoiar meu trabalho</a> para que eu continue desenvolvendo e compartilhando novos projetos.</p>
         </div>
-      
       </main>
 
       <!-- Coluna direita vazia -->
@@ -180,51 +179,6 @@
       }, 800);
     });
   </script>
-  <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const popup = document.getElementById("share-popup");
-    const overlay = document.getElementById("share-overlay");
-    const closeBtn = popup.querySelector(".btn-close-popup");
-
-    document.querySelectorAll(".share-icon-top").forEach(icon => {
-      icon.addEventListener("click", (e) => {
-        e.preventDefault();
-        const url = icon.getAttribute("data-url");
-
-        document.getElementById("share-whatsapp").href = `https://wa.me/?text=${encodeURIComponent(url)}`;
-        document.getElementById("share-facebook").href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
-        document.getElementById("share-twitter").href = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}`;
-        document.getElementById("share-copy").onclick = () => {
-          navigator.clipboard.writeText(url);
-          alert("Link copiado!");
-        };
-
-        popup.classList.remove("d-none");
-        overlay.classList.remove("d-none");
-
-        setTimeout(() => {
-          popup.classList.add("active");
-          overlay.classList.add("active");
-        }, 10);
-      });
-    });
-
-    function fecharPopup() {
-      popup.classList.remove("active");
-      overlay.classList.remove("active");
-
-      setTimeout(() => {
-        popup.classList.add("d-none");
-        overlay.classList.add("d-none");
-      }, 300);
-    }
-
-    overlay.addEventListener("click", fecharPopup);
-    closeBtn.addEventListener("click", fecharPopup);
-  });
-  </script>
-
-  <!-- Popup de Compartilhamento -->
   <script>
   document.addEventListener("DOMContentLoaded", () => {
     const popup = document.getElementById("share-popup");
