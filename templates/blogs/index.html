@@ -28,7 +28,7 @@
       position: fixed;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%) scale(0.95);
       background: #1c1c1c;
       color: white;
       padding: 1.5rem 2rem;
@@ -92,10 +92,10 @@
     <div class="card-body position-relative">
 
       <!-- Ícone de Compartilhamento -->
-      <a href="#"
-        class="share-icon-top"
-        data-url="{{ url_for('ver_post', projeto=projeto, nome=post.nome_arquivo, _external=True) }}"
-        title="Compartilhar este post">
+      <a href="#" 
+        class="share-icon-top" 
+        title="Compartilhar este post" 
+        data-url="{{ url_for('ver_post', projeto=projeto, nome=post.nome_arquivo, _external=True) }}">
         <i class="fas fa-share-nodes"></i>
       </a>
 
@@ -175,110 +175,9 @@
 
 <div class="post-separator"></div>
 
-<!-- Código Fonte -->
-<h2 class="section-title mt-4" id="codigo-fonte">🔗 Código Fonte</h2>
-<p>Você pode acessar o código fonte do projeto no GitHub através do botão abaixo:</p>
-<div class="my-4">
-  <a href="https://github.com/LuizRaizen/{{ projeto | replace(' ', '_') | lower }}"
-     class="btn btn-outline-light btn-lg" target="_blank">
-    <i class="fab fa-github"></i> Ver Código no GitHub
-  </a>
-</div>
-
-<div class="post-separator"></div>
-
-<!-- Ficha Técnica -->
-<h2 class="section-title mt-4" id="ficha-tecnica">🔧 Ficha Técnica</h2>
-<ul>
-  {% if ficha_tecnica.linguagem %}
-    <li><strong>Linguagem principal:</strong> {{ ficha_tecnica.linguagem }}</li>
-  {% endif %}
-  {% if ficha_tecnica.framework %}
-    <li><strong>Framework:</strong> {{ ficha_tecnica.framework }}</li>
-  {% endif %}
-  {% if ficha_tecnica.paradigma %}
-    <li><strong>Paradigma:</strong> {{ ficha_tecnica.paradigma }}</li>
-  {% endif %}
-  {% if ficha_tecnica.arquitetura %}
-    <li><strong>Arquitetura:</strong> {{ ficha_tecnica.arquitetura }}</li>
-  {% endif %}
-  {% if ficha_tecnica.tipo_projeto %}
-    <li><strong>Tipo de Projeto:</strong> {{ ficha_tecnica.tipo_projeto }}</li>
-  {% endif %}
-  {% if ficha_tecnica.interface %}
-    <li><strong>Interface:</strong> {{ ficha_tecnica.interface }}</li>
-  {% endif %}
-  {% if ficha_tecnica.funcionalidades %}
-    <li><strong>Funcionalidades:</strong>
-      <ul>
-        {% for item in ficha_tecnica.funcionalidades %}
-          <li>{{ item }}</li>
-        {% endfor %}
-      </ul>
-    </li>
-  {% endif %}
-  {% if ficha_tecnica.bibliotecas %}
-    <li><strong>Bibliotecas Utilizadas:</strong> {{ ficha_tecnica.bibliotecas | join(', ') }}</li>
-  {% endif %}
-  {% if ficha_tecnica.banco_de_dados %}
-    <li><strong>Banco de Dados:</strong> {{ ficha_tecnica.banco_de_dados }}</li>
-  {% endif %}
-  {% if ficha_tecnica.api_externa %}
-    <li><strong>APIs Externas:</strong> {{ ficha_tecnica.api_externa }}</li>
-  {% endif %}
-  {% if ficha_tecnica.plataforma %}
-    <li><strong>Plataforma Alvo:</strong> {{ ficha_tecnica.plataforma }}</li>
-  {% endif %}
-  {% if ficha_tecnica.resolucao %}
-    <li><strong>Resolução Padrão:</strong> {{ ficha_tecnica.resolucao }}</li>
-  {% endif %}
-  {% if ficha_tecnica.status %}
-    <li><strong>Status do Projeto:</strong> {{ ficha_tecnica.status }}</li>
-  {% endif %}
-</ul>
-
-<!-- Roadmap -->
-{% set status_icons = {
-  "concluido": "fas fa-check-circle text-success",
-  "desenvolvimento": "fas fa-spinner text-warning",
-  "planejado": "far fa-circle text-secondary"
-} %}
-
-{% if roadmap %}
-  {% set alerta = roadmap[0]['alerta'] if 'alerta' in roadmap[0] else None %}
-  {% set metas = roadmap[1:] if alerta else roadmap %}
-
-  {% if metas %}
-    <div class="post-separator"></div>
-
-    <h2 class="section-title mt-4" id="roadmap">📌 Roadmap do Projeto</h2>
-
-    {% if alerta %}
-      <p class="text-warning mt-3">
-        <i class="fas fa-exclamation-triangle me-2"></i> {{ alerta }}
-      </p>
-    {% endif %}
-
-    <ul class="list-unstyled">
-      {% for item in metas %}
-        <li><i class="{{ status_icons[item.status] }} me-2"></i>{{ item.meta }}</li>
-      {% endfor %}
-    </ul>
-  {% endif %}
-
-  <!-- Legenda -->
-  <h5 class="mt-4">Legenda:</h5>
-  <ul class="list-inline">
-    {% for key, icon in status_icons.items() %}
-      <li class="list-inline-item me-3">
-        <i class="{{ icon }}"></i> {{ key.capitalize() }}
-      </li>
-    {% endfor %}
-  </ul>
-{% endif %}
-
 <!-- Popup de Compartilhamento -->
-<div id="share-popup" class="share-popup d-none">
+<div id="share-overlay" class="d-none"></div>
+<div id="share-popup" class="d-none">
   <button class="btn-close-popup" title="Fechar">&times;</button>
   <p class="mb-2">Compartilhar este post:</p>
   <div class="share-buttons">
@@ -289,4 +188,56 @@
   </div>
 </div>
 
+{% endblock %}
+
+{% block scripts %}
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const popup = document.getElementById('share-popup');
+    const overlay = document.getElementById('share-overlay');
+    const btnClose = popup.querySelector('.btn-close-popup');
+    const btnCopy = document.getElementById('share-copy');
+    const btnWhatsapp = document.getElementById('share-whatsapp');
+    const btnFacebook = document.getElementById('share-facebook');
+    const btnTwitter = document.getElementById('share-twitter');
+
+    document.querySelectorAll('.share-icon-top').forEach(btn => {
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        const url = this.getAttribute('data-url');
+
+        if (!url) return;
+
+        btnWhatsapp.href = `https://wa.me/?text=${encodeURIComponent(url)}`;
+        btnFacebook.href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+        btnTwitter.href = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}`;
+
+        popup.classList.add('active');
+        overlay.classList.add('active');
+        popup.classList.remove('d-none');
+        overlay.classList.remove('d-none');
+      });
+    });
+
+    btnClose.addEventListener('click', () => {
+      popup.classList.remove('active');
+      overlay.classList.remove('active');
+      popup.classList.add('d-none');
+      overlay.classList.add('d-none');
+    });
+
+    overlay.addEventListener('click', () => {
+      btnClose.click();
+    });
+
+    btnCopy.addEventListener('click', () => {
+      const url = btnWhatsapp.href.split('=')[1];
+      navigator.clipboard.writeText(decodeURIComponent(url));
+      btnCopy.innerHTML = '<i class="fas fa-check"></i>';
+      setTimeout(() => {
+        btnCopy.innerHTML = '<i class="fas fa-link"></i>';
+      }, 2000);
+    });
+  });
+</script>
 {% endblock %}
