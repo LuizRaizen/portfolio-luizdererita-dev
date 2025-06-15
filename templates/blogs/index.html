@@ -23,10 +23,12 @@
     <div class="card-body position-relative">
 
       <!-- Ícone de Compartilhamento -->
-      <button class="btn-share" data-url="{{ url_for('ver_post', projeto=projeto, nome=post.nome_arquivo, _external=True) }}" title="Compartilhar este post">
+      <a href="#"
+        class="share-icon-top"
+        data-url="{{ url_for('ver_post', projeto=projeto, nome=post.nome_arquivo, _external=True) }}"
+        title="Compartilhar este post">
         <i class="fas fa-share-nodes"></i>
-      </button>
-
+      </a>
 
       <h5 class="card-title">{{ post.titulo }}</h5>
       <p class="meta-info post-data">
@@ -208,13 +210,14 @@
 
 <!-- Popup de Compartilhamento -->
 <div id="share-popup" class="share-popup d-none">
-  <button class="btn-close-popup">&times;</button>
-  <p>Compartilhar:</p>
+  <button class="btn-close-popup" title="Fechar">&times;</button>
+  <p class="mb-2">Compartilhar este post:</p>
   <div class="share-buttons">
-    <a id="share-whatsapp" target="_blank"><i class="fab fa-whatsapp"></i></a>
-    <a id="share-facebook" target="_blank"><i class="fab fa-facebook"></i></a>
-    <a id="share-twitter" target="_blank"><i class="fab fa-x-twitter"></i></a>
+    <a id="share-whatsapp" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    <a id="share-facebook" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
+    <a id="share-twitter" target="_blank" title="Twitter"><i class="fab fa-x-twitter"></i></a>
     <button id="share-copy" title="Copiar link"><i class="fas fa-link"></i></button>
   </div>
 </div>
+
 {% endblock %}

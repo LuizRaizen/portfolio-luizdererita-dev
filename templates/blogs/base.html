@@ -179,30 +179,32 @@
       }, 800);
     });
   </script>
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const popup = document.getElementById("share-popup");
-      const btnClose = document.querySelector(".btn-close-popup");
-      const shareButtons = document.querySelectorAll(".btn-share");
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const popup = document.getElementById("share-popup");
+    const btnClose = popup.querySelector(".btn-close-popup");
 
-      shareButtons.forEach(btn => {
-        btn.addEventListener("click", () => {
-          const url = btn.getAttribute("data-url");
-          document.getElementById("share-whatsapp").href = `https://wa.me/?text=${encodeURIComponent(url)}`;
-          document.getElementById("share-facebook").href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
-          document.getElementById("share-twitter").href = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}`;
-          document.getElementById("share-copy").onclick = () => {
-            navigator.clipboard.writeText(url);
-            alert("Link copiado!");
-          };
-          popup.classList.remove("d-none");
-        });
-      });
+    document.querySelectorAll(".share-icon-top").forEach(icon => {
+      icon.addEventListener("click", (e) => {
+        e.preventDefault();
+        const url = icon.getAttribute("data-url");
 
-      btnClose.addEventListener("click", () => {
-        popup.classList.add("d-none");
+        document.getElementById("share-whatsapp").href = `https://wa.me/?text=${encodeURIComponent(url)}`;
+        document.getElementById("share-facebook").href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+        document.getElementById("share-twitter").href = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}`;
+        document.getElementById("share-copy").onclick = () => {
+          navigator.clipboard.writeText(url);
+          alert("Link copiado!");
+        };
+
+        popup.classList.remove("d-none");
       });
     });
-  </script>
+
+    btnClose.addEventListener("click", () => {
+      popup.classList.add("d-none");
+    });
+  });
+</script>
 </body>
 </html>
