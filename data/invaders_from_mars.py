@@ -183,7 +183,7 @@ imagens = [
 # ------------------------------------------------------------------------------
 
 videos = [
-    {"src": "videos/invaders-from-mars/demo.mp4", "descricao": "Breve demonstração do jogo"},
+    {"src": "https://youtu.be/XJhx2AI0BfM", "descricao": "Breve demonstração do jogo"},
 ]
 
 # ------------------------------------------------------------------------------
