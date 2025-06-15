@@ -181,8 +181,8 @@
     });
   </script>
 
-<!-- Popup de Compartilhamento -->
-<script>
+  <!-- Popup de Compartilhamento -->
+  <script>
   document.addEventListener("DOMContentLoaded", () => {
     const popup = document.getElementById("share-popup");
     const overlay = document.getElementById("share-overlay");
@@ -190,19 +190,23 @@
     const inputUrl = document.getElementById("share-url");
     const copyBtn = document.getElementById("share-copy");
 
+    // Preenche o campo com a URL da página atual ao carregar
+    inputUrl.value = window.location.href;
+
     document.querySelectorAll(".share-icon-top").forEach(icon => {
       icon.addEventListener("click", (e) => {
         e.preventDefault();
-        const url = icon.getAttribute("data-url");
+        const url = icon.getAttribute("data-url") || window.location.href;
 
         inputUrl.value = url;
 
         document.getElementById("share-whatsapp").href = `https://wa.me/?text=${encodeURIComponent(url)}`;
         document.getElementById("share-facebook").href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
         document.getElementById("share-twitter").href = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}`;
+        document.getElementById("share-instagram").href = `https://www.instagram.com/`; // Instagram não tem API direta de compartilhamento
 
-        popup.classList.remove("d-none", "hidden-popup");
-        overlay.classList.remove("d-none", "hidden-popup");
+        popup.classList.remove("hidden-popup");
+        overlay.classList.remove("hidden-popup");
 
         setTimeout(() => {
           popup.classList.add("active");
@@ -211,10 +215,9 @@
       });
     });
 
-    copyBtn.addEventListener("click", (e) => {
+    copyBtn.addEventListener("click", function (e) {
       e.preventDefault();
       inputUrl.select();
-      inputUrl.setSelectionRange(0, 99999); // para mobile
       document.execCommand("copy");
       alert("Link copiado!");
     });
@@ -222,19 +225,16 @@
     function fecharPopup() {
       popup.classList.remove("active");
       overlay.classList.remove("active");
+
       setTimeout(() => {
-        popup.classList.add("d-none", "hidden-popup");
-        overlay.classList.add("d-none", "hidden-popup");
+        popup.classList.add("hidden-popup");
+        overlay.classList.add("hidden-popup");
       }, 300);
     }
 
     overlay.addEventListener("click", fecharPopup);
-    closeBtn.addEventListener("click", function (e) {
-      e.preventDefault();
-      fecharPopup();
-    });
+    closeBtn.addEventListener("click", fecharPopup);
   });
-</script>
-
+  </script>
 </body>
 </html>

@@ -88,6 +88,35 @@
     color: #5ec1ff;
   }
 
+  /* Container com largura fixa para alinhar os ícones e embed */
+  .share-container {
+    max-width: 260px;
+    margin: auto;
+  }
+
+  /* Ícones de redes sociais com hover */
+  .share-container a {
+    color: white;
+    transition: transform 0.2s ease, color 0.2s ease;
+  }
+
+  .share-container a:hover {
+    transform: scale(1.15);
+    color: #5ec1ff;
+  }
+
+  /* Caixa de embed */
+  .embed-row input {
+    flex: 1;
+    min-width: 0;
+    background-color: #2a2a2a;
+    color: white;
+    border: 1px solid #444;
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 0.85rem;
+  }
+
   /* Embed row abaixo com alinhamento bonito */
   .embed-row input {
     min-width: 220px;
@@ -95,12 +124,12 @@
 
   .embed-row a {
     color: #ccc;
-    transition: color 0.2s ease;
   }
 
   .embed-row a:hover {
     color: #5ec1ff;
   }
+
 
   #share-url {
     background-color: #2a2a2a;
@@ -313,20 +342,20 @@
 
     <p class="mb-2 fw-semibold text-start">Compartilhar este post:</p>
 
-    <div class="preview-separator"></div>
+    <div class="share-container">
+      <!-- Redes Sociais -->
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <a id="share-whatsapp" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp fa-2x"></i></a>
+        <a id="share-facebook" target="_blank" title="Facebook"><i class="fab fa-facebook fa-2x"></i></a>
+        <a id="share-twitter" target="_blank" title="Twitter"><i class="fab fa-twitter fa-2x"></i></a>
+        <a id="share-instagram" target="_blank" title="Instagram"><i class="fab fa-instagram fa-2x"></i></a>
+      </div>
 
-    <!-- Redes Sociais com espaçamento proporcional -->
-    <div class="d-flex justify-content-between align-items-center mb-3 social-icons-wrapper">
-      <a id="share-whatsapp" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp fa-2x"></i></a>
-      <a id="share-facebook" target="_blank" title="Facebook"><i class="fab fa-facebook fa-2x"></i></a>
-      <a id="share-twitter" target="_blank" title="Twitter"><i class="fab fa-twitter fa-2x"></i></a>
-      <a id="share-instagram" target="_blank" title="Instagram"><i class="fab fa-instagram fa-2x"></i></a>
-    </div>
-
-    <!-- Caixa com link e ícone de embed -->
-    <div class="d-flex align-items-center gap-2 embed-row">
-      <input type="text" id="share-url" class="form-control form-control-sm flex-grow-1" readonly>
-      <a id="share-copy" href="#" title="Copiar link"><i class="fas fa-link fa-sm"></i></a>
+      <!-- Caixa de Link + Embed -->
+      <div class="d-flex align-items-center gap-2 embed-row">
+        <input type="text" id="share-url" class="form-control form-control-sm flex-grow-1" readonly>
+        <a id="share-copy" href="#" title="Copiar link"><i class="fas fa-link fa-sm"></i></a>
+      </div>
     </div>
   </div>
 {% endblock %}
