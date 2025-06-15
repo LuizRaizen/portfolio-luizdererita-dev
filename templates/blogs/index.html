@@ -21,6 +21,10 @@
     transition: opacity 0.3s ease;
   }
 
+  body.blog-popup #share-overlay.active {
+    opacity: 1;
+  }
+
   body.blog-popup #share-popup {
     position: fixed;
     top: 50%;
@@ -41,10 +45,6 @@
   body.blog-popup #share-popup.active {
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
-  }
-
-  body.blog-popup #share-overlay.active {
-    opacity: 1;
   }
 
   body.blog-popup .share-buttons {
@@ -270,18 +270,4 @@
     {% endfor %}
   </ul>
 {% endif %}
-
-<!-- Popup de Compartilhamento -->
-<div id="share-overlay" class="hidden-popup"></div>
-<div id="share-popup" class="share-popup d-none">
-  <button class="btn-close-popup" title="Fechar">&times;</button>
-  <p class="mb-2">Compartilhar este post:</p>
-  <div class="share-buttons">
-    <a id="share-whatsapp" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-    <a id="share-facebook" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
-    <a id="share-twitter" target="_blank" title="Twitter"><i class="fab fa-x-twitter"></i></a>
-    <button id="share-copy" title="Copiar link"><i class="fas fa-link"></i></button>
-  </div>
-</div>
-
 {% endblock %}

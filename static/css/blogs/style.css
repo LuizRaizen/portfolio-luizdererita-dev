@@ -193,7 +193,6 @@ main > *:not(:last-child) {
   background-color: #222;
 }
 
-
 /* === Disqus: Contador formatado com ícone === */
 .disqus-comment-count {
   display: inline-flex;
