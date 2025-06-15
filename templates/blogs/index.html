@@ -5,109 +5,8 @@
 {% endblock %}
 
 {% block styles %}
-<style>
-  /* === Popup de Compartilhamento === */
-  #share-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.65);
-    backdrop-filter: blur(2px);
-    z-index: 998;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
+<link rel="stylesheet" href="{{ url_for('static', filename='css/blogs/style.css') }}">
 
-  #share-popup {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: #1c1c1c;
-    color: white;
-    padding: 1.5rem 2rem;
-    border-radius: 12px;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.4);
-    z-index: 999;
-    width: 300px;
-    max-width: 90%;
-    opacity: 0;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-  }
-
-  #share-popup.active {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-  }
-
-  #share-overlay.active {
-    opacity: 1;
-  }
-
-  .share-buttons {
-    display: flex;
-    gap: 15px;
-    justify-content: center;
-    margin-top: 1rem;
-  }
-
-  .share-buttons a,
-  .share-buttons button {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 1.5rem;
-    cursor: pointer;
-  }
-
-  .btn-close-popup {
-    position: absolute;
-    top: 10px;
-    right: 12px;
-    background: none;
-    border: none;
-    font-size: 1.25rem;
-    color: white;
-    cursor: pointer;
-  }
-
-  .d-none {
-    display: none !important;
-  }
-</style>
-<style>
-  /* === Sidebar === */
-  .sidebar {
-    background-color: #1a1a1a;
-    padding: 20px;
-    border-radius: 8px;
-    margin-bottom: 2rem;
-  }
-
-  .sidebar h4 {
-    color: #5ec1ff;
-  }
-
-  .sidebar ul {
-    list-style: none;
-    padding-left: 0;
-  }
-
-  .sidebar ul li {
-    margin-bottom: 10px;
-  }
-
-  .sidebar ul li a {
-    color: #ccc;
-    text-decoration: none;
-  }
-
-  .sidebar ul li a:hover {
-    color: #fff;
-  }
-</style>
 {% endblock %}
 
 {% block content %}
@@ -302,7 +201,7 @@
 {% endif %}
 
 <!-- Popup de Compartilhamento -->
-<div id="share-overlay" class="d-none"></div>
+<div id="share-overlay" class="hidden-popup"></div>
 <div id="share-popup" class="share-popup d-none">
   <button class="btn-close-popup" title="Fechar">&times;</button>
   <p class="mb-2">Compartilhar este post:</p>
