@@ -1,4 +1,3 @@
-
 /* === Reset e Base === */
 body {
   background-color: #0d0d0d;
@@ -30,7 +29,8 @@ body {
   z-index: 1;
 }
 
-.logo-central, .titulo-projeto {
+.logo-central,
+.titulo-projeto {
   position: relative;
   z-index: 2;
 }
@@ -63,7 +63,8 @@ body {
 .nav-links-responsive {
   font-weight: 500;
   font-size: 1.1rem;
-  white-space: nowrap; /* evita quebra de linha */
+  white-space: nowrap;
+  text-align: center;
 }
 
 .nav-links-responsive a {
@@ -72,17 +73,17 @@ body {
   margin: 0 0.6rem;
 }
 
-.separator {
-  color: #646464;
-  font-weight: normal;
-  font-size: 1.1rem;
-  margin: 0 0.4rem;
-}
-
 .nav-links-responsive a:hover,
 .nav-links-responsive a.active {
   background-color: #5ec1ff20;
   color: #5ec1ff;
+}
+
+.separator {
+  color: #ccc;
+  font-weight: normal;
+  font-size: 1.1rem;
+  margin: 0 0.4rem;
 }
 
 /* === Títulos === */
@@ -140,10 +141,6 @@ main > *:not(:last-child) {
 }
 
 /* === Imagens de Post === */
-.preview-img-wrapper {
-  display: none;
-}
-
 .preview-img,
 .preview-img-fluid {
   display: block;
@@ -254,8 +251,15 @@ main > *:not(:last-child) {
   font-weight: bold;
 }
 
+/* === Botões de Contato === */
 .btn-contact {
   width: 100%;
+}
+
+@media (min-width: 768px) {
+  .btn-contact {
+    width: auto;
+  }
 }
 
 /* === Rodapé === */
@@ -272,27 +276,20 @@ footer {
   }
 }
 
-/* Reduz fonte e espaçamento em telas pequenas */
-@media (min-width: 768px) {
-  .btn-contact {
-    width: auto;
-  }
-}
 @media (max-width: 576px) {
   .nav-links-responsive {
     font-size: 0.85rem;
   }
+
   .nav-links-responsive a {
     margin: 0 0.35rem;
   }
+
   .separator {
     font-size: 0.85rem;
     margin: 0 0.25rem;
   }
-  .separator {
-    font-size: 0.85rem;
-    padding: 0 0.15rem;
-  }
+
   #contato ul.list-inline {
     display: flex;
     flex-direction: column;
