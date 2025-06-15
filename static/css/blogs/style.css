@@ -341,12 +341,6 @@ footer {
 
 
 /* === Responsividade === */
-@media (min-width: 992px) {
-  main.col-lg-9 {
-    max-width: 75%;
-  }
-}
-
 @media (max-width: 768px) {
   .blog-title-overlay {
     font-size: 1.8rem;
