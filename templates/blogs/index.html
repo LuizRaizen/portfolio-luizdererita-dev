@@ -77,8 +77,29 @@
     color: #5ec1ff;
   }
 
-  #share-popup .embed-row {
-    margin-top: 1rem;
+  /* Estilização da linha dos ícones */
+  .social-icons-wrapper a {
+    color: white;
+    transition: transform 0.2s ease;
+  }
+
+  .social-icons-wrapper a:hover {
+    transform: scale(1.2);
+    color: #5ec1ff;
+  }
+
+  /* Embed row abaixo com alinhamento bonito */
+  .embed-row input {
+    min-width: 220px;
+  }
+
+  .embed-row a {
+    color: #ccc;
+    transition: color 0.2s ease;
+  }
+
+  .embed-row a:hover {
+    color: #5ec1ff;
   }
 
   #share-url {
@@ -289,16 +310,20 @@
   <div id="share-overlay" class="hidden-popup"></div>
   <div id="share-popup" class="share-popup hidden-popup">
     <a href="#" class="btn-close-popup" title="Fechar">&times;</a>
+
     <p class="mb-2 fw-semibold text-start">Compartilhar este post:</p>
-    <div class="d-flex justify-content-start gap-4 mb-3">
-      <a id="share-whatsapp" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp fa-lg"></i></a>
-      <a id="share-facebook" target="_blank" title="Facebook"><i class="fab fa-facebook fa-lg"></i></a>
-      <a id="share-instagram" target="_blank" title="Twitter"><i class="fab fa-instagram fa-lg"></i></a>
-      <a id="share-twitter" target="_blank" title="Twitter"><i class="fab fa-twitter fa-lg"></i></a>
+
+    <!-- Redes Sociais com espaçamento proporcional -->
+    <div class="d-flex justify-content-between align-items-center mb-3 social-icons-wrapper">
+      <a id="share-whatsapp" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp fa-2x"></i></a>
+      <a id="share-facebook" target="_blank" title="Facebook"><i class="fab fa-facebook fa-2x"></i></a>
+      <a id="share-twitter" target="_blank" title="Twitter"><i class="fab fa-twitter fa-2x"></i></a>
+      <a id="share-instagram" target="_blank" title="Instagram"><i class="fab fa-instagram fa-2x"></i></a>
     </div>
 
+    <!-- Caixa com link e ícone de embed -->
     <div class="d-flex align-items-center gap-2 embed-row">
-      <input type="text" id="share-url" class="form-control form-control-sm" readonly>
+      <input type="text" id="share-url" class="form-control form-control-sm flex-grow-1" readonly>
       <a id="share-copy" href="#" title="Copiar link"><i class="fas fa-link fa-sm"></i></a>
     </div>
   </div>
