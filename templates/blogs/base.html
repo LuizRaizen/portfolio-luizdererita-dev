@@ -138,12 +138,18 @@
   <div id="share-overlay" class="hidden-popup"></div>
   <div id="share-popup" class="share-popup hidden-popup">
     <button class="btn-close-popup" title="Fechar">&times;</button>
-    <p class="mb-2">Compartilhar este post:</p>
-    <div class="share-buttons">
-      <a id="share-whatsapp" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-      <a id="share-facebook" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
-      <a id="share-twitter" target="_blank" title="Twitter"><i class="fab fa-x-twitter"></i></a>
-      <a id="share-copy" target="_blank" title="Copiar link"><i class="fas fa-link"></i></a>
+
+    <p class="mb-2 fw-semibold text-start">Compartilhar este post:</p>
+
+    <div class="d-flex justify-content-start gap-4 mb-3">
+      <a id="share-whatsapp" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp fa-lg"></i></a>
+      <a id="share-facebook" target="_blank" title="Facebook"><i class="fab fa-facebook fa-lg"></i></a>
+      <a id="share-twitter" target="_blank" title="Twitter"><i class="fab fa-x-twitter fa-lg"></i></a>
+    </div>
+
+    <div class="d-flex align-items-center gap-2 embed-row">
+      <a id="share-copy" href="#" title="Copiar link"><i class="fas fa-link fa-sm"></i></a>
+      <input type="text" id="share-url" class="form-control form-control-sm" readonly>
     </div>
   </div>
 
@@ -201,21 +207,25 @@
     const overlay = document.getElementById("share-overlay");
     const closeBtn = popup.querySelector(".btn-close-popup");
 
+  document.addEventListener("DOMContentLoaded", () => {
+    const popup = document.getElementById("share-popup");
+    const overlay = document.getElementById("share-overlay");
+    const closeBtn = popup.querySelector(".btn-close-popup");
+    const inputUrl = document.getElementById("share-url");
+
     document.querySelectorAll(".share-icon-top").forEach(icon => {
       icon.addEventListener("click", (e) => {
         e.preventDefault();
         const url = icon.getAttribute("data-url");
 
+        inputUrl.value = url;
+
         document.getElementById("share-whatsapp").href = `https://wa.me/?text=${encodeURIComponent(url)}`;
         document.getElementById("share-facebook").href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
         document.getElementById("share-twitter").href = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}`;
-        document.getElementById("share-copy").onclick = () => {
-          navigator.clipboard.writeText(url);
-          alert("Link copiado!");
-        };
 
-        popup.classList.remove("hidden-popup");
-        overlay.classList.remove("hidden-popup");
+        popup.classList.remove("d-none", "hidden-popup");
+        overlay.classList.remove("d-none", "hidden-popup");
 
         setTimeout(() => {
           popup.classList.add("active");
@@ -223,6 +233,28 @@
         }, 10);
       });
     });
+
+    document.getElementById("share-copy").addEventListener("click", function (e) {
+      e.preventDefault();
+      inputUrl.select();
+      document.execCommand("copy");
+      alert("Link copiado!");
+    });
+
+    function fecharPopup() {
+      popup.classList.remove("active");
+      overlay.classList.remove("active");
+
+      setTimeout(() => {
+        popup.classList.add("d-none", "hidden-popup");
+        overlay.classList.add("d-none", "hidden-popup");
+      }, 300);
+    }
+
+    overlay.addEventListener("click", fecharPopup);
+    closeBtn.addEventListener("click", fecharPopup);
+  });
+
 
     function fecharPopup() {
       popup.classList.remove("active");
