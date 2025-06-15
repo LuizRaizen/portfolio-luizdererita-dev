@@ -179,10 +179,11 @@
       }, 800);
     });
   </script>
-<script>
+  <script>
   document.addEventListener("DOMContentLoaded", () => {
     const popup = document.getElementById("share-popup");
-    const btnClose = popup.querySelector(".btn-close-popup");
+    const overlay = document.getElementById("share-overlay");
+    const closeBtn = popup.querySelector(".btn-close-popup");
 
     document.querySelectorAll(".share-icon-top").forEach(icon => {
       icon.addEventListener("click", (e) => {
@@ -198,13 +199,28 @@
         };
 
         popup.classList.remove("d-none");
+        overlay.classList.remove("d-none");
+
+        setTimeout(() => {
+          popup.classList.add("active");
+          overlay.classList.add("active");
+        }, 10);
       });
     });
 
-    btnClose.addEventListener("click", () => {
-      popup.classList.add("d-none");
-    });
+    function fecharPopup() {
+      popup.classList.remove("active");
+      overlay.classList.remove("active");
+
+      setTimeout(() => {
+        popup.classList.add("d-none");
+        overlay.classList.add("d-none");
+      }, 300);
+    }
+
+    overlay.addEventListener("click", fecharPopup);
+    closeBtn.addEventListener("click", fecharPopup);
   });
-</script>
+  </script>
 </body>
 </html>

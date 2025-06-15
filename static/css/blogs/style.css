@@ -156,24 +156,6 @@ main > *:not(:last-child) {
 }
 
 
-/* === Ícone de Compartilhamento === */
-.share-icon-top {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  font-size: 1.1rem;
-  color: #bbb;
-  padding: 6px;
-  border-radius: 50%;
-  transition: all 0.2s ease-in-out;
-}
-
-.share-icon-top:hover {
-  color: #5ec1ff;
-  background-color: #222;
-}
-
-
 /* === Metadados dos Posts === */
 .post-meta {
   display: flex;
