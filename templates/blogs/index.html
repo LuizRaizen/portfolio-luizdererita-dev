@@ -338,10 +338,11 @@
   <!-- Popup de Compartilhamento -->
   <div id="share-overlay" class="hidden-popup"></div>
   <div id="share-popup" class="share-popup hidden-popup">
-    <a href="#" class="btn-close-popup" title="Fechar">&times;</a>
+    <a href="#" class="btn-close-popup" title="Fechar" role="button">&times;</a>
 
     <p class="mb-2 fw-semibold text-start">Compartilhar este post:</p>
-
+    <div class="post-separator"></div>
+    
     <div class="share-container">
       <!-- Redes Sociais -->
       <div class="d-flex justify-content-between align-items-center mb-3">
@@ -357,5 +358,6 @@
         <a id="share-copy" href="#" title="Copiar link"><i class="fas fa-link fa-sm"></i></a>
       </div>
     </div>
+    <div id="share-feedback" class="text-success small mt-1 d-none">Link copiado!</div>
   </div>
 {% endblock %}

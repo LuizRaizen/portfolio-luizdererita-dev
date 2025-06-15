@@ -233,7 +233,23 @@
     }
 
     overlay.addEventListener("click", fecharPopup);
-    closeBtn.addEventListener("click", fecharPopup);
+    closeBtn.addEventListener("click", function(e) {
+      e.preventDefault();
+      fecharPopup();
+    });
+    copyBtn.addEventListener("click", function (e) {
+      e.preventDefault();
+      inputUrl.select();
+      inputUrl.setSelectionRange(0, 99999); // Para mobile
+      document.execCommand("copy");
+
+      // Feedback visual e seleção
+      const feedback = document.getElementById("share-feedback");
+      feedback.classList.remove("d-none");
+      setTimeout(() => {
+        feedback.classList.add("d-none");
+      }, 2000);
+    });
   });
   </script>
 </body>
