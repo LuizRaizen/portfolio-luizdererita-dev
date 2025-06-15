@@ -200,18 +200,14 @@
     });
   </script>
 
-  <!-- Popup de Compartilhamento -->
-  <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const popup = document.getElementById("share-popup");
-    const overlay = document.getElementById("share-overlay");
-    const closeBtn = popup.querySelector(".btn-close-popup");
-
+<!-- Popup de Compartilhamento -->
+<script>
   document.addEventListener("DOMContentLoaded", () => {
     const popup = document.getElementById("share-popup");
     const overlay = document.getElementById("share-overlay");
     const closeBtn = popup.querySelector(".btn-close-popup");
     const inputUrl = document.getElementById("share-url");
+    const copyBtn = document.getElementById("share-copy");
 
     document.querySelectorAll(".share-icon-top").forEach(icon => {
       icon.addEventListener("click", (e) => {
@@ -234,9 +230,10 @@
       });
     });
 
-    document.getElementById("share-copy").addEventListener("click", function (e) {
+    copyBtn.addEventListener("click", (e) => {
       e.preventDefault();
       inputUrl.select();
+      inputUrl.setSelectionRange(0, 99999); // para mobile
       document.execCommand("copy");
       alert("Link copiado!");
     });
@@ -244,7 +241,6 @@
     function fecharPopup() {
       popup.classList.remove("active");
       overlay.classList.remove("active");
-
       setTimeout(() => {
         popup.classList.add("d-none", "hidden-popup");
         overlay.classList.add("d-none", "hidden-popup");
@@ -254,21 +250,7 @@
     overlay.addEventListener("click", fecharPopup);
     closeBtn.addEventListener("click", fecharPopup);
   });
+</script>
 
-
-    function fecharPopup() {
-      popup.classList.remove("active");
-      overlay.classList.remove("active");
-
-      setTimeout(() => {
-        popup.classList.add("hidden-popup");
-        overlay.classList.add("hidden-popup");
-      }, 300);
-    }
-
-    overlay.addEventListener("click", fecharPopup);
-    closeBtn.addEventListener("click", fecharPopup);
-  });
-  </script>
 </body>
 </html>
