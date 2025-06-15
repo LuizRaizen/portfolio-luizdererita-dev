@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/blogs/style.css') }}">
 <style>
   /* === Popup de Compartilhamento === */
-  body.blog-popup #share-overlay {
+  #share-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -21,7 +21,7 @@
     transition: opacity 0.3s ease;
   }
 
-  body.blog-popup #share-overlay.active {
+  #share-overlay.active {
     opacity: 1;
   }
 
