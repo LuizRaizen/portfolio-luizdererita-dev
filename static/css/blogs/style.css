@@ -61,20 +61,19 @@ body {
 }
 
 .nav-section-link {
-  color: #ccc;
-  text-decoration: none;
   padding: 0.5rem 1rem;
-  margin: 0 0.25rem;
+  text-decoration: none;
+  color: #fff;
+  background-color: #343a40;
+  border-radius: 0.25rem;
+  transition: background-color 0.2s ease;
   font-weight: 500;
-  font-size: 0.95rem;
-  border-radius: 8px;
-  transition: all 0.2s ease-in-out;
 }
 
-.nav-section-link:hover,
+.nav-section-link:hover
 .nav-section-link.active {
-  background-color: #5ec1ff20;
-  color: #5ec1ff;
+  background-color: #495057;
+  color: #fff;
 }
 
 /* === Títulos === */
