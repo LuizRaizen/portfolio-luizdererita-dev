@@ -229,7 +229,10 @@
     }
 
     overlay.addEventListener("click", fecharPopup);
-    closeBtn.addEventListener("click", fecharPopup);
+    closeBtn.addEventListener("click", function (e) {
+      e.preventDefault();
+      fecharPopup();
+    });
   });
 </script>
 

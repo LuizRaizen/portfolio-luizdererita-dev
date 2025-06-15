@@ -47,6 +47,23 @@
     transform: translate(-50%, -50%) scale(1);
   }
 
+  .blog-popup .btn-close-popup {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    font-size: 1.25rem;
+    color: white;
+    cursor: pointer;
+    text-decoration: none;
+    background: none;
+    border: none;
+    padding: 0;
+    line-height: 1;
+  }
+  .blog-popup .btn-close-popup:hover {
+    color: #ff5e5e;
+  }
+
   #share-popup p {
     margin-bottom: 0.75rem;
   }
@@ -271,8 +288,8 @@
   <!-- Popup de Compartilhamento -->
   <div id="share-overlay" class="hidden-popup"></div>
   <div id="share-popup" class="share-popup hidden-popup">
+    <a href="#" class="btn-close-popup" title="Fechar">&times;</a>
     <p class="mb-2 fw-semibold text-start">Compartilhar este post:</p>
-    <a class="btn-close-popup" title="Fechar">&times;</a>
     <div class="d-flex justify-content-start gap-4 mb-3">
       <a id="share-whatsapp" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp fa-lg"></i></a>
       <a id="share-facebook" target="_blank" title="Facebook"><i class="fab fa-facebook fa-lg"></i></a>
