@@ -287,6 +287,7 @@ footer {
     padding: 0 0.3rem;
   }
   .nav-section-link:not(:last-child)::after {
+    content: "|";
     right: -0.4rem;
   }
   #contato ul.list-inline {
