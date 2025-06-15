@@ -136,14 +136,14 @@
 
   <!-- Popup de Compartilhamento -->
   <div id="share-overlay" class="hidden-popup"></div>
-  <div id="share-popup" class="share-popup d-none">
+  <div id="share-popup" class="share-popup hidden-popup">
     <button class="btn-close-popup" title="Fechar">&times;</button>
     <p class="mb-2">Compartilhar este post:</p>
     <div class="share-buttons">
       <a id="share-whatsapp" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
       <a id="share-facebook" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
       <a id="share-twitter" target="_blank" title="Twitter"><i class="fab fa-x-twitter"></i></a>
-      <button id="share-copy" title="Copiar link"><i class="fas fa-link"></i></button>
+      <a id="share-copy" target="_blank" title="Copiar link"><i class="fas fa-link"></i></a>
     </div>
   </div>
 
@@ -214,8 +214,8 @@
           alert("Link copiado!");
         };
 
-        popup.classList.remove("d-none");
-        overlay.classList.remove("d-none");
+        popup.classList.remove("hidden-popup");
+        overlay.classList.remove("hidden-popup");
 
         setTimeout(() => {
           popup.classList.add("active");
@@ -229,8 +229,8 @@
       overlay.classList.remove("active");
 
       setTimeout(() => {
-        popup.classList.add("d-none");
-        overlay.classList.add("d-none");
+        popup.classList.add("hidden-popup");
+        overlay.classList.add("hidden-popup");
       }, 300);
     }
 
