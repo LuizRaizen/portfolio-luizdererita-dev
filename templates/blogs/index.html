@@ -5,7 +5,298 @@
 {% endblock %}
 
 {% block styles %}
-  
+  /* === Reset e Base === */
+  body {
+    background-color: #0d0d0d;
+    color: #f1f1f1;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    padding-top: 56px;
+  }
+
+  [id] {
+    scroll-margin-top: 70px;
+  }
+
+
+  /* === Capa do Blog === */
+  .blog-cover {
+    position: relative;
+    height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: #000;
+  }
+
+  .banner-fundo {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+  }
+
+  .logo-central, .titulo-projeto {
+    position: relative;
+    z-index: 2;
+  }
+
+  .logo-central {
+    max-height: 80%;
+    max-width: 80%;
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.7));
+  }
+
+  .titulo-projeto {
+    font-size: 2.5rem;
+    color: white;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+    text-align: center;
+  }
+
+
+  /* === Menu de Seções === */
+  .section-nav {
+    background: linear-gradient(to right, #101010, #0d0d0d);
+    border-top: 1px solid #333;
+    border-bottom: 1px solid #333;
+    padding: 0.5rem 0;
+    margin-bottom: 2rem;
+    position: sticky;
+    top: 56px;
+    z-index: 100;
+  }
+
+  .nav-section-link {
+    color: #ccc;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    margin: 0 0.25rem;
+    font-weight: 500;
+    font-size: 0.95rem;
+    border-radius: 8px;
+    transition: all 0.2s ease-in-out;
+  }
+
+  .nav-section-link:hover,
+  .nav-section-link.active {
+    background-color: #5ec1ff20;
+    color: #5ec1ff;
+  }
+
+
+  /* === Títulos === */
+  .section-title {
+    font-weight: bold;
+    border-bottom: 2px solid #5ec1ff;
+    display: inline-block;
+    padding-bottom: 5px;
+  }
+
+
+  /* === Metainformações === */
+  .meta-info {
+    font-size: 0.9rem;
+    color: #bbb;
+  }
+
+
+  /* === Sidebar === */
+  .sidebar {
+    background-color: #1a1a1a;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+  }
+
+  .sidebar h4 {
+    color: #5ec1ff;
+  }
+
+  .sidebar ul {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .sidebar ul li {
+    margin-bottom: 10px;
+  }
+
+  .sidebar ul li a {
+    color: #ccc;
+    text-decoration: none;
+  }
+
+  .sidebar ul li a:hover {
+    color: #fff;
+  }
+
+
+  /* === Separadores === */
+  .post-separator {
+    border-top: 2px solid #333;
+    margin: 60px 0 40px;
+  }
+
+  main > *:not(:last-child) {
+    margin-bottom: 2.5rem;
+  }
+
+
+  /* === Imagens de Post === */
+  .preview-img-wrapper {
+    display: none;
+  }
+
+  .preview-img,
+  .preview-img-fluid {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    padding: 25px;
+    border: 1px solid #444;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+  }
+
+
+  /* === Metadados dos Posts === */
+  .post-meta {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    font-size: 0.9rem;
+    color: #ccc;
+    margin-top: 0.75rem;
+  }
+
+  .post-meta span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .post-meta i {
+    font-size: 1rem;
+    color: #aaa;
+    transition: color 0.2s ease;
+  }
+
+
+  /* === Separador das Previews === */
+  .preview-separator {
+    border-top: 1px solid #333;
+    margin: 0.75rem 0 1rem;
+  }
+
+
+  /* === Ícone de Compartilhamento === */
+  .share-icon-top {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    font-size: 1.1rem;
+    color: #bbb;
+    padding: 6px;
+    border-radius: 50%;
+    transition: all 0.2s ease-in-out;
+  }
+
+  .share-icon-top:hover {
+    color: #5ec1ff;
+    background-color: #222;
+  }
+
+
+  /* === Disqus: Contador formatado com ícone === */
+  .disqus-comment-count {
+    display: inline-flex;
+    align-items: center;
+    color: #ccc;
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+
+  .disqus-comment-count:hover {
+    color: #5ec1ff;
+  }
+
+  .disqus-comment-count::before {
+    content: "\f075"; /* Font Awesome fa-comment */
+    font-family: "Font Awesome 6 Free";
+    font-weight: 400;
+    margin-right: 6px;
+    font-size: 1rem;
+  }
+
+
+  /* Ocultar os links do Disqus usados só como fonte */
+  .disqus-comment-count.d-none {
+    display: none !important;
+  }
+
+
+  /* === Paginação === */
+  .blog-pagination {
+    margin-top: 40px;
+  }
+
+  .page-link.custom-page-link {
+    background-color: #1a1a1a;
+    color: #ccc;
+    border: 1px solid #444;
+    border-radius: 6px;
+    padding: 6px 12px;
+    margin: 0 4px;
+    transition: all 0.2s ease-in-out;
+  }
+
+  .page-link.custom-page-link:hover {
+    background-color: #5ec1ff20;
+    color: #5ec1ff;
+    border-color: #5ec1ff;
+  }
+
+  .page-item.active .custom-page-link {
+    background-color: #5ec1ff;
+    color: #0d0d0d;
+    border-color: #5ec1ff;
+    font-weight: bold;
+  }
+
+
+  /* === Rodapé === */
+  footer {
+    background-color: #111;
+    color: #bbb;
+    margin-top: 60px;
+  }
+
+
+  /* === Responsividade === */
+  @media (max-width: 768px) {
+    .blog-title-overlay {
+      font-size: 1.8rem;
+    }
+  }
+
+  @media (max-width: 576px) {
+    #contato ul.list-inline {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    #contato ul.list-inline li,
+    #contato ul.list-inline a.btn {
+      width: 100%;
+      text-align: center;
+    }
+  }
+
 {% endblock %}
 
 {% block content %}
