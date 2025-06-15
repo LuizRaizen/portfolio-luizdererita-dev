@@ -148,6 +148,7 @@
     gtag('config', 'G-XXXXXXXXXX');
   </script>
   <script id="dsq-count-scr" src="//luiz-dererita-dev.disqus.com/count.js" async></script>
+
   <script>
     const tryFillDisqusCounts = () => {
       const disqusCounts = document.querySelectorAll('.disqus-comment-count');
@@ -181,7 +182,7 @@
 <script>
   window.addEventListener('load', function () {
     // Atualizar reações favoritas (ícone de coração) com base na API Disqus
-    const reactionSpans = document.querySelectorAll('.reaction-count');
+    const reactionSpans = document.querySelectorAll('.reactions-count');
 
     reactionSpans.forEach(span => {
       const identifier = span.getAttribute('data-disqus-identifier');
