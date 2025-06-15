@@ -61,36 +61,34 @@ body {
 }
 
 .nav-links-responsive {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
   font-weight: 500;
   font-size: 1.1rem;
   white-space: nowrap;
-  text-align: center;
 }
 
-.nav-links-responsive a,
-.nav-links-responsive .separator {
-  display: inline;
-}
-
-/* Estilo padrão (desktop) */
+/* Links */
 .nav-links-responsive a {
   color: white;
   text-decoration: none;
-  margin: 0 0.6rem;
+  transition: color 0.2s ease, background-color 0.2s ease;
 }
 
-.nav-links-responsive .separator {
-  color: #ccc;
-  margin: 0 0.4rem;
-  font-size: 1.1rem;
-  font-weight: normal;
-}
-
-/* Hover no desktop */
 .nav-links-responsive a:hover,
 .nav-links-responsive a.active {
   background-color: #5ec1ff20;
   color: #5ec1ff;
+}
+
+/* Separadores visuais */
+.nav-links-responsive .separator {
+  color: #ccc;
+  font-size: 1.1rem;
+  font-weight: normal;
 }
 
 /* === Títulos === */
@@ -285,14 +283,13 @@ footer {
 
 @media (max-width: 576px) {
   .nav-links-responsive {
+    gap: 0.4rem;
     font-size: 0.85rem;
   }
-  .nav-links-responsive a {
-    margin: 0 0.35rem;
-  }
+
   .nav-links-responsive .separator {
-    margin: 0 0.25rem;
     font-size: 0.85rem;
+    margin: 0;
   }
 
   #contato ul.list-inline {
