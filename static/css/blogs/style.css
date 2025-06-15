@@ -60,29 +60,27 @@ body {
   z-index: 100;
 }
 
-/* Estilo padrão dos links */
 .nav-links-responsive {
-  gap: 0.75rem;
-  font-size: 1.1rem;
   font-weight: 500;
+  font-size: 1.1rem;
+  white-space: nowrap; /* evita quebra de linha */
 }
 
-.nav-section-link a {
+.nav-links-responsive a {
   color: white;
   text-decoration: none;
-  padding: 0 0.3rem;
+  margin: 0 0.6rem;
 }
 
-/* Separador visual */
 .separator {
-  color: #ccc;
+  color: #646464;
   font-weight: normal;
-  padding: 0 0.2rem;
   font-size: 1.1rem;
+  margin: 0 0.4rem;
 }
 
-.nav-section-link:hover,
-.nav-section-link.active {
+.nav-links-responsive a:hover,
+.nav-links-responsive a.active {
   background-color: #5ec1ff20;
   color: #5ec1ff;
 }
@@ -282,14 +280,15 @@ footer {
 }
 @media (max-width: 576px) {
   .nav-links-responsive {
-    gap: 0.2rem;
     font-size: 0.85rem;
   }
-
-  .nav-section-link a {
-    padding: 0 0.2rem;
+  .nav-links-responsive a {
+    margin: 0 0.35rem;
   }
-
+  .separator {
+    font-size: 0.85rem;
+    margin: 0 0.25rem;
+  }
   .separator {
     font-size: 0.85rem;
     padding: 0 0.15rem;

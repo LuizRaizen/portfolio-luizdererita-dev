@@ -60,22 +60,14 @@
 
   <!-- Navegação entre seções do blog -->
   <nav class="section-nav shadow-sm py-2">
-    <div class="container-fluid d-flex flex-wrap justify-content-center align-items-center nav-links-responsive">
-      <span class="nav-section-link">
-        <a href="{{ url_for('blog_index', projeto=projeto) }}">Sobre</a>
-      </span>
+    <div class="container-fluid text-center nav-links-responsive">
+      <a href="{{ url_for('blog_index', projeto=projeto) }}">Sobre</a>
       <span class="separator">|</span>
-      <span class="nav-section-link">
-        <a href="{{ url_for('galeria_imagens', projeto=projeto) }}">Imagens</a>
-      </span>
+      <a href="{{ url_for('galeria_imagens', projeto=projeto) }}">Imagens</a>
       <span class="separator">|</span>
-      <span class="nav-section-link">
-        <a href="{{ url_for('galeria_videos', projeto=projeto) }}">Vídeos</a>
-      </span>
+      <a href="{{ url_for('galeria_videos', projeto=projeto) }}">Vídeos</a>
       <span class="separator">|</span>
-      <span class="nav-section-link">
-        <a href="{{ url_for('galeria_downloads', projeto=projeto) }}">Downloads</a>
-      </span>
+      <a href="{{ url_for('galeria_downloads', projeto=projeto) }}">Downloads</a>
     </div>
   </nav>
 
