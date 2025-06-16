@@ -73,16 +73,18 @@
       }
     }
 
-    .modal-image-wrapper {
+    .modal-image-container {
       position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
+      gap: 1.5rem;
       max-width: 92vw;
+      width: 100%;
       margin-bottom: 1rem;
     }
 
-    .modal-image-container {
+    .modal-image-wrapper {
       max-width: 92vw;
       max-height: 80vh;
       overflow: hidden;
@@ -92,7 +94,7 @@
       background: black;
     }
 
-    .modal-image-container img {
+    .modal-image-wrapper img {
       display: block;
       width: 100%;
       height: auto;
@@ -102,12 +104,9 @@
 
     .modal-btn-left,
     .modal-btn-right {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
       background: rgba(0, 0, 0, 0.5);
       border: none;
-      padding: 12px 16px;
+      padding: 14px 18px;
       font-size: 1.5rem;
       color: white;
       cursor: pointer;
@@ -119,14 +118,6 @@
     .modal-btn-left:hover,
     .modal-btn-right:hover {
       background: rgba(94, 193, 255, 0.7);
-    }
-
-    .modal-btn-left {
-      left: -48px;
-    }
-
-    .modal-btn-right {
-      right: -48px;
     }
 
     .modal-descricao {
@@ -205,19 +196,20 @@
 <div class="modal-backdrop" id="modalGaleria" onclick="fecharModal(event)">
   <button class="modal-close" onclick="fecharModal(event)">×</button>
 
-  <div class="modal-image-wrapper">
+  <div class="modal-image-container">
     <button class="modal-btn-left" onclick="navegar(-1)">◀</button>
 
-    <div class="modal-image-container">
+    <div class="modal-image-wrapper">
       <img id="modalImagem" src="" alt="Imagem ampliada">
     </div>
 
     <button class="modal-btn-right" onclick="navegar(1)">▶</button>
   </div>
 
-  <div id="modalDescricao" class="modal-descricao"></div>
+  <div id="modalDescricao" class="modal-descricao">Descrição da imagem</div>
 </div>
 
+<!-- Scripts -->
 <script>
   const imagens = {{ imagens | tojson }};
   let imagemAtual = 0;
