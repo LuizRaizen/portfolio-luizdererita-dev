@@ -148,21 +148,23 @@
         <div class="overlay-container" onclick="abrirModal({{ loop.index0 }})">
           {% if item.get('thumb') %}
             <!-- Exibe thumb personalizada -->
-            <img src="{{ url_for('static', filename=item.thumb) }}" alt="{{ item.descricao }}" class="video-thumb">
+            <img src="{{ url_for('static', filename=item.thumb) }}" alt="{{ item.get('descricao', 'Prévia do vídeo') }}" class="video-thumb">
+          
           {% elif item.get('youtube_id') %}
-            <!-- Exibe preview do YouTube com embed como fallback visual -->
-            <div class="video-thumb">
-              <img src="https://img.youtube.com/vi/{{ item.youtube_id }}/hqdefault.jpg" alt="{{ item.descricao }}">
-            </div>
+            <!-- Exibe preview do YouTube com imagem de fundo -->
+            <img src="https://img.youtube.com/vi/{{ item.youtube_id }}/hqdefault.jpg" alt="{{ item.get('descricao', 'Vídeo do YouTube') }}" class="video-thumb">
+          
           {% else %}
-            <!-- Vídeo local como fallback -->
+            <!-- Exibe vídeo local como fallback -->
             <video class="video-thumb" muted preload="metadata">
               <source src="{{ url_for('static', filename=item.src) }}" type="video/mp4">
               Seu navegador não suporta a tag de vídeo.
             </video>
           {% endif %}
+
           <div class="play-overlay"><i class="fas fa-play-circle"></i></div>
         </div>
+
         {% if item.get('descricao') %}
           <div class="gallery-caption">{{ item.descricao }}</div>
         {% endif %}
