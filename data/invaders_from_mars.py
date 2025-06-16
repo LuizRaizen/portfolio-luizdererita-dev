@@ -183,7 +183,10 @@ imagens = [
 # ------------------------------------------------------------------------------
 
 videos = [
-    {"src": "https://youtu.be/XJhx2AI0BfM", "descricao": "Breve demonstração do jogo"},
+    {
+        "youtube_id": "XJhx2AI0BfM",
+        "descricao": "Descrição do vídeo",
+    },
 ]
 
 # ------------------------------------------------------------------------------

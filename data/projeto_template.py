@@ -16,7 +16,7 @@ from datetime import datetime
 # Nome do projeto (deve corresponder ao nome da pasta e à URL)
 # ------------------------------------------------------------------------------
 
-projeto = "ferramenta-pesquisa-ia"  # Exemplo: "meu-projeto-avancado"
+projeto = "nome-do-projeto"  # Exemplo: "meu-projeto-avancado"
 
 # ------------------------------------------------------------------------------
 # Ficha Técnica
@@ -26,26 +26,29 @@ projeto = "ferramenta-pesquisa-ia"  # Exemplo: "meu-projeto-avancado"
 # ------------------------------------------------------------------------------
 
 ficha_tecnica = {
-    "nome": "Ferramenta de Pesquisa com IA",
-    "linguagem": "Python, Javascript, HTML5, CSS3",
-    "framework": "Boostrap 5, FastAPI",
-    "paradigma": "Programação Orientada a Objetos (OOP)",
-    "arquitetura": "",
-    "tipo_projeto": "Questionário web com perguntas sobre saúde e instruções para melhora na qualidade de vida",
-    "interface": "Interface Web responsiva e adaptável a Desktop e Mobile",
+    "nome": "Nome do Projeto",
+    "linguagem": "Linguagem(s) utilizadas no projeto",
+    "framework": "Framework utilizado no projeto",
+    "paradigma": "Paradigma de desenvolvimento",
+    "arquitetura": "Arquitetura utilizada no projeto",
+    "tipo_projeto": "Descrição do projeto",
+    "interface": "Tipo de interface do projeto",
     "funcionalidades": [
-        "Geração de dicas personalizadas de saúde e bem-estar com base nas respostas do usuário",
-        "Texto gerado com recomendações práticas exibidas na tela e enviado por e-mail"
+        "Funcionalidade 1",
+        "Funcionalidade 2",
     ],
-    "bibliotecas": ["pygame", "os", "random"],
-    "banco_de_dados": "",
+    "bibliotecas": [
+        "biblioteca_1",
+        "biblioteca_2",
+    ],
+    "banco_de_dados": "Banco de dados utilizado no projeto",
     "api_externa": [
-        "API da OpenAI para geração de texto com IA",
-        "Integração com <code>smtplib</code> para envio por e-mail do resultado"
+        "API_1",
+        "API_2",
     ],
-    "plataforma": "Web (acesso via QR Code em dispositivos móveis)",
-    "resolucao": "",
-    "status": "Finalizado e aplicado com sucesso"
+    "plataforma": "Plataforma onde roda o projeto",
+    "resolucao": "000x000",
+    "status": "Status do projeto"
 }
 
 # ------------------------------------------------------------------------------
@@ -62,56 +65,12 @@ ficha_tecnica = {
 
 posts = [
     {
-        "titulo": "Projeto de Extensão Universitária",
-        "data": datetime(2025, 6, 12),
-        "autor": "Luiz R. Dererita",
+        "titulo": "Título da Postagem",
+        "data": datetime(0000, 0, 0),
+        "autor": "Autor",
         "nome_arquivo": "post1",
         "conteudo": """
-        <p>
-          Este projeto foi desenvolvido como parte da minha <strong>Atividade de Extensão Universitária</strong> na <strong>Universidade Cruzeiro do Sul</strong>, onde atualmente curso Análise e Desenvolvimento de Sistemas (ADS). A proposta era realizar uma intervenção social relevante, e decidi unir <strong>tecnologia, saúde e inteligência artificial</strong> em um único sistema.
-        </p>
-
-        <h3 class="section-title mt-4">A Proposta</h3>
-        <p>
-          O projeto consistiu na criação de um <strong>aplicativo web</strong> que funcionava como um <strong>questionário de pesquisa sobre saúde e bem-estar</strong>. Ao final do preenchimento, os participantes recebiam um texto com <strong>dicas personalizadas</strong> com base em suas respostas. Essa mensagem era gerada automaticamente por uma <strong>IA conectada à API da OpenAI</strong>, oferecendo recomendações práticas de saúde, como alimentação, sono, exercícios físicos e controle emocional.
-        </p>
-
-        <h3 class="section-title mt-4">Como Funciona</h3>
-        <ul>
-          <li>O participante acessava um formulário digital via <strong>QR Code</strong>, impresso e plastificado como um crachá que eu mesmo usava.</li>
-          <li>Após o preenchimento do questionário, os dados eram processados por um <strong>servidor em FastAPI</strong> com integração à <strong>API da OpenAI</strong>.</li>
-          <li>O texto com dicas de saúde era gerado automaticamente e exibido na tela.</li>
-          <li>Esse mesmo texto era também enviado para o <strong>e-mail do participante</strong>, possibilitando consulta futura.</li>
-        </ul>
-
-        <h3 class="section-title mt-4">Execução em Campo</h3>
-        <p>
-          A aplicação da pesquisa aconteceu presencialmente, em uma praça na região de <strong>Itaquera, São Paulo</strong>. Durante um fim de semana, abordei cerca de <strong>60 pessoas</strong>. Dessas, <strong>50 toparam responder</strong> o questionário e aproximadamente <strong>30 apresentaram respostas sérias e interessadas</strong> nas recomendações geradas pela IA.
-        </p>
-        <p>
-          Foi uma experiência enriquecedora: além de desenvolver o sistema completo, tive que lidar com <strong>interação social, organização de dados, suporte técnico no local e validação prática</strong> do que estava propondo.
-        </p>
-
-        <h3 class="section-title mt-4">Aprendizados Técnicos</h3>
-        <ul>
-          <li>Uso da <strong>API da OpenAI</strong> para geração automática de conteúdo com base em respostas humanas.</li>
-          <li>Criação de <strong>formulários web</strong> responsivos e intuitivos com HTML, CSS e Bootstrap.</li>
-          <li>Implementação de backend com <strong>Python + FastAPI</strong>, tratamento de dados e integração com bibliotecas como <code>smtplib</code> para envio de e-mails.</li>
-          <li>Gerenciamento de variáveis de ambiente com segurança (chaves da API e credenciais de e-mail).</li>
-        </ul>
-
-        <h3 class="section-title mt-4">Impacto Social</h3>
-        <p>
-          Este projeto uniu tecnologia e intervenção social. A proposta foi além do desenvolvimento técnico: tratou-se de criar uma ponte entre conhecimento acadêmico e benefício direto à comunidade. Muitos participantes demonstraram surpresa e entusiasmo ao receberem as recomendações personalizadas, e alguns me disseram que iriam seguir as dicas em seu cotidiano.
-        </p>
-
-        <h3 class="section-title mt-4">Reflexão Final</h3>
-        <p>
-          A <strong>Pesquisa-intervenção de Saúde e Bem-Estar</strong> foi uma das experiências mais completas que já tive como estudante. Pude desenvolver um sistema funcional, aplicar pessoalmente, interagir com a comunidade, promover a saúde e exercitar minhas habilidades de programação, design e comunicação. É um projeto que me orgulha profundamente e representa bem minha intenção de utilizar a tecnologia como ferramenta de transformação positiva.
-        </p>
-
-        <p class="meta-info">Postado em <strong>9 de Junho de 2025</strong> por <strong>Luiz R. Dererita</strong></p>
-        
+          <p>Conteúdo da postagem</p>
         """,
     },
 ]
@@ -127,21 +86,10 @@ posts = [
 
 roadmap = [
     # ALERTA OPCIONAL
-    {"alerta": ""},
+    {"alerta": "Mensagem de alerta"},
 
     # METAS
-    {"status": "concluido", "meta": "Definição do tema e metodologia da pesquisa de extensão universitária"},
-    {"status": "desenvolvimento", "meta": "Criação do questionário com foco em saúde e bem-estar"},
-    {"status": "planejado", "meta": "Integração com API da OpenAI para geração de recomendações personalizadas"},
-    {"status": "planejado", "meta": "Implementação do backend com FastAPI para receber e processar os dados"},
-    {"status": "planejado", "meta": "Envio automatizado das respostas por e-mail para os participantes"},
-    {"status": "planejado", "meta": "Preparação de crachá com QR Code para acesso rápido ao sistema"},
-    {"status": "planejado", "meta": "Aplicação presencial da pesquisa em praça pública"},
-    {"status": "planejado", "meta": "Coleta de respostas e interação com cerca de 60 pessoas"},
-    {"status": "planejado", "meta": "Dashboard administrativo com visualização de respostas e estatísticas"},
-    {"status": "planejado", "meta": "Versão pública do sistema para uso aberto por qualquer usuário na web"},
-    {"status": "planejado", "meta": "Adição de novos temas de pesquisa com IA (ex: educação, hábitos digitais, etc.)"},
-    
+    {"status": "planejado", "meta": "Descrição da meta"},
 ]
 
 # ------------------------------------------------------------------------------
@@ -153,7 +101,7 @@ roadmap = [
 # ------------------------------------------------------------------------------
 
 imagens = [
-    {"src": "img/ecommerce-oticas-picerni/print_1.png", "descricao": "Tela de boas-vindas do E-commerce"},
+    {"src": "img/pasta-do-projeto/imagem", "descricao": "Descrição do imagem"},
 ]
 
 # ------------------------------------------------------------------------------
@@ -164,7 +112,12 @@ imagens = [
 # - descricao: legenda opcional
 # ------------------------------------------------------------------------------
 
-videos = []
+videos = [
+    {
+        "youtube_id": "ID do vídeo no Youtube",
+        "descricao": "Descrição do vídeo"
+    }
+]
 
 # ------------------------------------------------------------------------------
 # Arquivos disponíveis para download
@@ -175,4 +128,10 @@ videos = []
 # - arquivo: caminho relativo à pasta static/
 # ------------------------------------------------------------------------------
 
-downloads = []
+downloads = [
+    {
+        "nome": "nome-do-arquivo",
+        "descricao": "Descrição do Download",
+        "arquivo": "downloads/caminho-para-o-arquivo"
+    }
+]
