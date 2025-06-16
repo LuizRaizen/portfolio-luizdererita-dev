@@ -140,47 +140,38 @@
 
 {% block content %}
 <h2 class="section-title mt-4">🎮 Galeria de Vídeos</h2>
-
-  {% if videos %}
-    <div class="gallery">
-      {% for item in videos %}
-        <div class="gallery-item">
-          <div class="overlay-container" onclick="abrirModal({{ loop.index0 }})">
-            {% if item.thumb %}
-              <img src="{{ url_for('static', filename=item.thumb) }}" alt="{{ item.descricao }}" class="video-thumb">
-            {% elif item.youtube_id %}
-              <div class="video-thumb">
-                <iframe
-                  width="100%" height="315"
-                  src="https://www.youtube.com/embed/{{ item.youtube_id }}"
-                  title="YouTube video player"
-                  frameborder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen>
-                </iframe>
-              </div>
-            {% else %}
-              <video class="video-thumb" muted preload="metadata">
-                <source src="{{ url_for('static', filename=item.src) }}" type="video/mp4">
-                Seu navegador não suporta a tag de vídeo.
-              </video>
-            {% endif %}
-            <div class="play-overlay"><i class="fas fa-play-circle"></i></div>
-          </div>
-          {% if item.descricao %}
-            <div class="gallery-caption">{{ item.descricao }}</div>
+{% if videos %}
+  <div class="gallery">
+    {% for item in videos %}
+      <div class="gallery-item">
+        <div class="overlay-container" onclick="abrirModal({{ loop.index0 }})">
+          {% if item.get('thumb') %}
+            <img src="{{ url_for('static', filename=item.thumb) }}" alt="{{ item.descricao }}" class="video-thumb">
+          {% elif item.get('youtube_id') %}
+            <div class="video-thumb">
+              <iframe
+                width="100%" height="315"
+                src="https://www.youtube.com/embed/{{ item.youtube_id }}"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+              </iframe>
+            </div>
+          {% else %}
+            <video class="video-thumb" muted preload="metadata">
+              <source src="{{ url_for('static', filename=item.src) }}" type="video/mp4">
+              Seu navegador não suporta a tag de vídeo.
+            </video>
           {% endif %}
+          <div class="play-overlay"><i class="fas fa-play-circle"></i></div>
         </div>
-      {% endfor %}
-    </div>
-  {% endif %}
-  {% endblock %}
-
+        {% if item.get('descricao') %}
+          <div class="gallery-caption">{{ item.descricao }}</div>
+        {% endif %}
+      </div>
+    {% endfor %}
   </div>
-{% else %}
-  <p class="no-videos">
-    <i class="fas fa-video-slash"></i> Nenhum vídeo foi adicionado para este projeto ainda.
-  </p>
 {% endif %}
 
 {% if total_paginas > 1 %}
