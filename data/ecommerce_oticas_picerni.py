@@ -173,7 +173,12 @@ imagens = [
 # - descricao: legenda opcional
 # ------------------------------------------------------------------------------
 
-videos = []
+videos = [
+    {
+        "youtube_id": "UK0heRTkygw",
+        "descricao": "Breve demonstração do front-end da Página Inicial da Óticas Picerni"
+    }
+]
 
 # ------------------------------------------------------------------------------
 # Arquivos disponíveis para download

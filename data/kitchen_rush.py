@@ -1,11 +1,30 @@
-"""Lista de postagens do blog do Kitchen Rush."""
+"""
+Módulo de configuração do projeto para exibição dinâmica no portfólio/blog.
+
+Este módulo define as informações estruturadas sobre um projeto específico,
+incluindo dados técnicos, posts, roadmap, imagens, vídeos e arquivos para download.
+Ele será importado dinamicamente pelo sistema Flask do site.
+
+Exemplo de uso:
+    from data import nome_do_projeto
+    dados = carregar_projeto(nome_do_projeto)
+"""
 
 from datetime import datetime
 
-# Nome do projeto para ser identificado na URL
+# ------------------------------------------------------------------------------
+# Nome do projeto (deve corresponder ao nome da pasta e à URL)
+# ------------------------------------------------------------------------------
+
 projeto = "kitchen-rush"
 
-# Informações qu aparecem na seção "Ficha Técnica" da Página Inicial
+# ------------------------------------------------------------------------------
+# Ficha Técnica
+# ------------------------------------------------------------------------------
+# Informações exibidas na seção "Ficha Técnica" da página principal do projeto.
+# Os campos podem ser deixados em branco ("") caso não se apliquem.
+# ------------------------------------------------------------------------------
+
 ficha_tecnica = {
     "nome": "Kitchen Rush",
     "linguagem": "Python",
@@ -28,7 +47,18 @@ ficha_tecnica = {
     "status": "Em desenvolvimento"
 }
 
-# Lista de postagens feitas no blog
+# ------------------------------------------------------------------------------
+# Postagens do blog
+# ------------------------------------------------------------------------------
+# Cada postagem deve conter:
+# - titulo (str)
+# - data (datetime)
+# - autor (str)
+# - nome_arquivo (str) - usado na URL para exibição individual
+# - conteudo (str) - HTML com parágrafos, títulos, etc.
+# - imagem (opcional) - caminho relativo à pasta static/
+# ------------------------------------------------------------------------------
+
 posts = [
     {
         "titulo": "A Ideia para Kitchen Rush",
@@ -61,24 +91,60 @@ posts = [
     },
 ]
 
-# Lista de metas definidas para a conclusão do projeto
+# ------------------------------------------------------------------------------
+# Roadmap do projeto
+# ------------------------------------------------------------------------------
+# A primeira entrada pode ser um alerta opcional (com chave "alerta").
+# As metas devem conter:
+# - status: "concluido", "desenvolvimento" ou "planejado"
+# - meta: descrição da tarefa/meta
+# ------------------------------------------------------------------------------
+
 roadmap = [
+    # ALERTA OPCIONAL
+    {"alerta": "Este projeto está em fase de desenvolvimento"},
+    
+    # METAS
     {"status": "concluido", "meta": "Interface gráfica finalizada"},
     {"status": "desenvolvimento", "meta": "Integração com API da OpenAI"},
     {"status": "planejado", "meta": "Envio automático de e-mails"},
-    {"alerta": "Este projeto está em fase de desenvolvimento"}
 ]
 
-# Lista de imagens do projeto que aparecem na página "Imagens"
+# ------------------------------------------------------------------------------
+# Galeria de imagens
+# ------------------------------------------------------------------------------
+# Cada imagem deve conter:
+# - src: caminho relativo à pasta static/
+# - descricao: legenda exibida ao lado da imagem
+# ------------------------------------------------------------------------------
+
 imagens = [
     {"src": "img/kitchen-rush/gameplay.png", "descricao": "Gameplay da primeira fase"},
     {"src": "img/kitchen-rush/menu-principal.png", "descricao": "Menu principal do jogo"},
 ]
 
-# Lista de vídeos do projeto que aparecem na página "Vídeos"
+# ------------------------------------------------------------------------------
+# Vídeos do projeto
+# ------------------------------------------------------------------------------
+# Cada vídeo deve conter:
+# - src: caminho relativo à pasta static/
+# - descricao: legenda opcional
+# ------------------------------------------------------------------------------
+
 videos = [
-    {"src": "https://www.youtube.com/embed/zfFwE3YUQB4?si=Pi0l-95VyOLGyctC", "descricao": "Video demonstrativo do jogo"},
+    {
+        "youtube_id": "zfFwE3YUQB4",
+        "descricao": "Breve demonstração de como está ficando o jogo"
+    }
 ]
 
-# Lista de arquivos disponíveis para download na página "Downloads"
+# ------------------------------------------------------------------------------
+# Arquivos disponíveis para download
+# ------------------------------------------------------------------------------
+# Cada item deve conter:
+# - nome: nome do arquivo
+# - descricao: descrição exibida ao lado do botão
+# - arquivo: caminho relativo à pasta static/
+# ------------------------------------------------------------------------------
+
 downloads = []
