@@ -22,7 +22,7 @@
 
 {% block content %}
   <!-- Título do post -->
-  <h2 class="section-title mt-4" id="postagens">{{ post.titulo }}</h2>
+  <h2 class="section-title mt-4" id="postagem">{{ post.titulo }}</h2>
 
   <!-- Imagem do post (caso exista) -->
   {% if post.imagem %}
@@ -39,7 +39,7 @@
   </div>
   
   <!-- Seção de Comentários -->
-  <h2 class="section-title mt-4">💬 Comentários</h2>
+  <h2 class="section-title mt-4 anchor-offset" id="comentarios">💬 Comentários</h2>
   <div id="disqus_thread"></div>
 
   <script>
