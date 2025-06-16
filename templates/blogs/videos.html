@@ -301,8 +301,19 @@
   function fecharModal(event) {
     if (event.target.id === 'modalGaleria' || event.target.classList.contains('modal-close')) {
       const modal = document.getElementById('modalGaleria');
+      const video = document.getElementById('modalVideo');
+      const iframe = document.getElementById('modalIframe');
+
       modal.classList.remove('active');
-      document.getElementById('modalVideo').pause();
+
+      // Interrompe vídeo local
+      video.pause();
+      video.src = '';
+      video.style.display = 'none';
+
+      // Interrompe vídeo do YouTube
+      iframe.src = '';
+      iframe.style.display = 'none';
     }
   }
 

@@ -40,77 +40,87 @@
     }
     .modal-backdrop {
       position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.85);
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(8px);
       display: none;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
+      flex-direction: column;
       z-index: 1050;
-      padding: 20px;
-      transition: opacity 0.4s ease;
-    }
-    .modal-backdrop.active {
-      display: flex;
+      padding: 1.5rem;
       animation: fadeInScale 0.3s ease;
     }
-    @keyframes fadeInScale {
-      0% { transform: scale(0.9); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
+
+    .modal-backdrop.active {
+      display: flex;
     }
+
+    @keyframes fadeInScale {
+      from {
+        transform: scale(0.95);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
     .modal-backdrop img {
-      max-width: 90%;
+      max-width: 92vw;
       max-height: 80vh;
-      border-radius: 6px;
+      border-radius: 8px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
       border: 1px solid #555;
-      box-shadow: 0 0 20px #000;
       margin-bottom: 1rem;
     }
+
     .modal-descricao {
-      color: #ccc;
-      font-size: 0.95rem;
+      color: #ddd;
+      font-size: 1rem;
       text-align: center;
-      max-width: 90%;
-      margin-bottom: 10px;
+      max-width: 90vw;
+      margin-bottom: 0.5rem;
     }
+
     .modal-nav {
       display: flex;
       gap: 10px;
-      margin-bottom: 20px;
+      justify-content: center;
+      margin-bottom: 0.5rem;
     }
+
     .modal-nav button {
       background: #444;
-      border: none;
-      padding: 8px 12px;
       color: #fff;
+      border: none;
+      padding: 8px 14px;
+      font-size: 1.1rem;
       border-radius: 4px;
       cursor: pointer;
+      transition: background 0.2s ease;
     }
+
     .modal-nav button:hover {
       background: #5ec1ff;
     }
+
     .modal-close {
       position: absolute;
       top: 15px;
       right: 20px;
-      font-size: 1.4rem;
+      font-size: 1.6rem;
       color: #ccc;
       background: none;
       border: none;
       cursor: pointer;
+      z-index: 1100;
     }
+
     .modal-close:hover {
       color: #fff;
-    }
-    .no-images {
-      text-align: center;
-      color: #888;
-      margin-top: 3rem;
-      font-size: 1rem;
-    }
-    .no-images i {
-      margin-right: 8px;
-      color: #666;
     }
   </style>
 {% endblock %}
