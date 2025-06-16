@@ -154,6 +154,31 @@
       cursor: pointer;
       z-index: 1100;
     }
+    .modal-video-wrapper {
+      width: 90vw;
+      max-width: 960px;
+    }
+
+    .modal-video-aspect {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%; /* 16:9 ratio */
+      height: 0;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(0,0,0,0.6);
+    }
+
+    .modal-video-aspect iframe,
+    .modal-video-aspect video {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: black;
+      display: block;
+    }
   </style>
 {% endblock %}
 
@@ -213,19 +238,22 @@
   </ul>
 </nav>
 {% endif %}
+
 <!-- Modal -->
 <div class="modal-backdrop" id="modalGaleria" onclick="fecharModal(event)">
   <button class="modal-close" onclick="fecharModal(event)">×</button>
 
-  <div class="modal-video-container">
-    <video id="modalVideo" controls autoplay muted style="display: none;"></video>
-    <iframe
-      id="modalIframe"
-      frameborder="0"
-      allowfullscreen
-      allow="autoplay; encrypted-media"
-      style="display: none;">
-    </iframe>
+  <div class="modal-video-wrapper">
+    <div class="modal-video-aspect">
+      <video id="modalVideo" controls autoplay muted style="display: none;"></video>
+      <iframe
+        id="modalIframe"
+        frameborder="0"
+        allowfullscreen
+        allow="autoplay; encrypted-media"
+        style="display: none;">
+      </iframe>
+    </div>
   </div>
 
   <div id="modalDescricao" class="modal-descricao">Descrição do vídeo</div>
