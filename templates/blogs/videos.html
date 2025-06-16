@@ -4,188 +4,182 @@
 
 {% block styles %}
   <link rel="stylesheet" href="{{ url_for('static', filename='css/blogs/style.css') }}">
-<style>
-  .gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1rem;
-    margin-top: 1rem;
-  }
-
-  .gallery-item {
-    background-color: #1a1a1a;
-    border-radius: 8px;
-    overflow: hidden;
-    position: relative;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
-  }
-
-  .overlay-container {
-    position: relative;
-    width: 100%;
-    height: 180px;
-    overflow: hidden;
-    border-radius: 8px;
-    cursor: pointer;
-  }
-
-  .video-thumb,
-  .overlay-container video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.3s ease, filter 0.3s ease;
-  }
-
-  .overlay-container .video-thumb {
-    filter: brightness(60%);
-  }
-
-  .overlay-container:hover .video-thumb,
-  .overlay-container:hover video {
-    transform: scale(1.03);
-    filter: brightness(75%);
-  }
-
-  .play-overlay {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    font-size: 3rem;
-    pointer-events: none;
-    opacity: 0.85;
-    transition: opacity 0.3s ease;
-  }
-
-  .overlay-container:hover .play-overlay {
-    opacity: 1;
-  }
-
-  .gallery-caption {
-    padding: 0.5rem;
-    font-size: 0.875rem;
-    color: #ccc;
-    text-align: center;
-  }
-
-  .modal-backdrop {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.75);
-    backdrop-filter: blur(10px);
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem 1rem;
-    z-index: 1050;
-  }
-
-  .modal-backdrop.active {
-    display: flex;
-    animation: fadeInScale 0.3s ease-out;
-  }
-
-  @keyframes fadeInScale {
-    from {
-      opacity: 0;
-      transform: scale(0.97);
+  <style>
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
     }
-    to {
+
+    .gallery-item {
+      background-color: #1a1a1a;
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+    }
+
+    .overlay-container {
+      position: relative;
+      width: 100%;
+      height: 180px;
+      overflow: hidden;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .video-thumb,
+    .overlay-container video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+
+    .overlay-container .video-thumb {
+      filter: brightness(60%);
+    }
+
+    .overlay-container:hover .video-thumb,
+    .overlay-container:hover video {
+      transform: scale(1.03);
+      filter: brightness(75%);
+    }
+
+    .play-overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: 3rem;
+      pointer-events: none;
+      opacity: 0.85;
+      transition: opacity 0.3s ease;
+    }
+
+    .overlay-container:hover .play-overlay {
       opacity: 1;
-      transform: scale(1);
     }
-  }
 
-  .modal-video-wrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    max-width: 90vw;
-    width: 100%;
-    margin-bottom: 1rem;
-  }
+    .gallery-caption {
+      padding: 0.5rem;
+      font-size: 0.875rem;
+      color: #ccc;
+      text-align: center;
+    }
 
-  .modal-video-aspect {
-    position: relative;
-    width: 100%;
-    padding-bottom: 56.25%; /* 16:9 ratio */
-    height: 0;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 0 20px rgba(0,0,0,0.6);
-    z-index: 1;
-  }
+    .modal-backdrop {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(10px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1050;
+      padding: 2rem 1rem;
+    }
 
-  .modal-video-aspect iframe,
-  .modal-video-aspect video {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%;
-    height: 100%;
-    border: none;
-    background: black;
-    display: block;
-  }
+    .modal-backdrop.active {
+      display: flex;
+      animation: fadeInScale 0.3s ease-out;
+    }
 
-  .modal-btn-left,
-  .modal-btn-right {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.5);
-    border: none;
-    padding: 12px 16px;
-    font-size: 1.5rem;
-    color: white;
-    cursor: pointer;
-    border-radius: 50%;
-    z-index: 2;
-    transition: background 0.3s ease;
-  }
+    @keyframes fadeInScale {
+      from {
+        opacity: 0;
+        transform: scale(0.96);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
 
-  .modal-btn-left:hover,
-  .modal-btn-right:hover {
-    background: rgba(94, 193, 255, 0.7);
-  }
+    .modal-video-wrapper {
+      position: relative;
+      width: 90vw;
+      max-width: 960px;
+      margin-bottom: 1rem;
+    }
 
-  .modal-btn-left {
-    left: -40px;
-  }
+    .modal-video-aspect {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%; /* 16:9 */
+      border-radius: 10px;
+      overflow: hidden;
+      background: black;
+      box-shadow: 0 0 20px rgba(0,0,0,0.6);
+    }
 
-  .modal-btn-right {
-    right: -40px;
-  }
+    .modal-video-aspect iframe,
+    .modal-video-aspect video {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: black;
+    }
 
-  .modal-descricao {
-    margin-top: 1rem;
-    color: #ddd;
-    text-align: center;
-    font-size: 1rem;
-    max-width: 90vw;
-  }
+    .modal-btn-left,
+    .modal-btn-right {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.5);
+      border: none;
+      padding: 12px 16px;
+      font-size: 1.5rem;
+      color: white;
+      cursor: pointer;
+      border-radius: 50%;
+      z-index: 2;
+      transition: background 0.3s ease;
+    }
 
-  .modal-close {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 1.5rem;
-    color: #fff;
-    background: none;
-    border: none;
-    cursor: pointer;
-    z-index: 1100;
-  }
+    .modal-btn-left:hover,
+    .modal-btn-right:hover {
+      background: rgba(94, 193, 255, 0.7);
+    }
 
-  .modal-close:hover {
-    color: #fff;
-  }
-</style>
+    .modal-btn-left {
+      left: -48px;
+    }
+
+    .modal-btn-right {
+      right: -48px;
+    }
+
+    .modal-descricao {
+      margin-top: 0.8rem;
+      color: #ddd;
+      text-align: center;
+      font-size: 1rem;
+      max-width: 90vw;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 1.6rem;
+      color: #ccc;
+      background: none;
+      border: none;
+      cursor: pointer;
+      z-index: 1100;
+    }
+
+    .modal-close:hover {
+      color: white;
+    }
+  </style>
 {% endblock %}
 
 {% block content %}
@@ -246,24 +240,28 @@
 {% endif %}
 
 <!-- Modal -->
-<div class="modal-video-wrapper">
-  <button class="modal-btn-left" onclick="navegar(-1)">◀</button>
+<div class="modal-backdrop" id="modalGaleria" onclick="fecharModal(event)">
+  <button class="modal-close" onclick="fecharModal(event)">×</button>
 
-  <div class="modal-video-aspect">
-    <video id="modalVideo" controls autoplay muted style="display: none;"></video>
-    <iframe
-      id="modalIframe"
-      frameborder="0"
-      allowfullscreen
-      allow="autoplay; encrypted-media"
-      style="display: none;">
-    </iframe>
+  <div class="modal-video-wrapper">
+    <button class="modal-btn-left" onclick="navegar(-1)">◀</button>
+
+    <div class="modal-video-aspect">
+      <video id="modalVideo" controls autoplay muted style="display: none;"></video>
+      <iframe
+        id="modalIframe"
+        frameborder="0"
+        allowfullscreen
+        allow="autoplay; encrypted-media"
+        style="display: none;">
+      </iframe>
+    </div>
+
+    <button class="modal-btn-right" onclick="navegar(1)">▶</button>
   </div>
 
-  <button class="modal-btn-right" onclick="navegar(1)">▶</button>
+  <div id="modalDescricao" class="modal-descricao">Descrição do vídeo</div>
 </div>
-
-<div id="modalDescricao" class="modal-descricao">Descrição do vídeo</div>
 
 <!-- Scripts -->
 <script>
