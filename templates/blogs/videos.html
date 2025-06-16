@@ -64,65 +64,66 @@
     }
     .modal-backdrop {
       position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.85);
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(8px);
       display: none;
       align-items: center;
       justify-content: center;
       z-index: 1050;
-      padding: 1rem;
+      flex-direction: column;
+      gap: 0.5rem;
+      animation: fadeIn 0.4s ease-out forwards;
     }
 
     .modal-backdrop.active {
       display: flex;
-      animation: fadeInScale 0.3s ease;
+      animation: fadeInScale 0.4s ease-out forwards;
     }
 
-    .modal-content {
-      position: relative;
-      background: #111;
-      padding: 1rem;
-      border-radius: 8px;
-      max-width: 960px;
-      width: 100%;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+    @keyframes fadeInScale {
+      from {
+        transform: scale(0.95);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
     }
 
     #modalVideo,
     #modalIframe {
-      width: 100%;
-      max-height: 70vh;
-      border-radius: 6px;
-      border: 1px solid #555;
-      box-shadow: 0 0 20px #000;
-      margin-bottom: 1rem;
+      width: 90%;
+      max-width: 960px;
+      max-height: 75vh;
+      border-radius: 8px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.6);
+      border: none;
     }
 
     .modal-descricao {
-      color: #ccc;
+      color: #fff;
       font-size: 1rem;
-      margin-bottom: 0.75rem;
       text-align: center;
-      max-width: 90%;
+      padding: 0.25rem 1rem;
     }
 
     .modal-nav {
       display: flex;
       gap: 10px;
-      justify-content: center;
     }
 
     .modal-nav button {
-      background: #444;
+      background: #333;
       border: none;
       padding: 8px 16px;
+      font-size: 1.2rem;
       color: #fff;
-      border-radius: 4px;
-      font-size: 1rem;
+      border-radius: 5px;
       cursor: pointer;
+      transition: background 0.2s ease;
     }
 
     .modal-nav button:hover {
@@ -131,17 +132,18 @@
 
     .modal-close {
       position: absolute;
-      top: 10px;
-      right: 15px;
-      font-size: 1.5rem;
+      top: 15px;
+      right: 20px;
+      font-size: 1.6rem;
       color: #ccc;
       background: none;
       border: none;
       cursor: pointer;
+      z-index: 1100;
     }
 
     .modal-close:hover {
-      color: #fff;
+      color: white;
     }
   </style>
 {% endblock %}
@@ -202,27 +204,25 @@
   </ul>
 </nav>
 {% endif %}
-
 <!-- Modal -->
 <div class="modal-backdrop" id="modalGaleria" onclick="fecharModal(event)">
-  <div class="modal-content" onclick="event.stopPropagation()">
-    <button class="modal-close" onclick="fecharModal(event)">×</button>
+  <button class="modal-close" onclick="fecharModal(event)">×</button>
 
-    <video id="modalVideo" controls autoplay muted style="display: none;"></video>
-    <iframe
-      id="modalIframe"
-      style="display: none;"
-      frameborder="0"
-      allowfullscreen
-      allow="autoplay; encrypted-media">
-    </iframe>
+  <video id="modalVideo" controls autoplay muted style="display: none;"></video>
 
-    <div id="modalDescricao" class="modal-descricao"></div>
+  <iframe
+    id="modalIframe"
+    style="display: none;"
+    frameborder="0"
+    allowfullscreen
+    allow="autoplay; encrypted-media">
+  </iframe>
 
-    <div class="modal-nav">
-      <button onclick="navegar(-1)">◀</button>
-      <button onclick="navegar(1)">▶</button>
-    </div>
+  <div id="modalDescricao" class="modal-descricao">Descrição do vídeo</div>
+
+  <div class="modal-nav">
+    <button onclick="navegar(-1)">◀</button>
+    <button onclick="navegar(1)">▶</button>
   </div>
 </div>
 
