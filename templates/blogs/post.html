@@ -6,6 +6,17 @@
 
 {% block styles %}
   <link rel="stylesheet" href="{{ url_for('static', filename='css/blogs/style.css') }}">
+  <style>
+    .share-callout i {
+      font-size: 1.2rem;
+    }
+    .share-callout .btn {
+      min-width: 45px;
+    }
+    #share-url-inline {
+      font-size: 0.9rem;
+    }
+  </style>
 {% endblock %}
 
 {% block posts %}
@@ -42,6 +53,36 @@
   <h2 class="section-title mt-4 anchor-offset" id="comentarios">💬 Comentários</h2>
   <div id="disqus_thread"></div>
 
+  <!-- Chamada para Compartilhamento -->
+  <div class="share-callout text-center bg-dark text-light rounded p-4 mt-5">
+    <h5 class="mb-3"><i class="fas fa-share-alt me-2 text-info"></i>Gostou do post?</h5>
+    <p class="mb-4">Compartilhe com seus amigos e ajude mais pessoas a conhecerem este projeto!</p>
+
+    <div class="d-flex justify-content-center gap-3 flex-wrap">
+      <a href="#" id="share-whatsapp" class="btn btn-outline-success" title="Compartilhar no WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+      </a>
+      <a href="#" id="share-facebook" class="btn btn-outline-primary" title="Compartilhar no Facebook">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+      <a href="#" id="share-twitter" class="btn btn-outline-info" title="Compartilhar no Twitter">
+        <i class="fab fa-twitter"></i>
+      </a>
+      <a href="#" id="share-instagram" class="btn btn-outline-light" title="Compartilhar no Instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
+    </div>
+
+    <div class="input-group mt-4">
+      <input type="text" id="share-url-inline" class="form-control bg-dark text-white border-secondary" readonly>
+      <button class="btn btn-outline-light" id="share-copy-inline" title="Copiar link">
+        <i class="fas fa-copy"></i>
+      </button>
+    </div>
+    <small id="share-feedback-inline" class="text-success d-none mt-2">Link copiado com sucesso!</small>
+  </div>
+
+  <!-- Script do Sistema de comentários do Disqus -->
   <script>
     // Configuração do Disqus
     var disqus_config = function () {
@@ -73,4 +114,29 @@
   <noscript>
     Ative o JavaScript para ver os comentários via Disqus.
   </noscript>
+
+  <!-- Script do Sistema de Comprtilhamento -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const url = window.location.href;
+      const input = document.getElementById("share-url-inline");
+      const copyBtn = document.getElementById("share-copy-inline");
+      const feedback = document.getElementById("share-feedback-inline");
+
+      input.value = url;
+
+      document.getElementById("share-whatsapp").href = `https://wa.me/?text=${encodeURIComponent(url)}`;
+      document.getElementById("share-facebook").href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+      document.getElementById("share-twitter").href = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}`;
+      document.getElementById("share-instagram").href = `https://www.instagram.com/`;
+
+      copyBtn.addEventListener("click", function () {
+        input.select();
+        input.setSelectionRange(0, 99999);
+        document.execCommand("copy");
+        feedback.classList.remove("d-none");
+        setTimeout(() => feedback.classList.add("d-none"), 2000);
+      });
+    });
+  </script>
 {% endblock %}
