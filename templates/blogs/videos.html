@@ -140,25 +140,22 @@
 
 {% block content %}
 <h2 class="section-title mt-4">🎮 Galeria de Vídeos</h2>
+
 {% if videos %}
   <div class="gallery">
     {% for item in videos %}
       <div class="gallery-item">
         <div class="overlay-container" onclick="abrirModal({{ loop.index0 }})">
           {% if item.get('thumb') %}
+            <!-- Exibe thumb personalizada -->
             <img src="{{ url_for('static', filename=item.thumb) }}" alt="{{ item.descricao }}" class="video-thumb">
           {% elif item.get('youtube_id') %}
+            <!-- Exibe preview do YouTube com embed como fallback visual -->
             <div class="video-thumb">
-              <iframe
-                width="100%" height="315"
-                src="https://www.youtube.com/embed/{{ item.youtube_id }}"
-                title="YouTube video player"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen>
-              </iframe>
+              <img src="https://img.youtube.com/vi/{{ item.youtube_id }}/hqdefault.jpg" alt="{{ item.descricao }}">
             </div>
           {% else %}
+            <!-- Vídeo local como fallback -->
             <video class="video-thumb" muted preload="metadata">
               <source src="{{ url_for('static', filename=item.src) }}" type="video/mp4">
               Seu navegador não suporta a tag de vídeo.
@@ -217,9 +214,26 @@
     const video = document.getElementById('modalVideo');
     const desc = document.getElementById('modalDescricao');
 
-    video.src = `/static/${videos[videoAtual].src}`;
+    const isYouTube = !!videos[videoAtual].youtube_id;
+    const video = document.getElementById('modalVideo');
+    const iframe = document.getElementById('modalIframe');
+    const desc = document.getElementById('modalDescricao');
+
+    video.pause();
+    video.style.display = 'none';
+    iframe.style.display = 'none';
+    iframe.src = '';
+
+    if (isYouTube) {
+      iframe.src = `https://www.youtube.com/embed/${videos[videoAtual].youtube_id}?autoplay=1`;
+      iframe.style.display = 'block';
+    } else {
+      video.src = `/static/${videos[videoAtual].src}`;
+      video.style.display = 'block';
+      video.play();
+    }
+
     desc.textContent = videos[videoAtual].descricao || '';
-    modal.classList.add('active');
   }
 
   function fecharModal(event) {
