@@ -210,19 +210,20 @@
 
   function abrirModal(index) {
     videoAtual = index;
-    const modal = document.getElementById('modalGaleria');
-    const video = document.getElementById('modalVideo');
-    const desc = document.getElementById('modalDescricao');
 
-    const isYouTube = !!videos[videoAtual].youtube_id;
+    const modal = document.getElementById('modalGaleria');
     const video = document.getElementById('modalVideo');
     const iframe = document.getElementById('modalIframe');
     const desc = document.getElementById('modalDescricao');
 
+    const isYouTube = !!videos[videoAtual].youtube_id;
+
+    // Limpa o estado anterior
     video.pause();
     video.style.display = 'none';
     iframe.style.display = 'none';
     iframe.src = '';
+    video.src = '';
 
     if (isYouTube) {
       iframe.src = `https://www.youtube.com/embed/${videos[videoAtual].youtube_id}?autoplay=1`;
@@ -234,6 +235,7 @@
     }
 
     desc.textContent = videos[videoAtual].descricao || '';
+    modal.classList.add('active'); // <-- ESSENCIAL para exibir a modal
   }
 
   function fecharModal(event) {
