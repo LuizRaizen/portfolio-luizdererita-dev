@@ -198,7 +198,14 @@
 <!-- Modal -->
 <div class="modal-backdrop" id="modalGaleria" onclick="fecharModal(event)">
   <button class="modal-close" onclick="fecharModal(event)">×</button>
-  <video id="modalVideo" controls autoplay muted></video>
+  <video id="modalVideo" controls autoplay muted style="display: none;"></video>
+  <iframe
+    id="modalIframe"
+    style="display: none; max-width: 90%; max-height: 80vh; border-radius: 6px; border: 1px solid #555; box-shadow: 0 0 20px #000; margin-bottom: 1rem;"
+    frameborder="0"
+    allowfullscreen
+    allow="autoplay; encrypted-media">
+  </iframe>
   <div id="modalDescricao" class="modal-descricao"></div>
   <div class="modal-nav">
     <button onclick="navegar(-1)">◀</button>
