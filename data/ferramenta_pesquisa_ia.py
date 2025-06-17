@@ -149,12 +149,12 @@ roadmap = [
 # ------------------------------------------------------------------------------
 
 imagens = [
-    {"src": "img/ferramenta-pesquisa-ia/pesquisa_1.jpeg", "descricao": "Gameplay da primeira fase"},
-    {"src": "img/ferramenta-pesquisa-ia/pesquisa_2.JPG", "descricao": "Gameplay da primeira fase"},
-    {"src": "img/ferramenta-pesquisa-ia/pesquisa_3.JPG", "descricao": "Gameplay da primeira fase"},
-    {"src": "img/ferramenta-pesquisa-ia/pesquisa_4.jpeg", "descricao": "Gameplay da primeira fase"},
-    {"src": "img/ferramenta-pesquisa-ia/print_1.jpeg", "descricao": "Gameplay da primeira fase"},
-    {"src": "img/ferramenta-pesquisa-ia/print_2.jpeg", "descricao": "Gameplay da primeira fase"},
+    {"src": "img/ferramenta-pesquisa-ia/pesquisa_1.jpeg", "descricao": "Trocando ideia com um participante"},
+    {"src": "img/ferramenta-pesquisa-ia/pesquisa_2.JPG", "descricao": "Orientando participante sobre como usar o App"},
+    {"src": "img/ferramenta-pesquisa-ia/pesquisa_3.JPG", "descricao": "Participante acessando o App via QR Code"},
+    {"src": "img/ferramenta-pesquisa-ia/pesquisa_4.jpeg", "descricao": "Crachá impresso e plástificado para a pesquisa"},
+    {"src": "img/ferramenta-pesquisa-ia/print_1.jpeg", "descricao": "O App rodando a partir de um celular #1"},
+    {"src": "img/ferramenta-pesquisa-ia/print_2.jpeg", "descricao": "O App rodando a partir de um celular #2"},
 ]
 
 # ------------------------------------------------------------------------------
