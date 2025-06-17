@@ -230,7 +230,7 @@
   </div>
 {% else %}
   <p class="no-videos">
-    <i class="fas fa-video py-5 my-5"></i> Nenhuma vídeo foi adicionada a este projeto ainda.
+    <i class="fas fa-video py-5 my-5"></i> Nenhuma vídeo foi adicionado a este projeto ainda.
   </p>
 {% endif %}
 
@@ -272,7 +272,7 @@
           allow="autoplay; encrypted-media"
           style="display: none;"></iframe>
       </div>
-      <div id="modalDescricao" class="modal-descricao">Descrição do vídeo</div>
+      <div id="modalDescricao" class="modal-descricao">{{ item.descricao }}</div>
     </div>
 
     <button class="modal-btn-right" onclick="navegar(1)">▶</button>
