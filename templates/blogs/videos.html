@@ -19,6 +19,18 @@
       position: relative;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
     }
+  
+    .no-videos {
+      text-align: center;
+      color: #888;
+      margin-top: 3rem;
+      font-size: 1rem;
+    }
+
+    .no-videos i {
+      margin-right: 8px;
+      color: #666;
+    }
 
     .overlay-container {
       position: relative;
@@ -216,6 +228,10 @@
       </div>
     {% endfor %}
   </div>
+{% else %}
+  <p class="no-videos">
+    <i class="fas fa-video"></i> Nenhuma vídeo foi adicionada a este projeto ainda.
+  </p>
 {% endif %}
 
 {% if total_paginas > 1 %}
