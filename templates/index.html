@@ -56,6 +56,27 @@
       color: #bbb;
       margin-top: 60px;
     }
+    .skill-item {
+      flex: 1 1 120px;           /* mínimo 120px por item, quebra em colunas */
+      max-width: 150px;
+      text-align: center;
+    }
+
+    .skill-item i {
+      display: block;
+      margin: 0 auto 8px;
+    }
+
+    @media (max-width: 576px) {
+      .accordion-body {
+        justify-content: center !important;
+      }
+
+      .skill-item {
+        flex: 1 1 45%;
+        max-width: 45%;
+      }
+    }
     @media (max-width: 768px) {
       .hero {
         padding: 0 20px;
@@ -155,23 +176,23 @@
         </h2>
         <div id="collapseLinguagens" class="accordion-collapse collapse" data-bs-parent="#accordionHabilidades">
           <div class="accordion-body d-flex flex-wrap justify-content-start gap-4">
-            <div class="text-center">
+            <div class="skill-item">
               <i class="fab fa-python fa-2x text-primary" title="Avançado"></i>
               <p>Python</p>
             </div>
-            <div class="text-center">
+            <div class="skill-item">
               <i class="fab fa-html5 fa-2x text-danger" title="Intermediário"></i>
               <p>HTML5</p>
             </div>
-            <div class="text-center">
+            <div class="skill-item">
               <i class="fab fa-css3-alt fa-2x text-primary" title="Intermediário"></i>
               <p>CSS3</p>
             </div>
-            <div class="text-center">
+            <div class="skill-item">
               <i class="fab fa-js-square fa-2x text-warning" title="Intermediário"></i>
               <p>JavaScript</p>
             </div>
-            <div class="text-center">
+            <div class="skill-item">
               <i class="fas fa-code fa-2x text-light" title="Intermediário"></i>
               <p>SQL</p>
             </div>
@@ -188,31 +209,31 @@
         </h2>
         <div id="collapseFrameworks" class="accordion-collapse collapse" data-bs-parent="#accordionHabilidades">
           <div class="accordion-body d-flex flex-wrap justify-content-start gap-4">
-            <div class="text-center">
+            <div class="skill-item">
               <i class="fas fa-bolt fa-2x text-info" title="Intermediário"></i>
               <p>FastAPI</p>
             </div>
-            <div class="text-center">
+            <div class="skill-item">
               <i class="fab fa-bootstrap fa-2x text-light" title="Intermediário"></i>
               <p>Bootstrap</p>
             </div>
-            <div class="text-center">
+            <div class="skill-item">
               <i class="fas fa-gamepad fa-2x text-white" title="Avançado"></i>
               <p>Pygame</p>
             </div>
-            <div class="text-center">
+            <div class="skill-item">
               <i class="fas fa-window-restore fa-2x text-success" title="Intermediário"></i>
               <p>Tkinter / Kivy / PySide</p>
             </div>
-            <div class="text-center">
+            <div class="skill-item">
               <i class="fab fa-python fa-2x text-warning" title="Intermediário"></i>
               <p>Django</p>
             </div>
-            <div class="text-center">
+            <div class="skill-item">
               <i class="fas fa-image fa-2x text-danger" title="Intermediário"></i>
               <p>Pillow</p>
             </div>
-            <div class="text-center">
+            <div class="skill-item">
               <i class="fas fa-file-code fa-2x text-secondary" title="Básico"></i>
               <p>Jinja2</p>
             </div>
@@ -229,7 +250,7 @@
         </h2>
         <div id="collapseBD" class="accordion-collapse collapse" data-bs-parent="#accordionHabilidades">
           <div class="accordion-body d-flex flex-wrap justify-content-start gap-4">
-            <div class="text-center">
+            <div class="skill-item">
               <i class="fas fa-database fa-2x text-success" title="Intermediário"></i>
               <p>SQLite / MySQL</p>
             </div>
@@ -247,37 +268,37 @@
         <div id="collapseFerramentas" class="accordion-collapse collapse" data-bs-parent="#accordionHabilidades">
           <div class="accordion-body d-flex flex-wrap justify-content-start gap-4">
 
-            <div class="text-center">
-              <i class="fab fa-git-alt fa-2x text-warning" title="Avançado"></i>
+            <div class="skill-item">
+              <i class="fab textfa-git-alt fa-2x text-warning" title="Avançado"></i>
               <p>Git / GitHub</p>
             </div>
 
-            <div class="text-center">
+            <div class="skill-item">
               <i class="fas fa-cloud-upload-alt fa-2x text-info" title="Intermediário"></i>
               <p>Vercel / Render</p>
             </div>
 
-            <div class="text-center">
+            <div class="skill-item">
               <i class="fas fa-terminal fa-2x text-secondary" title="Intermediário"></i>
               <p>CLI / Linha de Comando</p>
             </div>
 
-            <div class="text-center">
+            <div class="skill-item">
               <i class="fas fa-shield-alt fa-2x text-danger" title="Intermediário"></i>
               <p>bcrypt / Segurança</p>
             </div>
 
-            <div class="text-center">
+            <div class="skill-item">
               <i class="fas fa-robot fa-2x text-light" title="Básico"></i>
               <p>IA + ChatGPT</p>
             </div>
 
-            <div class="text-center">
+            <div class="skill-item">
               <i class="fab fa-linux fa-2x text-light" title="Avançado"></i>
               <p>Linux / Vim</p>
             </div>
 
-            <div class="text-center">
+            <div class="skill-item">
               <i class="fas fa-laptop-code fa-2x text-info" title="Intermediário"></i>
               <p>VS Code / Visual Studio</p>
             </div>
