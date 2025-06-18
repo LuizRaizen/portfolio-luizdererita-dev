@@ -1,27 +1,15 @@
-import os
-import json
+from utils.models import Visualizacao
+from utils.db import db
 
-CAMINHO_ARQUIVO = "data/visualizacoes.json"
+def registrar_visualizacao(projeto, pagina):
+    registro = Visualizacao.query.filter_by(projeto=projeto, pagina=pagina).first()
+    if registro:
+        registro.quantidade += 1
+    else:
+        registro = Visualizacao(projeto=projeto, pagina=pagina, quantidade=1)
+        db.session.add(registro)
+    db.session.commit()
 
-def _carregar_dados():
-    if not os.path.exists(CAMINHO_ARQUIVO):
-        os.makedirs(os.path.dirname(CAMINHO_ARQUIVO), exist_ok=True)
-        with open(CAMINHO_ARQUIVO, "w") as f:
-            json.dump({}, f)
-    with open(CAMINHO_ARQUIVO, "r") as f:
-        return json.load(f)
-
-def _salvar_dados(dados):
-    with open(CAMINHO_ARQUIVO, "w") as f:
-        json.dump(dados, f, indent=2)
-
-def registrar_visualizacao(projeto, nome_post):
-    chave = f"{projeto}/{nome_post}"
-    dados = _carregar_dados()
-    dados[chave] = dados.get(chave, 0) + 1
-    _salvar_dados(dados)
-
-def obter_visualizacoes(projeto, nome_post):
-    chave = f"{projeto}/{nome_post}"
-    dados = _carregar_dados()
-    return dados.get(chave, 0)
+def obter_visualizacoes(projeto, pagina):
+    registro = Visualizacao.query.filter_by(projeto=projeto, pagina=pagina).first()
+    return registro.quantidade if registro else 0
