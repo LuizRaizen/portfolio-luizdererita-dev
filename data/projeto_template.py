@@ -16,7 +16,7 @@ from datetime import datetime
 # Nome do projeto (deve corresponder ao nome da pasta e à URL)
 # ------------------------------------------------------------------------------
 
-projeto = "nome-do-projeto"  # Exemplo: "meu-projeto-avancado"
+projeto = "nome-do-projeto" # Exemplo: "meu-projeto-avancado"
 
 # ------------------------------------------------------------------------------
 # Ficha Técnica

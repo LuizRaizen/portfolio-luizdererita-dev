@@ -1,8 +1,29 @@
-"""Lista de postagens do blog do Floux."""
+"""
+Módulo de configuração do projeto para exibição dinâmica no portfólio/blog.
+
+Este módulo define as informações estruturadas sobre um projeto específico,
+incluindo dados técnicos, posts, roadmap, imagens, vídeos e arquivos para download.
+Ele será importado dinamicamente pelo sistema Flask do site.
+
+Exemplo de uso:
+    from data import nome_do_projeto
+    dados = carregar_projeto(nome_do_projeto)
+"""
 
 from datetime import datetime
 
-projeto = "whats-clone"
+# ------------------------------------------------------------------------------
+# Nome do projeto (deve corresponder ao nome da pasta e à URL)
+# ------------------------------------------------------------------------------
+
+projeto = "whats-clone" # Exemplo: "meu-projeto-avancado"
+
+# ------------------------------------------------------------------------------
+# Ficha Técnica
+# ------------------------------------------------------------------------------
+# Informações exibidas na seção "Ficha Técnica" da página principal do projeto.
+# Os campos podem ser deixados em branco ("") caso não se apliquem.
+# ------------------------------------------------------------------------------
 
 ficha_tecnica = {
     "nome": "WhatsClone",
@@ -20,6 +41,18 @@ ficha_tecnica = {
     "resolucao": "",
     "status": "Em pausa, com problemas de responsividade em dispositivos recentes"
 }
+
+# ------------------------------------------------------------------------------
+# Postagens do blog
+# ------------------------------------------------------------------------------
+# Cada postagem deve conter:
+# - titulo (str)
+# - data (datetime)
+# - autor (str)
+# - nome_arquivo (str) - usado na URL para exibição individual
+# - conteudo (str) - HTML com parágrafos, títulos, etc.
+# - imagem (opcional) - caminho relativo à pasta static/
+# ------------------------------------------------------------------------------
 
 posts = [
     {
@@ -62,18 +95,59 @@ posts = [
     },
 ]
 
-# Lista de metas definidas para a conclusão do projeto
+# ------------------------------------------------------------------------------
+# Roadmap do projeto
+# ------------------------------------------------------------------------------
+# A primeira entrada pode ser um alerta opcional (com chave "alerta").
+# As metas devem conter:
+# - status: "concluido", "desenvolvimento" ou "planejado"
+# - meta: descrição da tarefa/meta
+# ------------------------------------------------------------------------------
+
 roadmap = [
-    {"status": "concluido", "meta": "Interface gráfica finalizada"},
-    {"status": "desenvolvimento", "meta": "Integração com API da OpenAI"},
-    {"status": "planejado", "meta": "Envio automático de e-mails"},
-    {"alerta": "Este projeto está em fase de desenvolvimento"}
+    # ALERTA OPCIONAL
+    {"alerta": "Criação da interface da conversa com mensagens enviadas e recebidas"},
+
+    # METAS
+    {"status": "concluido", "meta": "Criação do esqueleto do projeto com Kivy"},
+    {"status": "desenvolvimento", "meta": "Implementação da tela de login"},
+    {"status": "concluido", "meta": "Criação da tela de contatos e lista de chats"},
+    {"status": "desenvolvimento", "meta": "Identificação de problemas de responsividade em novos dispositivos"},
+    {"status": "desdenvolvimento", "meta": "Refatoração completa da estrutura do layout com foco em responsividade"},
+    {"status": "concluido", "meta": "Separação de camadas (UI e lógica)"},
+    {"status": "planejado", "meta": "Simulação de sistema de envio/recebimento de mensagens local"},
+    {"status": "planejado", "meta": "Adição de suporte a múltiplos temas (modo claro e escuro)"},
 ]
+
+# ------------------------------------------------------------------------------
+# Galeria de imagens
+# ------------------------------------------------------------------------------
+# Cada imagem deve conter:
+# - src: caminho relativo à pasta static/
+# - descricao: legenda exibida ao lado da imagem
+# ------------------------------------------------------------------------------
 
 imagens = [
     {"src": "img/whats-clone/print.png", "descricao": "Testando o WhatsClone no Desktop"}
 ]
 
+# ------------------------------------------------------------------------------
+# Vídeos do projeto
+# ------------------------------------------------------------------------------
+# Cada vídeo deve conter:
+# - src: caminho relativo à pasta static/
+# - descricao: legenda opcional
+# ------------------------------------------------------------------------------
+
 videos = []
+
+# ------------------------------------------------------------------------------
+# Arquivos disponíveis para download
+# ------------------------------------------------------------------------------
+# Cada item deve conter:
+# - nome: nome do arquivo
+# - descricao: descrição exibida ao lado do botão
+# - arquivo: caminho relativo à pasta static/
+# ------------------------------------------------------------------------------
 
 downloads = []

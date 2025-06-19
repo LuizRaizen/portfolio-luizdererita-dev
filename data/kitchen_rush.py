@@ -105,9 +105,27 @@ roadmap = [
     {"alerta": "Este projeto está em fase de desenvolvimento"},
     
     # METAS
-    {"status": "concluido", "meta": "Interface gráfica finalizada"},
-    {"status": "desenvolvimento", "meta": "Integração com API da OpenAI"},
-    {"status": "planejado", "meta": "Envio automático de e-mails"},
+    {"status": "concluido", "meta": "Criação da Splash Screen e Menu Principal"},
+    {"status": "concluido", "meta": "Implementação da tela de gameplay com background e HUD"},
+    {"status": "planejado", "meta": "Desenvolvimento do sistema de fases baseado em dias úteis"},
+    {"status": "planejado", "meta": "Sistema de pausa e save/load de progresso"},
+    {"status": "concluido", "meta": "Renderização e organização das mesas e cadeiras"},
+    {"status": "concluido", "meta": "Programação de clientes com grupos variados e bosses"},
+    {"status": "planejado", "meta": "Sistema de reputação e avaliação do restaurante"},
+    {"status": "planejado", "meta": "Implementação de decorações e upgrades físicos"},
+    {"status": "planejado", "meta": "Tela de contratação e designação de funcionários"},
+    {"status": "concluido", "meta": "Classe `Employee` e subclasses `Waiter`, `Cook`, `Manager`, `Chef`"},
+    {"status": "planejado", "meta": "Folha de pagamento e disponibilidade de funcionários"},
+    {"status": "planejado", "meta": "Sistema de upgrades individuais para funcionários"},
+    {"status": "concluido", "meta": "HUD com relógio funcional e contador de dinheiro"},
+    {"status": "planejado", "meta": "Popup de Supermercado com sistema de compra de ingredientes"},
+    {"status": "planejado", "meta": "Algoritmo de atendimento automático e rotinas dos funcionários"},
+    {"status": "planejado", "meta": "Sistema de fases com eventos aleatórios e desafios por dia"},
+    {"status": "planejado", "meta": "Implementação de feedbacks dos clientes"},
+    {"status": "planejado", "meta": "Power-ups e itens temporários (como café, energia, etc.)"},
+    {"status": "desenvolvimento", "meta": "Trilha sonora e efeitos sonoros personalizados"},
+    {"status": "desenvolvimento", "meta": "Sistema de animação por bones e personalização dos personagens"},
+    {"status": "planejado", "meta": "Build e adaptação para versão web/jogável no navegador"},
 ]
 
 # ------------------------------------------------------------------------------

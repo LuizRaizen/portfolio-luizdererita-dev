@@ -1,8 +1,30 @@
-"""Lista de postagens do blog do Floux."""
+"""
+Módulo de configuração do projeto para exibição dinâmica no portfólio/blog.
+
+Este módulo define as informações estruturadas sobre um projeto específico,
+incluindo dados técnicos, posts, roadmap, imagens, vídeos e arquivos para download.
+Ele será importado dinamicamente pelo sistema Flask do site.
+
+Exemplo de uso:
+    from data import nome_do_projeto
+    dados = carregar_projeto(nome_do_projeto)
+"""
 
 from datetime import datetime
 
-projeto = "img-convert"
+# ------------------------------------------------------------------------------
+# Nome do projeto (deve corresponder ao nome da pasta e à URL)
+# ------------------------------------------------------------------------------
+
+projeto = "img-convert" # Exemplo: "meu-projeto-avancado"
+
+# ------------------------------------------------------------------------------
+# Ficha Técnica
+# ------------------------------------------------------------------------------
+# Informações exibidas na seção "Ficha Técnica" da página principal do projeto.
+# Os campos podem ser deixados em branco ("") caso não se apliquem.
+# ------------------------------------------------------------------------------
+
 
 ficha_tecnica = {
     "nome": "IMG Convert",
@@ -20,6 +42,18 @@ ficha_tecnica = {
     "resolucao": "",
     "status": "Em desenvolvimento"
 }
+
+# ------------------------------------------------------------------------------
+# Postagens do blog
+# ------------------------------------------------------------------------------
+# Cada postagem deve conter:
+# - titulo (str)
+# - data (datetime)
+# - autor (str)
+# - nome_arquivo (str) - usado na URL para exibição individual
+# - conteudo (str) - HTML com parágrafos, títulos, etc.
+# - imagem (opcional) - caminho relativo à pasta static/
+# ------------------------------------------------------------------------------
 
 posts = [
     {
@@ -79,18 +113,67 @@ posts = [
     },
 ]
 
-# Lista de metas definidas para a conclusão do projeto
+# ------------------------------------------------------------------------------
+# Roadmap do projeto
+# ------------------------------------------------------------------------------
+# A primeira entrada pode ser um alerta opcional (com chave "alerta").
+# As metas devem conter:
+# - status: "concluido", "desenvolvimento" ou "planejado"
+# - meta: descrição da tarefa/meta
+# ------------------------------------------------------------------------------
+
 roadmap = [
-    {"status": "concluido", "meta": "Interface gráfica finalizada"},
-    {"status": "desenvolvimento", "meta": "Integração com API da OpenAI"},
-    {"status": "planejado", "meta": "Envio automático de e-mails"},
-    {"alerta": "Este projeto está em fase de desenvolvimento"}
+    # ALERTA OPCIONAL
+    {"alerta": "Este projeto está em fase de desenvolvimento"},
+
+    # METAS
+    {"status": "concluido", "meta": "Criação do módulo base para conversão de imagens usando a biblioteca PIL"},
+    {"status": "concluido", "meta": "Implementação da versão CLI (linha de comando) para uso rápido e direto"},
+    {"status": "concluido", "meta": "Desenvolvimento de uma interface simples com Tkinter"},
+    {"status": "concluido", "meta": "Planejamento para manter a UI Tkinter como parte alternativa “histórica” do projeto"},
+    {"status": "concluido", "meta": "Modelagem das novas telas com Qt Designer"},
+    {"status": "concluido", "meta": "Tela principal com navegação fluida entre módulos"},
+    {"status": "concluido", "meta": "Tela de seleção de imagem individual"},
+    {"status": "concluido", "meta": "Tela de seleção de pasta e diretório de saída"},
+    {"status": "concluido", "meta": "Tela de conversão com barra de progresso animada"},
+    {"status": "desenvolvimento", "meta": "Integração do backend de conversão com as telas do PySide6"},
+    {"status": "planejado", "meta": "Suporte para múltiplos formatos (PNG, JPG, BMP, WEBP...)"},
+    {"status": "planejado", "meta": "Conversão em lote de imagens em pastas inteiras"},
+    {"status": "planejado", "meta": "Mensagens de status e feedbacks visuais ao usuário"},
+    {"status": "planejado", "meta": "Melhoria na experiência do usuário (UX/UI)"},
+    {"status": "planejado", "meta": "Criação de ícone do app e splash screen inicial"},
+    {"status": "planejado", "meta": "Geração de executável com PyInstaller"},
 ]
+
+# ------------------------------------------------------------------------------
+# Galeria de imagens
+# ------------------------------------------------------------------------------
+# Cada imagem deve conter:
+# - src: caminho relativo à pasta static/
+# - descricao: legenda exibida ao lado da imagem
+# ------------------------------------------------------------------------------
 
 imagens = [
     {"src": "img/img-convert/print.png", "descricao": "Tela principal do IMG Convert"},
 ]
 
+# ------------------------------------------------------------------------------
+# Vídeos do projeto
+# ------------------------------------------------------------------------------
+# Cada vídeo deve conter:
+# - src: caminho relativo à pasta static/
+# - descricao: legenda opcional
+# ------------------------------------------------------------------------------
+
 videos = []
+
+# ------------------------------------------------------------------------------
+# Arquivos disponíveis para download
+# ------------------------------------------------------------------------------
+# Cada item deve conter:
+# - nome: nome do arquivo
+# - descricao: descrição exibida ao lado do botão
+# - arquivo: caminho relativo à pasta static/
+# ------------------------------------------------------------------------------
 
 downloads = []

@@ -1,8 +1,29 @@
-"""Lista de postagens do blog do Floux."""
+"""
+Módulo de configuração do projeto para exibição dinâmica no portfólio/blog.
+
+Este módulo define as informações estruturadas sobre um projeto específico,
+incluindo dados técnicos, posts, roadmap, imagens, vídeos e arquivos para download.
+Ele será importado dinamicamente pelo sistema Flask do site.
+
+Exemplo de uso:
+    from data import nome_do_projeto
+    dados = carregar_projeto(nome_do_projeto)
+"""
 
 from datetime import datetime
 
-projeto = "tomato"
+# ------------------------------------------------------------------------------
+# Nome do projeto (deve corresponder ao nome da pasta e à URL)
+# ------------------------------------------------------------------------------
+
+projeto = "tomato" # Exemplo: "meu-projeto-avancado"
+
+# ------------------------------------------------------------------------------
+# Ficha Técnica
+# ------------------------------------------------------------------------------
+# Informações exibidas na seção "Ficha Técnica" da página principal do projeto.
+# Os campos podem ser deixados em branco ("") caso não se apliquem.
+# ------------------------------------------------------------------------------
 
 ficha_tecnica = {
     "nome": "Tomato",
@@ -20,6 +41,18 @@ ficha_tecnica = {
     "resolucao": "",
     "status": "Em análise para possíveis melhorias"
 }
+
+# ------------------------------------------------------------------------------
+# Postagens do blog
+# ------------------------------------------------------------------------------
+# Cada postagem deve conter:
+# - titulo (str)
+# - data (datetime)
+# - autor (str)
+# - nome_arquivo (str) - usado na URL para exibição individual
+# - conteudo (str) - HTML com parágrafos, títulos, etc.
+# - imagem (opcional) - caminho relativo à pasta static/
+# ------------------------------------------------------------------------------
 
 posts = [
     {
@@ -62,16 +95,61 @@ posts = [
     },
 ]
 
-# Lista de metas definidas para a conclusão do projeto
+# ------------------------------------------------------------------------------
+# Roadmap do projeto
+# ------------------------------------------------------------------------------
+# A primeira entrada pode ser um alerta opcional (com chave "alerta").
+# As metas devem conter:
+# - status: "concluido", "desenvolvimento" ou "planejado"
+# - meta: descrição da tarefa/meta
+# ------------------------------------------------------------------------------
+
 roadmap = [
-    {"status": "concluido", "meta": "Interface gráfica finalizada"},
-    {"status": "desenvolvimento", "meta": "Integração com API da OpenAI"},
-    {"status": "planejado", "meta": "Envio automático de e-mails"},
-    {"alerta": "Este projeto está em fase de desenvolvimento"}
+    # ALERTA OPCIONAL
+    {"alerta": ""},
+
+    # METAS
+    {"status": "concluido", "meta": "Criação do módulo principal com comandos básicos de formatação ANSI"},
+    {"status": "concluido", "meta": "Implementação dos primeiros estilos (negrito, itálico, sublinhado, tachado)"},
+    {"status": "concluido", "meta": "Leitura e uso de arquivo `config.json` para ajustes dinâmicos"},
+    {"status": "concluido", "meta": "Criação do sistema de diretórios e arquitetura para plugins"},
+    {"status": "concluido", "meta": "Documentação interna e docstrings para todos os móduloss"},
+    {"status": "desenvolvimento", "meta": "Implementação de testes automatizados para os estilos e plugins"},
+    {"status": "planejado", "meta": 'Criação de novos plugins com estilos personalizados (ex: "futurista", "vintage")'},
+    {"status": "planejado", "meta": "Implementação de modo interativo para seleção de estilo ao vivo"},
+    {"status": "planejado", "meta": "Modo compatível com exportação de texto para arquivos `.md` e `.txt`"},
+    {"status": "planejado", "meta": "Criação de versão desktop com interface gráfica simples"},
+    {"status": "planejado", "meta": "Modo compatível com exportação de texto para arquivos `.md` e `.txt`"},
+    {"status": "planejado", "meta": "Distribuição via PyPI com `pip install tomato-cli`"},
 ]
+
+# ------------------------------------------------------------------------------
+# Galeria de imagens
+# ------------------------------------------------------------------------------
+# Cada imagem deve conter:
+# - src: caminho relativo à pasta static/
+# - descricao: legenda exibida ao lado da imagem
+# ------------------------------------------------------------------------------
 
 imagens = []
 
+# ------------------------------------------------------------------------------
+# Vídeos do projeto
+# ------------------------------------------------------------------------------
+# Cada vídeo deve conter:
+# - src: caminho relativo à pasta static/
+# - descricao: legenda opcional
+# ------------------------------------------------------------------------------
+
 videos = []
+
+# ------------------------------------------------------------------------------
+# Arquivos disponíveis para download
+# ------------------------------------------------------------------------------
+# Cada item deve conter:
+# - nome: nome do arquivo
+# - descricao: descrição exibida ao lado do botão
+# - arquivo: caminho relativo à pasta static/
+# ------------------------------------------------------------------------------
 
 downloads = []

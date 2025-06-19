@@ -1,8 +1,29 @@
-"""Lista de postagens do blog do Floux."""
+"""
+Módulo de configuração do projeto para exibição dinâmica no portfólio/blog.
+
+Este módulo define as informações estruturadas sobre um projeto específico,
+incluindo dados técnicos, posts, roadmap, imagens, vídeos e arquivos para download.
+Ele será importado dinamicamente pelo sistema Flask do site.
+
+Exemplo de uso:
+    from data import nome_do_projeto
+    dados = carregar_projeto(nome_do_projeto)
+"""
 
 from datetime import datetime
 
-projeto = "tela-cadastro-login-multi-ui"
+# ------------------------------------------------------------------------------
+# Nome do projeto (deve corresponder ao nome da pasta e à URL)
+# ------------------------------------------------------------------------------
+
+projeto = "tela-cadastro-login-multi-ui" # Exemplo: "meu-projeto-avancado"
+
+# ------------------------------------------------------------------------------
+# Ficha Técnica
+# ------------------------------------------------------------------------------
+# Informações exibidas na seção "Ficha Técnica" da página principal do projeto.
+# Os campos podem ser deixados em branco ("") caso não se apliquem.
+# ------------------------------------------------------------------------------
 
 ficha_tecnica = {
     "nome": "Tela de Cadastro e Login Multi-UI",
@@ -24,6 +45,18 @@ ficha_tecnica = {
     "resolucao": "",
     "status": "Finalizado (fase de estudo e referência pessoal)"
 }
+
+# ------------------------------------------------------------------------------
+# Postagens do blog
+# ------------------------------------------------------------------------------
+# Cada postagem deve conter:
+# - titulo (str)
+# - data (datetime)
+# - autor (str)
+# - nome_arquivo (str) - usado na URL para exibição individual
+# - conteudo (str) - HTML com parágrafos, títulos, etc.
+# - imagem (opcional) - caminho relativo à pasta static/
+# ------------------------------------------------------------------------------
 
 posts = [
     {
@@ -58,13 +91,37 @@ posts = [
     },
 ]
 
-# Lista de metas definidas para a conclusão do projeto
+# ------------------------------------------------------------------------------
+# Roadmap do projeto
+# ------------------------------------------------------------------------------
+# A primeira entrada pode ser um alerta opcional (com chave "alerta").
+# As metas devem conter:
+# - status: "concluido", "desenvolvimento" ou "planejado"
+# - meta: descrição da tarefa/meta
+# ------------------------------------------------------------------------------
+
 roadmap = [
-    {"status": "concluido", "meta": "Interface gráfica finalizada"},
-    {"status": "desenvolvimento", "meta": "Integração com API da OpenAI"},
-    {"status": "planejado", "meta": "Envio automático de e-mails"},
-    {"alerta": "Este projeto está em fase de desenvolvimento"}
+    # ALERTA OPCIONAL
+    {"alerta": ""},
+    
+    # METAS
+    {"status": "concluido", "meta": "Estruturação do banco de dados SQLite com tabela de usuários"},
+    {"status": "desenvolvimento", "meta": "Criação da camada de persistência de dados"},
+    {"status": "planejado", "meta": "Implementação do sistema de hash e salt com bcrypt"},
+    {"status": "planejado", "meta": "Interface gráfica com Tkinter funcional"},
+    {"status": "planejado", "meta": "Interface gráfica com PySide6 funcional"},
+    {"status": "planejado", "meta": "Interface gráfica com Kivy funcional"},
+    {"status": "planejado", "meta": "Implementação da seleção de interface via terminal"},
+    {"status": "planejado", "meta": "Modularização do projeto (UI, lógica, persistência, segurança)"},
 ]
+
+# ------------------------------------------------------------------------------
+# Galeria de imagens
+# ------------------------------------------------------------------------------
+# Cada imagem deve conter:
+# - src: caminho relativo à pasta static/
+# - descricao: legenda exibida ao lado da imagem
+# ------------------------------------------------------------------------------
 
 imagens = [
     {"src": "img/tela-cadastro-login-multi-ui/tk_ui.jpg", "descricao": "Tela de Login com Tkinter"},
@@ -72,6 +129,23 @@ imagens = [
     {"src": "img/tela-cadastro-login-multi-ui/kv_ui.jpg", "descricao": "Tela de Login com Kivy"},
 ]
 
+# ------------------------------------------------------------------------------
+# Vídeos do projeto
+# ------------------------------------------------------------------------------
+# Cada vídeo deve conter:
+# - src: caminho relativo à pasta static/
+# - descricao: legenda opcional
+# ------------------------------------------------------------------------------
+
 videos = []
+
+# ------------------------------------------------------------------------------
+# Arquivos disponíveis para download
+# ------------------------------------------------------------------------------
+# Cada item deve conter:
+# - nome: nome do arquivo
+# - descricao: descrição exibida ao lado do botão
+# - arquivo: caminho relativo à pasta static/
+# ------------------------------------------------------------------------------
 
 downloads = []
