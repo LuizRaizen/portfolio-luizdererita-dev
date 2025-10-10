@@ -128,8 +128,8 @@ posts = [
         <p>Por enquanto, tanto essa tela quanto o sistema do Supermercado estão em <strong>fase inicial de desenvolvimento</strong>, mas já possuem <strong>estrutura funcional básica</strong>, o que me deixa bastante empolgado com o rumo do projeto.</p>
 
         <h3 class="section-title mt-4">Bastidores: melhorias no site e novas mídias em breve</h3>
-        <p>Esse post também me fez perceber que o <strong>site do Kitchen Rush</strong> precisa de uma refatoração. Atualmente, as postagens são criadas dinamicamente por meio de um <strong>módulo Python</strong>, o que facilita muito a publicação de atualizações. No entanto, percebi que ainda falta suporte adequado para <strong>imagens e vídeos nos posts</strong> — e isso é algo que pretendo resolver em breve.</p>
-        <p>Enquanto isso, convido vocês a visitarem as seções de <strong>“Imagens”</strong> e <strong>“Vídeos”</strong>, onde vou adicionar novos conteúdos para que possam <strong>ver de perto as novidades</strong> mencionadas neste post.</p>
+        <p>Esse post também me fez perceber que o <strong>meu site portfólio</strong> precisa de uma refatoração. Atualmente, as postagens são criadas dinamicamente por meio de um <strong>módulo Python</strong>, o que facilita muito a publicação de atualizações. No entanto, percebi que ainda falta suporte adequado para <strong>imagens e vídeos nos posts</strong> devido a isso, não foi possível adicionar conteúdo visual à este post — e isso é algo que pretendo resolver em breve.</p>
+        <p>Enquanto isso, convido vocês a visitarem as seções de <strong>“Imagens”</strong> e <strong>“Vídeos”</strong>, onde todo o conteúdo adicional (imagens e/ou vídeos) serão acrescentados ao projeto, para que vocês possam <strong>ver de perto as novidades</strong> mencionadas em cada post.</p>
 
         <h3 class="section-title mt-4">Encerrando</h3>
         <p>Muito obrigado por acompanharem o projeto até aqui! Essas pequenas evoluções significam muito para mim e mostram que, mesmo devagar, o <strong>Kitchen Rush</strong> está ganhando vida.</p>
