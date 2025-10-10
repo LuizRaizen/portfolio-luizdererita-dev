@@ -108,12 +108,16 @@ posts = [
         <p>Uma das principais adições é o novo <strong>sistema de paciência visível</strong>, agora representado por <strong>barras acima de cada mesa</strong>. Essas barras registram a <strong>paciência coletiva</strong> do grupo de clientes, e não a de cada cliente individualmente — ou seja, a barra de uma mesa representa o humor e a tolerância de todo o grupo.</p>
         <p>Por questões de boa UX e clareza visual, busquei criar uma interface minimalista, mas intuitiva. A barra começa verde e, conforme o tempo passa, <strong>muda gradualmente para o vermelho</strong>, sinalizando que os clientes estão perdendo a paciência. Isso traz identidade, urgência e clareza para o jogador, que consegue entender rapidamente o que está acontecendo no salão e agir antes que os clientes desistam do pedido.</p>
 
+        <h3 class="section-title mt-4">Trilha sonora e ambientação</h3>
+        <p>Na parte artística, o projeto também ganhou <strong>uma trilha sonora de fundo</strong> durante o gameplay. A música, com ritmo contagiante de <strong>jazz</strong>, cria uma atmosfera agradável e imersiva, transmitindo perfeitamente a <strong>vibe de um restaurante movimentado</strong>. O som ambiente e o ritmo da música ajudam a envolver o jogador e reforçam a identidade visual e sonora do <strong>Kitchen Rush</strong>.</p>
+
         <h3 class="section-title mt-4">Novas animações e fluidez na interface</h3>
         <p>Outra melhoria significativa foi a adição de <strong>novas animações e fluidez nas interações gráficas</strong>. Os botões usados para abrir telas intermediárias durante o gameplay (como o <strong>Cardápio</strong> ou o <strong>Supermercado</strong>) agora contam com <strong>transições suaves</strong>, tornando a navegação mais agradável e reforçando a sensação de qualidade e polimento na experiência visual do jogo.</p>
 
-        <h3 class="section-title mt-4">Cardápio expandido e pratos com habilidades</h3>
+        <h3 class="section-title mt-4">Cardápio expandido, habilidades e previews de pratos</h3>
         <p>O <strong>Cardápio</strong> do jogo também recebeu bastante atenção. Agora ele está praticamente concluído e conta com <strong>muitos novos pratos</strong> adicionados ao sistema. Durante o gameplay, o jogador poderá <strong>expandir seu cardápio</strong> à medida que desbloquear <strong>novas receitas</strong>, tornando o gerenciamento da cozinha mais estratégico e recompensador.</p>
         <p>Alguns pratos <strong>possuem habilidades especiais</strong> que influenciam diretamente o andamento do jogo. Por exemplo, certos pratos podem <strong>melhorar a paciência dos clientes</strong> — especialmente quando o pedido inclui algo mais demorado. Se houver na sua equipe um <strong>garçom carismático</strong> o suficiente para convencer o cliente a experimentar um desses pratos, isso pode <strong>melhorar a experiência geral</strong> e até <strong>gerar gorjetas generosas</strong>. 💸</p>
+        <p>Além disso, foi adicionada uma nova função de <strong>pré-visualização dos pratos</strong>. Agora, ao clicar em um prato no cardápio, o jogador vê uma <strong>arte ampliada</strong> do prato acompanhada de um <strong>campo descritivo</strong> com detalhes sobre ele, suas <strong>habilidades</strong> (quando houver), <strong>ingredientes utilizados</strong>, <strong>número de estrelas</strong> (indicando popularidade) e o <strong>preço</strong> correspondente. Essa adição deixa a experiência mais completa, visual e informativa.</p>
         <p>Você deve estar se perguntando: “Mas como tudo isso vai funcionar tecnicamente?” Para ser honesto... eu também não sei! (risos) Muita coisa ainda está sendo experimentada e ajustada conforme o projeto evolui — e essa é justamente a parte divertida de desenvolver um jogo independente: ter liberdade para improvisar e deixar o projeto se moldar naturalmente.</p>
 
         <h3 class="section-title mt-4">Tela do Supermercado e gerenciamento de recursos</h3>
@@ -184,6 +188,9 @@ roadmap = [
 imagens = [
     {"src": "img/kitchen-rush/gameplay.png", "descricao": "Gameplay da primeira fase"},
     {"src": "img/kitchen-rush/menu-principal.png", "descricao": "Menu principal do jogo"},
+    {"src": "img/kitchen-rush/gameplay-2.png", "descricao": "Medidores de paciência adicionados às mesas"},
+    {"src": "img/kitchen-rush/supermercado.png", "descricao": "Protótipo da tela do supermercado tomando forma"},
+    {"src": "img/kitchen-rush/cardapio-2.png", "descricao": "Cardápio expandido com novos pratos e pré-visualização"},
 ]
 
 # ------------------------------------------------------------------------------
@@ -198,6 +205,11 @@ videos = [
     {
         "youtube_id": "zfFwE3YUQB4",
         "descricao": "Breve demonstração de como está ficando o jogo"
+    },
+
+    {
+        "youtube_id": "aED-1KFs2Bc",
+        "descricao": "Novas atualizações do Kitchen Rush (Outubro de 2025)"
     }
 ]
 
