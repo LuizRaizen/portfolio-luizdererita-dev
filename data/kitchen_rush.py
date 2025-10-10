@@ -86,7 +86,52 @@ posts = [
         
         <p>Falta muito para <strong>Kitchen Rush</strong> finalmente estar pronto para ser publicado como um jogo de verdade. Por enquanto, muita coisa ainda está no mundo das ideias. Possibilidades, mecânicas, Design... Eu venho trabalhando no jogo quando tenho tempo. Mas devido a rotina de trabalho no restaurante e o fechamento do Semestre na Faculdade, já faz um bom tempo que não paro para trabalhar no projeto. Mas este, com certeza, é um projeto que terei o prazer de finalizar!</p>
         <p class="meta-info" id="postagens">Postado em <strong>10 de Junho de 2025</strong> por <strong>Luiz R. Dererita</strong></p>
+        """,
+    },
 
+    {
+        "titulo": "Atualizações do Kitchen Rush — Novos sistemas e melhorias!",
+        "data": datetime(2025, 10, 10),
+        "autor": "Luiz R. Dererita",
+        "nome_arquivo": "post2",
+        "conteudo": """
+        <h2>Atualizações do Kitchen Rush — Novos sistemas, animações e ideias tomando forma!</h2>
+
+        <p>Olá, pessoal! Já faz um bom tempo desde a última atualização do <strong>Kitchen Rush</strong>, não é? 😅 Esse jogo foi um dos primeiros projetos que inauguraram o meu portfólio, e desde então muita coisa aconteceu. Desde a publicação do meu site, venho dividindo meu tempo entre inúmeros projetos, a faculdade, o trabalho e os compromissos pessoais do dia a dia. É muita coisa — e manter uma constância nos meus projetos acaba sendo um verdadeiro desafio.</p>
+        <p>Mas... cá estamos nós novamente (risos). E, sim, <strong>o Kitchen Rush está vivo!</strong> 🌟 Nos últimos meses, consegui dedicar um bom tempo ao desenvolvimento do jogo e estou animado para compartilhar com vocês o que mudou desde o último post.</p>
+
+        <h3 class="section-title mt-4">De ideias no papel a sistemas funcionais</h3>
+        <p>Se você já conferiu o vídeo de demonstração na seção <strong>“Vídeos”</strong> do site, deve ter notado que até pouco tempo atrás o jogo ainda estava em um estágio bem inicial. No último post, apresentei várias ideias para o futuro do projeto — e, aos poucos, essas ideias estão finalmente começando a tomar forma.</p>
+        <p>Antes, o jogo contava apenas com a <strong>tela do Menu Principal</strong> e um layout inicial da <strong>tela de gameplay</strong>. Não havia clientes de fato no salão — no lugar deles, existia apenas um <strong>protótipo do sistema de clientes</strong>, representado por pequenos blocos coloridos que apareciam aleatoriamente nas mesas. Esses blocos simbolizavam cada cliente, mas ainda não havia nenhuma representação visual do sistema de paciência (eles simplesmente apareciam e desapareciam quando a paciência acabava).</p>
+
+        <h3 class="section-title mt-4">Sistema de paciência com barras visuais</h3>
+        <p>Uma das principais adições é o novo <strong>sistema de paciência visível</strong>, agora representado por <strong>barras acima de cada mesa</strong>. Essas barras registram a <strong>paciência coletiva</strong> do grupo de clientes, e não a de cada cliente individualmente — ou seja, a barra de uma mesa representa o humor e a tolerância de todo o grupo.</p>
+        <p>Por questões de boa UX e clareza visual, busquei criar uma interface minimalista, mas intuitiva. A barra começa verde e, conforme o tempo passa, <strong>muda gradualmente para o vermelho</strong>, sinalizando que os clientes estão perdendo a paciência. Isso traz identidade, urgência e clareza para o jogador, que consegue entender rapidamente o que está acontecendo no salão e agir antes que os clientes desistam do pedido.</p>
+
+        <h3 class="section-title mt-4">Novas animações e fluidez na interface</h3>
+        <p>Outra melhoria significativa foi a adição de <strong>novas animações e fluidez nas interações gráficas</strong>. Os botões usados para abrir telas intermediárias durante o gameplay (como o <strong>Cardápio</strong> ou o <strong>Supermercado</strong>) agora contam com <strong>transições suaves</strong>, tornando a navegação mais agradável e reforçando a sensação de qualidade e polimento na experiência visual do jogo.</p>
+
+        <h3 class="section-title mt-4">Cardápio expandido e pratos com habilidades</h3>
+        <p>O <strong>Cardápio</strong> do jogo também recebeu bastante atenção. Agora ele está praticamente concluído e conta com <strong>muitos novos pratos</strong> adicionados ao sistema. Durante o gameplay, o jogador poderá <strong>expandir seu cardápio</strong> à medida que desbloquear <strong>novas receitas</strong>, tornando o gerenciamento da cozinha mais estratégico e recompensador.</p>
+        <p>Alguns pratos <strong>possuem habilidades especiais</strong> que influenciam diretamente o andamento do jogo. Por exemplo, certos pratos podem <strong>melhorar a paciência dos clientes</strong> — especialmente quando o pedido inclui algo mais demorado. Se houver na sua equipe um <strong>garçom carismático</strong> o suficiente para convencer o cliente a experimentar um desses pratos, isso pode <strong>melhorar a experiência geral</strong> e até <strong>gerar gorjetas generosas</strong>. 💸</p>
+        <p>Você deve estar se perguntando: “Mas como tudo isso vai funcionar tecnicamente?” Para ser honesto... eu também não sei! (risos) Muita coisa ainda está sendo experimentada e ajustada conforme o projeto evolui — e essa é justamente a parte divertida de desenvolver um jogo independente: ter liberdade para improvisar e deixar o projeto se moldar naturalmente.</p>
+
+        <h3 class="section-title mt-4">Tela do Supermercado e gerenciamento de recursos</h3>
+        <p>Também comecei a trabalhar melhor na <strong>tela do Supermercado</strong>. Agora, <strong>os ingredientes comprados são subtraídos do dinheiro do jogador</strong>, tornando o gerenciamento de recursos mais tangível e próximo do que espero para a versão final. Esse sistema ainda está em estágio inicial, mas já é funcional e abre espaço para novos recursos relacionados à economia do jogo no futuro.</p>
+
+        <h3 class="section-title mt-4">Seleção e criação de Restaurantes (sistema de saves)</h3>
+        <p>Outra novidade é a <strong>tela intermediária</strong> antes de iniciar o gameplay, que funcionará como uma <strong>tela de seleção e criação de restaurantes</strong>. Ela será responsável por <strong>gerenciar os slots de salvamento</strong>, permitindo ao jogador criar e escolher diferentes restaurantes salvos — algo essencial para a progressão e rejogabilidade.</p>
+        <p>Por enquanto, tanto essa tela quanto o sistema do Supermercado estão em <strong>fase inicial de desenvolvimento</strong>, mas já possuem <strong>estrutura funcional básica</strong>, o que me deixa bastante empolgado com o rumo do projeto.</p>
+
+        <h3 class="section-title mt-4">Bastidores: melhorias no site e novas mídias em breve</h3>
+        <p>Esse post também me fez perceber que o <strong>site do Kitchen Rush</strong> precisa de uma refatoração. Atualmente, as postagens são criadas dinamicamente por meio de um <strong>módulo Python</strong>, o que facilita muito a publicação de atualizações. No entanto, percebi que ainda falta suporte adequado para <strong>imagens e vídeos nos posts</strong> — e isso é algo que pretendo resolver em breve.</p>
+        <p>Enquanto isso, convido vocês a visitarem as seções de <strong>“Imagens”</strong> e <strong>“Vídeos”</strong>, onde vou adicionar novos conteúdos para que possam <strong>ver de perto as novidades</strong> mencionadas neste post.</p>
+
+        <h3 class="section-title mt-4">Encerrando</h3>
+        <p>Muito obrigado por acompanharem o projeto até aqui! Essas pequenas evoluções significam muito para mim e mostram que, mesmo devagar, o <strong>Kitchen Rush</strong> está ganhando vida.</p>
+        <p>Continuem acompanhando — e fiquem à vontade para deixar sugestões, ideias ou apenas uma mensagem de incentivo. Até a próxima atualização! 👋</p>
+
+        <p class="meta-info" id="postagens">Postado em <strong>10 de Outubro de 2025</strong> por <strong>Luiz R. Dererita</strong></p>
         """,
     },
 ]
