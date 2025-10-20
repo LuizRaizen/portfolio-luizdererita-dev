@@ -55,7 +55,7 @@ posts = [
         "data": datetime(2025, 10, 19),
         "autor": "Luiz R. Dererita",
         "nome_arquivo": "lancamento-convertetudo",
-        "imagem": "img/ct_preview.png",
+        "imagem": "img/convertetudo_preview.png",
         "conteudo": """
         <p>
           Hoje eu finalmente posso dizer com orgulho: o <strong>ConverteTudo</strong> está no ar! 🚀
