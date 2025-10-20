@@ -1,0 +1,10 @@
+# robots.txt for ConverteTudo
+# Permite que todos os buscadores indexem o site
+User-agent: *
+Disallow:
+
+# Permite rastrear todas as páginas e idiomas
+Allow: /
+
+# Indica o sitemap principal (substitua o caminho correto se necessário)
+Sitemap: https://converte-tudo-online.com.br/sitemap.xml
