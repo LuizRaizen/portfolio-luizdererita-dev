@@ -210,19 +210,19 @@ roadmap = [
 
 imagens = [
     {
-        "src": "img/ct_preview.png",
+        "src": "img/convertetudo/ct_preview.png",
         "descricao": "Prévia geral do ConverteTudo — homepage e identidade visual principal da plataforma."
     },
     {
-        "src": "img/ct_languages.png",
+        "src": "img/convertetudo/ct_languages.png",
         "descricao": "Sistema multilíngue em funcionamento — interface adaptada para diferentes idiomas e SEO internacional."
     },
     {
-        "src": "img/ct_dark_mode.png",
+        "src": "img/convertetudo/ct_dark_mode.png",
         "descricao": "Visual moderno do modo escuro — interface refinada com contraste e design responsivo."
     },
     {
-        "src": "img/ct_mobile.png",
+        "src": "img/convertetudo/ct_mobile.png",
         "descricao": "Versão mobile do ConverteTudo — interface otimizada para smartphones e tablets."
     },
 ]
@@ -241,11 +241,11 @@ downloads = [
     {
         "nome": "robots.txt (modelo)",
         "descricao": "Modelo usado na configuração inicial para buscadores.",
-        "arquivo": "downloads/convertetudo_robots.txt"
+        "arquivo": "downloads/convertetudo/convertetudo_robots.txt"
     },
     {
         "nome": "ads.txt (modelo)",
         "descricao": "Modelo base para verificação do Google AdSense.",
-        "arquivo": "downloads/convertetudo_ads.txt"
+        "arquivo": "downloads/convertetudo/convertetudo_ads.txt"
     },
 ]
