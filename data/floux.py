@@ -193,6 +193,6 @@ home_card = {
     "resumo": "Protótipo de rede social moderna focada em postagens rápidas (\"fragmentos\"), com visual mobile-friendly e sistema de cards interativos.",
     "categoria": "web",
     "tecnologias": ["HTML", "CSS", "JavaScript", "Flexbox", "UI/UX Design"],
-    "imagem": "img/floux_preview.png",
+    "imagem": "img/floux_preview.webp",
     "ordem": 70,
 }

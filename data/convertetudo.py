@@ -37,7 +37,7 @@ ficha_tecnica = {
         "Suporte a múltiplos idiomas e SEO técnico (titles, hreflang)",
         "Estrutura pronta para AdSense e blocos de anúncios",
     ],
-    "bibliotecas": ["Pillow (PIL)", "Django i18n", "Gunicorn + UvicornWorker"],
+    "bibliotecas": ["Pillow (PIL)", "Django i18n", "Redis (fila de tarefas)", "Gunicorn + UvicornWorker"],
     "banco_de_dados": "",
     "api_externa": "",
     "plataforma": "Web (Desktop / Mobile) — deploy em Render",
@@ -55,7 +55,7 @@ posts = [
         "data": datetime(2025, 10, 19),
         "autor": "Luiz R. Dererita",
         "nome_arquivo": "lancamento-convertetudo",
-        "imagem": "img/convertetudo_preview.png",
+        "imagem": "img/convertetudo_preview.webp",
         "conteudo": """
         <p>
           Hoje eu finalmente posso dizer com orgulho: o <strong>ConverteTudo</strong> está no ar! 🚀
@@ -257,7 +257,8 @@ downloads = [
 home_card = {
     "resumo": "Plataforma web de ferramentas online para conversão de imagens, documentos, áudios e vídeos. O projeto prioriza velocidade, privacidade e acessibilidade — com suporte a múltiplos idiomas e otimização para SEO e Google AdSense.",
     "categoria": "web",
-    "tecnologias": ["Python", "Django", "JavaScript", "HTML5", "CSS3"],
-    "imagem": "img/convertetudo_preview.png",
+    "tecnologias": ["Python", "Django", "Redis", "JavaScript", "HTML5", "CSS3"],
+    "imagem": "img/convertetudo_preview.webp",
     "ordem": 10,
+    "destaque": True,
 }

@@ -208,6 +208,6 @@ home_card = {
     "resumo": "Jogo de nave espacial inspirado no clássico Alien Invasion, desenvolvido com Pygame.",
     "categoria": "jogos",
     "tecnologias": ["Python", "Pygame"],
-    "imagem": "img/invaders_from_mars_preview.png",
+    "imagem": "img/invaders_from_mars_preview.webp",
     "ordem": 30,
 }

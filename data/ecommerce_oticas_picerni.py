@@ -199,6 +199,6 @@ home_card = {
     "resumo": "Protótipo de e-commerce para ótica, com layout moderno, menu de departamentos, botão WhatsApp e estrutura realista para negócios locais.",
     "categoria": "web",
     "tecnologias": ["HTML", "CSS", "JavaScript"],
-    "imagem": "img/picerni_preview.png",
+    "imagem": "img/picerni_preview.webp",
     "ordem": 50,
 }

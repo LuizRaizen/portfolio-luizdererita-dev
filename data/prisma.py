@@ -129,7 +129,7 @@ roadmap = [
 # ------------------------------------------------------------------------------
 
 imagens = [
-    {"src": "img/prisma/prisma.png", "descricao": "Tela do Prisma"}
+    {"src": "img/prisma/print.png", "descricao": "Tela do Prisma"}
 ]
 
 # ------------------------------------------------------------------------------
@@ -161,6 +161,6 @@ home_card = {
     "resumo": "App desktop em Python com interface Tkinter que permite alterar a cor de um canvas usando sliders RGB. Útil para testes visuais, experimentações com cor e aprendizado de interfaces gráficas.",
     "categoria": "desktop",
     "tecnologias": ["Python", "Tkinter"],
-    "imagem": "img/prisma_preview_2.png",
+    "imagem": "img/prisma_preview_2.webp",
     "ordem": 110,
 }

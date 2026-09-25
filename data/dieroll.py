@@ -161,6 +161,6 @@ home_card = {
     "resumo": "Módulo em Python para simular dados de RPG de mesa (d4, d6, d20, etc). Possui uma interface visual feita em Pygame, que exibe a rolagem de dados animada ao clicar no botão \"Rolar\".",
     "categoria": "jogos",
     "tecnologias": ["Python", "Pygame", "Programação Modular"],
-    "imagem": "img/dieroll_preview.png",
+    "imagem": "img/dieroll_preview.webp",
     "ordem": 100,
 }

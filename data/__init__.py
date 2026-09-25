@@ -13,7 +13,9 @@ def carregar_projeto(nome):
         modulo = importlib.import_module(f"data.{nome_modulo}")
 
         caminho_logo = os.path.join("static", "img", nome, "logo.png")
+        caminho_banner = os.path.join("static", "img", nome, "banner.png")
         tem_logo = os.path.exists(caminho_logo)
+        tem_banner = os.path.exists(caminho_banner)
 
         return {
             "projeto": getattr(modulo, "projeto"),
@@ -24,7 +26,8 @@ def carregar_projeto(nome):
             "videos": getattr(modulo, "videos", []),
             "downloads": getattr(modulo, "downloads", []),
             "home_card": getattr(modulo, "home_card", None),
-            "tem_logo": tem_logo
+            "tem_logo": tem_logo,
+            "tem_banner": tem_banner
         }
 
     except ModuleNotFoundError:

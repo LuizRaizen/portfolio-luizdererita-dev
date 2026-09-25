@@ -1,353 +1,359 @@
-/* === Reset e Base === */
-html {
-  scroll-behavior: smooth;
-}
+/* ==========================================================================
+   Portfólio — Blog do projeto. Depende de tokens.css e shell.css (linkados
+   antes deste arquivo). Bootstrap 5 continua sendo usado aqui (pagination,
+   inputs, cards, botões), mas importado dentro da layer "vendor" (a de
+   menor prioridade, declarada em shell.css) — sem isso, o CSS do Bootstrap
+   (que não está em nenhuma @layer) venceria qualquer regra deste arquivo,
+   não importa a ordem ou especificidade, e o tema escuro nunca apareceria.
+   ========================================================================== */
 
-body {
-  background-color: var(--color-bg, #0d0d0d);
-  color: var(--color-text, #f1f1f1);
-  font-family: var(--font-sans, 'Segoe UI', system-ui, sans-serif);
-  padding-top: 56px;
-}
+@import url("https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css") layer(vendor);
 
-[id] {
-  scroll-margin-top: 70px;
-}
+[id] { scroll-margin-top: 96px; }
 
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-}
+/* === Capa do projeto ===================================================== */
 
-/* === Navbar === */
-.site-navbar {
-  transition: background-color 250ms ease, box-shadow 250ms ease;
-}
-
-.site-navbar.is-scrolled {
-  background-color: #000 !important;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
-}
-
-.site-navbar .nav-link {
-  color: #bbb;
-  transition: color 150ms ease;
-}
-
-.site-navbar .nav-link:hover,
-.site-navbar .nav-link:focus-visible {
-  color: var(--color-accent, #5ec1ff);
-}
-
-/* === Progressive enhancement de scroll reveal (ver static/js/scroll-reveal.js) === */
-.js-reveal-ready .reveal {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 250ms ease, transform 250ms ease;
-}
-
-.js-reveal-ready .reveal.is-visible {
-  opacity: 1;
-  transform: none;
-}
-
-/* === Capa do Blog === */
 .blog-cover {
   position: relative;
-  height: 250px;
+  block-size: 320px;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-  background-color: #000;
+  overflow: clip;
+  background-color: var(--color-bg);
 }
 
 .banner-fundo {
   position: absolute;
-  width: 100%;
-  height: 100%;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
   object-fit: cover;
-  z-index: 1;
 }
 
-.logo-central,
-.titulo-projeto {
+.blog-cover__scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, var(--color-bg), color-mix(in oklab, var(--color-bg) 35%, transparent) 60%, color-mix(in oklab, var(--color-bg) 55%, transparent));
+}
+
+/* Projetos sem banner.png: gradiente de marca no lugar da imagem ausente. */
+.blog-cover--sem-banner {
+  background:
+    radial-gradient(ellipse 70% 60% at 75% 20%, color-mix(in oklab, var(--color-accent) 20%, transparent), transparent 70%),
+    radial-gradient(ellipse 60% 50% at 15% 90%, color-mix(in oklab, var(--gold-600) 14%, transparent), transparent 70%),
+    var(--color-bg);
+}
+
+.blog-cover__content {
   position: relative;
-  z-index: 2;
+  text-align: center;
+  padding-inline: var(--space-4);
 }
 
 .logo-central {
-  max-height: 80%;
-  max-width: 80%;
-  filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.7));
+  max-block-size: 96px;
+  max-inline-size: 80%;
+  filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.6));
 }
 
 .titulo-projeto {
-  font-size: 2.5rem;
-  color: white;
-  text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
-  text-align: center;
+  font-size: var(--text-2xl);
+  font-weight: 600;
+  color: var(--color-text);
+  text-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
 }
 
-/* === Menu de Seções === */
+.blog-cover__status {
+  margin-block-start: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-accent-text);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* === Navegação entre seções do blog ====================================== */
+
 .section-nav {
-  background: linear-gradient(to right, #101010, #0d0d0d);
-  border-top: 1px solid #333;
-  border-bottom: 1px solid #333;
-  padding: 0.5rem 0;
-  margin-bottom: 2rem;
   position: sticky;
   top: 56px;
-  z-index: 100;
+  z-index: 90;
+  background: color-mix(in oklab, var(--color-bg) 90%, transparent);
+  backdrop-filter: blur(10px);
+  border-block: 1px solid var(--color-border);
 }
 
-.nav-links-responsive {
+.section-nav__inner {
+  max-width: var(--content-max);
+  margin-inline: auto;
+  padding: var(--space-3) var(--space-4);
   display: flex;
-  flex-wrap: nowrap;
-  align-items: center;
   justify-content: center;
-  gap: 1.2rem;
-  font-weight: 500;
-  font-size: 1.1rem;
-  white-space: nowrap;
+  flex-wrap: wrap;
+  gap: var(--space-2);
 }
 
-/* Links */
-.nav-links-responsive a {
-  color: white;
-  text-decoration: none;
-  transition: color 0.2s ease, background-color 0.2s ease;
+.section-nav__inner a {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  padding: var(--space-2) var(--space-3);
+  transition: color var(--duration-fast), border-color var(--duration-fast);
 }
 
-.nav-links-responsive a:hover,
-.nav-links-responsive a.active {
-  background-color: #5ec1ff20;
-  color: #5ec1ff;
+.section-nav__inner a:hover {
+  color: var(--color-text);
+  border-color: var(--color-border-strong);
 }
 
-/* Separadores visuais */
-.nav-links-responsive .separator {
-  color: #ccc;
-  font-size: 1.1rem;
-  font-weight: normal;
+/* === Layout principal (sidebar + conteúdo) =============================== */
+
+.blog-layout {
+  max-width: var(--content-max);
+  margin-inline: auto;
+  padding: var(--space-6) var(--space-4);
+  display: grid;
+  gap: var(--space-6);
+  grid-template-columns: 1fr;
 }
 
-/* === Títulos === */
+@media (min-width: 960px) {
+  .blog-layout { grid-template-columns: 15rem minmax(0, 1fr); }
+}
+
+.sidebar {
+  display: none;
+}
+
+@media (min-width: 960px) {
+  .sidebar {
+    display: block;
+    align-self: start;
+    position: sticky;
+    top: 6.5rem;
+  }
+}
+
+.sidebar h4 {
+  font-size: var(--text-sm);
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-text-faint);
+  margin-block-end: var(--space-3);
+}
+
+.sidebar h4 i { color: var(--color-accent-text); margin-inline-end: var(--space-2); }
+
+.sidebar ul { display: flex; flex-direction: column; gap: var(--space-2); }
+
+.sidebar li a {
+  display: block;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  padding-block: var(--space-1);
+  border-inline-start: 2px solid transparent;
+  padding-inline-start: var(--space-3);
+  transition: color var(--duration-fast), border-color var(--duration-fast);
+}
+
+.sidebar li a:hover {
+  color: var(--color-text);
+  border-inline-start-color: var(--color-accent);
+}
+
+.sidebar__date {
+  font-family: var(--font-mono);
+  color: var(--color-text-faint);
+}
+
+.blog-main { min-inline-size: 0; }
+
+.blog-main > *:not(:last-child) { margin-block-end: var(--space-5); }
+
+/* === Títulos e separadores ================================================ */
+
 .section-title {
-  font-weight: bold;
-  border-bottom: 2px solid #5ec1ff;
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 600;
+  border-bottom: 2px solid var(--color-accent);
   display: inline-block;
-  padding-bottom: 5px;
+  padding-bottom: var(--space-1);
 }
 
-/* === Metainformações === */
-.meta-info {
-  font-size: 0.9rem;
-  color: #bbb;
-}
+.meta-info { font-size: var(--text-sm); color: var(--color-text-muted); }
 
-/* === Sidebar === */
-body.blog-page .sidebar {
-  background-color: #1a1a1a;
-  padding: 20px;
-  border-radius: 8px;
-  margin-bottom: 2rem;
-}
-
-body.blog-page .sidebar h4 {
-  color: #5ec1ff;
-}
-
-body.blog-page .sidebar ul {
-  list-style: none;
-  padding-left: 0;
-}
-
-body.blog-page .sidebar ul li {
-  margin-bottom: 10px;
-}
-
-body.blog-page .sidebar ul li a {
-  color: #ccc;
-  text-decoration: none;
-}
-
-body.blog-page .sidebar ul li a:hover {
-  color: #fff;
-}
-
-/* === Separadores === */
 .post-separator {
-  border-top: 2px solid #333;
-  margin: 60px 0 40px;
+  border-top: 1px solid var(--color-border);
+  margin-block: var(--space-6) var(--space-4);
 }
 
-main > *:not(:last-child) {
-  margin-bottom: 2.5rem;
+/* === Cards de postagem (blogs/index.html) ================================= */
+
+.card.bg-dark {
+  background-color: var(--color-surface) !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: var(--radius-md) !important;
 }
 
-/* === Imagens de Post === */
+.card-title { font-family: var(--font-display); font-weight: 600; }
+
 .preview-img,
 .preview-img-fluid {
   display: block;
-  width: 100%;
-  height: auto;
+  inline-size: 100%;
+  block-size: auto;
   object-fit: contain;
-  padding: 25px;
-  border: 1px solid #444;
-  border-radius: 8px;
-  margin-bottom: 1rem;
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  margin-block-end: var(--space-3);
+  background: var(--color-bg);
 }
 
-/* === Metadados dos Posts === */
 .post-meta {
   display: flex;
-  gap: 1.5rem;
+  gap: var(--space-4);
   align-items: center;
-  font-size: 0.9rem;
-  color: #ccc;
-  margin-top: 0.75rem;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  margin-block-start: var(--space-2);
 }
 
-.post-meta span {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
+.post-meta span { display: flex; align-items: center; gap: 6px; }
+.post-meta i { color: var(--color-text-faint); }
 
-.post-meta i {
-  font-size: 1rem;
-  color: #aaa;
-  transition: color 0.2s ease;
-}
+.preview-separator { border-top: 1px solid var(--color-border); margin-block: var(--space-2) var(--space-3); }
 
-/* === Separador das Previews === */
-.preview-separator {
-  border-top: 1px solid #333;
-  margin: 0.75rem 0 1rem;
-}
-
-/* === Ícone de Compartilhamento === */
 .share-icon-top {
   position: absolute;
-  top: 12px;
-  right: 12px;
-  font-size: 1.1rem;
-  color: #bbb;
-  padding: 6px;
+  top: var(--space-3);
+  right: var(--space-3);
+  font-size: var(--text-base);
+  color: var(--color-text-faint);
+  padding: var(--space-2);
   border-radius: 50%;
-  transition: all 0.2s ease-in-out;
+  transition: all var(--duration-fast) ease-in-out;
 }
 
-.share-icon-top:hover {
-  color: #5ec1ff;
-  background-color: #222;
-}
+.share-icon-top:hover { color: var(--color-accent-text); background-color: var(--color-surface-raised); }
 
-/* === Disqus: Contador formatado com ícone === */
 .disqus-comment-count {
   display: inline-flex;
   align-items: center;
-  color: #ccc;
-  text-decoration: none;
-  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
 }
 
-.disqus-comment-count:hover {
-  color: #5ec1ff;
-}
+.disqus-comment-count:hover { color: var(--color-accent-text); }
 
 .disqus-comment-count::before {
-  content: "\f075"; /* Font Awesome fa-comment */
+  content: "\f075";
   font-family: "Font Awesome 6 Free";
   font-weight: 400;
-  margin-right: 6px;
-  font-size: 1rem;
+  margin-inline-end: 6px;
 }
 
-.disqus-comment-count.d-none {
-  display: none !important;
+/* === Post individual ======================================================= */
+
+.post-body { color: var(--color-text); line-height: 1.75; }
+.post-body p { margin-block-end: var(--space-4); }
+.post-body h3 { margin-block: var(--space-5) var(--space-3); font-size: var(--text-xl); }
+
+.share-callout {
+  background: var(--color-surface) !important;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md) !important;
 }
 
-/* === Paginação === */
-.blog-pagination {
-  margin-top: 40px;
+/* === Ficha técnica / Roadmap =============================================== */
+
+.blog-main ul:not(.pagination):not(.list-inline):not(.list-unstyled):not(.sidebar ul) {
+  list-style: disc;
+  padding-inline-start: 1.4em;
+  color: var(--color-text-muted);
 }
+
+.blog-main ul ul { list-style: circle; margin-block-start: var(--space-2); }
+.blog-main li { margin-block-end: var(--space-2); }
+
+/* === Paginação ============================================================== */
+
+.blog-pagination { margin-block-start: var(--space-5); }
 
 .page-link.custom-page-link {
-  background-color: #1a1a1a;
-  color: #ccc;
-  border: 1px solid #444;
-  border-radius: 6px;
-  padding: 6px 12px;
-  margin: 0 4px;
-  transition: all 0.2s ease-in-out;
+  background-color: var(--color-surface);
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2) var(--space-3);
+  margin-inline: 4px;
+  transition: all var(--duration-fast) ease-in-out;
 }
 
 .page-link.custom-page-link:hover {
-  background-color: #5ec1ff20;
-  color: #5ec1ff;
-  border-color: #5ec1ff;
+  background-color: var(--color-surface-raised);
+  color: var(--color-text);
+  border-color: var(--color-border-strong);
 }
 
 .page-item.active .custom-page-link {
-  background-color: #5ec1ff;
-  color: #0d0d0d;
-  border-color: #5ec1ff;
-  font-weight: bold;
+  background-color: var(--color-accent);
+  color: var(--gray-950);
+  border-color: var(--color-accent);
+  font-weight: 600;
 }
 
-/* === Botões de Contato === */
-.btn-contact {
-  width: 100%;
+/* === Apoio / suporte ======================================================= */
+
+.support-box {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
 }
 
-@media (min-width: 768px) {
-  .btn-contact {
-    width: auto;
-  }
+.support-box a { color: var(--color-accent-text); font-weight: 600; }
+
+/* === Sobrescritas de Bootstrap (botões, inputs) ============================ */
+
+.btn-outline-light,
+.btn-outline-success,
+.btn-outline-primary,
+.btn-outline-info {
+  border-color: var(--color-border-strong);
+  color: var(--color-text);
 }
 
-/* === Rodapé === */
-footer {
-  background-color: #111;
-  color: #bbb;
-  margin-top: 60px;
+.btn-outline-light:hover,
+.btn-outline-success:hover,
+.btn-outline-primary:hover,
+.btn-outline-info:hover {
+  border-color: var(--color-accent);
+  color: var(--gray-950);
+  background-color: var(--color-accent);
 }
 
-/* === Responsividade === */
+.form-control {
+  background-color: var(--color-surface) !important;
+  border-color: var(--color-border) !important;
+  color: var(--color-text) !important;
+  font-family: var(--font-mono);
+}
+
+.form-control:focus {
+  border-color: var(--color-accent) !important;
+  box-shadow: 0 0 0 3px var(--color-accent-soft) !important;
+}
+
+/* === Responsividade ========================================================= */
+
 @media (max-width: 768px) {
-  .blog-title-overlay {
-    font-size: 1.8rem;
-  }
-}
-
-@media (max-width: 576px) {
-  .nav-links-responsive {
-    gap: 0.4rem;
-    font-size: 0.85rem;
-  }
-
-  .nav-links-responsive .separator {
-    font-size: 0.85rem;
-    margin: 0;
-  }
-
-  #contato ul.list-inline {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-  }
-
-  #contato ul.list-inline li,
-  #contato ul.list-inline a.btn {
-    width: 100%;
-    text-align: center;
-  }
-  
-  .anchor-offset {
-    scroll-margin-top: 80px;
-  }
+  .titulo-projeto { font-size: var(--text-xl); }
 }

@@ -158,6 +158,6 @@ home_card = {
     "resumo": "Projeto conceitual que implementa cadastro e login de usuários em SQLite com três interfaces diferentes: Kivy, Tkinter e PySide6, com tratamento seguro de senhas via hash e salt (bcrypt).",
     "categoria": "desktop",
     "tecnologias": ["Python", "Kivy", "PySide6", "Tkinter", "SQLite", "bcrypt"],
-    "imagem": "img/tela_cadastro_multi_ui_preview.jpg",
+    "imagem": "img/tela_cadastro_multi_ui_preview.webp",
     "ordem": 130,
 }

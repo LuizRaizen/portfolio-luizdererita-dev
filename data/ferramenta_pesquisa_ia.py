@@ -186,6 +186,7 @@ home_card = {
     "resumo": "Projeto acadêmico de impacto social que coleta dados sobre saúde e bem-estar, analisa-os com IA e retorna dicas personalizadas via Web App.",
     "categoria": "web",
     "tecnologias": ["HTML", "CSS", "JavaScript", "Python", "FastAPI", "OpenAI API", "SMTP"],
-    "imagem": "img/pesquisa_saude_preview.png",
+    "imagem": "img/pesquisa_saude_preview.webp",
     "ordem": 60,
+    "destaque": True,
 }

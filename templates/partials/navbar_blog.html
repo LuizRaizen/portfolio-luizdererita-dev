@@ -1,18 +1,30 @@
-<nav class="navbar navbar-dark bg-dark fixed-top navbar-expand-lg site-navbar" id="siteNavbar">
-  <div class="container-fluid">
-    <a class="navbar-brand fw-bold" href="{{ url_for('portfolio') }}">← Voltar ao Portfólio</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navBlog"
-            aria-controls="navBlog" aria-expanded="false" aria-label="Alternar navegação">
-      <span class="navbar-toggler-icon"></span>
+<header class="site-header" id="siteNavbar">
+  <div class="site-header__inner">
+    <a class="brand brand--back" href="{{ url_for('portfolio') }}">
+      <i class="fas fa-arrow-left" aria-hidden="true"></i> Portfólio
+    </a>
+
+    <nav class="primary-nav" aria-label="Navegação do projeto">
+      <a href="#novidades">Novidades</a>
+      <a href="#codigo-fonte">Código</a>
+      <a href="#ficha-tecnica">Ficha técnica</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="#contato" class="primary-nav__cta">Contato</a>
+    </nav>
+
+    <button type="button" class="menu-toggle" popovertarget="mobileMenu" aria-label="Abrir menu">
+      <span></span><span></span><span></span>
     </button>
-    <div class="collapse navbar-collapse justify-content-end" id="navBlog">
-      <ul class="navbar-nav gap-lg-2">
-        <li class="nav-item"><a class="nav-link" href="#novidades">Novidades</a></li>
-        <li class="nav-item"><a class="nav-link" href="#codigo-fonte">Código Fonte</a></li>
-        <li class="nav-item"><a class="nav-link" href="#ficha-tecnica">Ficha Técnica</a></li>
-        <li class="nav-item"><a class="nav-link" href="#roadmap">Roadmap</a></li>
-        <li class="nav-item"><a class="nav-link" href="#contato">Contato</a></li>
-      </ul>
-    </div>
   </div>
-</nav>
+</header>
+
+<div id="mobileMenu" popover="auto" class="mobile-menu">
+  <nav aria-label="Navegação mobile do projeto">
+    <a href="{{ url_for('portfolio') }}">← Portfólio</a>
+    <a href="#novidades">Novidades</a>
+    <a href="#codigo-fonte">Código fonte</a>
+    <a href="#ficha-tecnica">Ficha técnica</a>
+    <a href="#roadmap">Roadmap</a>
+    <a href="#contato">Contato</a>
+  </nav>
+</div>

@@ -1,0 +1,326 @@
+/* ==========================================================================
+   Shell — UI compartilhada entre a home e o blog: reset base, navbar, menu
+   mobile (popover), skip-link, scroll-reveal e rodapé. Depende de tokens.css
+   (linkado antes deste arquivo). Carregado tanto por templates/index.html
+   quanto por templates/blogs/base.html.
+   ========================================================================== */
+
+/* "vendor" fica com a menor prioridade: blogs/style.css importa o Bootstrap
+   nessa layer, para que nenhum estilo dele (nao vindo de layer nenhuma,
+   o que normalmente venceria qualquer @layer) sobreponha o tema novo. */
+@layer vendor, base, components, utilities;
+
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    line-height: 1.6;
+  }
+
+  img, svg { max-width: 100%; }
+
+  a { color: inherit; text-decoration: none; }
+
+  h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.15; margin: 0; }
+
+  ::selection {
+    background: var(--color-accent-soft);
+    color: var(--color-accent-text);
+  }
+
+  :root {
+    scrollbar-color: var(--color-border-strong) var(--color-bg);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: var(--radius-sm);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+}
+
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+  .text-pretty { text-wrap: pretty; }
+
+  .skip-link {
+    position: fixed;
+    top: -100%;
+    left: var(--space-3);
+    z-index: 1000;
+    background: var(--color-accent);
+    color: var(--gray-950);
+    font-weight: 600;
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-sm);
+    transition: top var(--duration-fast) var(--ease-out);
+  }
+
+  .skip-link:focus-visible { top: var(--space-3); }
+}
+
+@layer components {
+
+  /* === Cabeçalho / navegação ============================================ */
+
+  .site-header {
+    position: fixed;
+    inset-inline: 0;
+    top: 0;
+    z-index: 100;
+    background: color-mix(in oklab, var(--color-bg) 72%, transparent);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid transparent;
+    transition: border-color var(--duration-base) var(--ease-out), background-color var(--duration-base) var(--ease-out);
+  }
+
+  .site-header.is-scrolled {
+    border-bottom-color: var(--color-border);
+    background: color-mix(in oklab, var(--color-bg) 92%, transparent);
+  }
+
+  .site-header__inner {
+    max-width: var(--content-max);
+    margin-inline: auto;
+    padding: var(--space-3) var(--space-4);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+  }
+
+  .brand {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--text-lg);
+    letter-spacing: -0.01em;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .brand__dot { color: var(--color-accent); }
+
+  .brand--back {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    transition: color var(--duration-fast);
+  }
+
+  .brand--back:hover { color: var(--color-text); }
+
+  .primary-nav {
+    display: none;
+    align-items: center;
+    gap: var(--space-5);
+    font-size: var(--text-sm);
+  }
+
+  .primary-nav a {
+    color: var(--color-text-muted);
+    transition: color var(--duration-fast);
+    padding-block: var(--space-1);
+  }
+
+  .primary-nav a:hover,
+  .primary-nav a:focus-visible { color: var(--color-text); }
+
+  .primary-nav__cta {
+    color: var(--color-accent-text) !important;
+    font-weight: 600;
+  }
+
+  .menu-toggle {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    inline-size: 40px;
+    block-size: 40px;
+    background: none;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .menu-toggle span {
+    display: block;
+    inline-size: 18px;
+    block-size: 2px;
+    margin-inline: auto;
+    background: var(--color-text);
+    border-radius: var(--radius-full);
+    transition: transform var(--duration-fast) var(--ease-out), opacity var(--duration-fast) var(--ease-out);
+  }
+
+  body:has(#mobileMenu:popover-open) .menu-toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  body:has(#mobileMenu:popover-open) .menu-toggle span:nth-child(2) { opacity: 0; }
+  body:has(#mobileMenu:popover-open) .menu-toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .mobile-menu {
+    position: fixed;
+    inset: 0;
+    top: 0;
+    margin: 0;
+    inline-size: 100%;
+    block-size: 100dvb;
+    max-inline-size: 100%;
+    max-block-size: 100dvb;
+    border: none;
+    padding: calc(var(--space-6) + var(--space-4)) var(--space-4) var(--space-4);
+    background: var(--color-bg);
+    color: var(--color-text);
+  }
+
+  .mobile-menu::backdrop { background: rgba(0, 0, 0, 0.6); }
+
+  .mobile-menu nav {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .mobile-menu a {
+    font-family: var(--font-display);
+    font-size: var(--text-2xl);
+    font-weight: 600;
+    padding-block: var(--space-2);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  @media (min-width: 860px) {
+    .primary-nav { display: flex; }
+    .menu-toggle { display: none; }
+  }
+
+  /* === Botões compartilhados ============================================= */
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: var(--text-sm);
+    padding: var(--space-3) var(--space-4);
+    border-radius: var(--radius-full);
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: transform var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out), background-color var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out);
+    min-block-size: 44px;
+  }
+
+  .btn--primary { background: var(--color-accent); color: var(--gray-950); }
+
+  .btn--primary:hover,
+  .btn--primary:focus-visible {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow);
+  }
+
+  .btn--ghost {
+    background: transparent;
+    border-color: var(--color-border-strong);
+    color: var(--color-text);
+  }
+
+  .btn--ghost:hover,
+  .btn--ghost:focus-visible {
+    border-color: var(--color-accent);
+    color: var(--color-accent-text);
+  }
+
+  /* === Contato (partials/contato.html, reusado na home e no blog) ======== */
+
+  .section--contact {
+    text-align: center;
+    padding-block: var(--space-8) var(--space-7);
+    max-width: var(--content-max);
+    margin-inline: auto;
+    padding-inline: var(--space-4);
+  }
+
+  .section--contact h2 {
+    font-size: var(--text-3xl);
+    font-weight: 600;
+    margin-block-end: var(--space-3);
+  }
+
+  .contact__lead {
+    color: var(--color-text-muted);
+    max-width: var(--content-narrow);
+    margin-inline: auto;
+    margin-block-end: var(--space-5);
+  }
+
+  .contact__links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-3);
+  }
+
+  .contact__links a {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
+    padding: var(--space-3) var(--space-4);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    transition: border-color var(--duration-fast), color var(--duration-fast), transform var(--duration-fast);
+  }
+
+  .contact__links a:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent-text);
+    transform: translateY(-2px);
+  }
+
+  /* === Rodapé (partials/footer.html) ===================================== */
+
+  .site-footer {
+    border-top: 1px solid var(--color-border);
+    padding: var(--space-5) var(--space-4);
+  }
+
+  .site-footer__inner {
+    max-width: var(--content-max);
+    margin-inline: auto;
+    display: flex;
+    justify-content: center;
+    gap: var(--space-2);
+    font-size: var(--text-xs);
+    color: var(--color-text-faint);
+    font-family: var(--font-mono);
+  }
+
+  /* === Scroll reveal (progressive enhancement — ver scroll-reveal.js) ===== */
+
+  .js-reveal-ready .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity var(--duration-slow) var(--ease-out), transform var(--duration-slow) var(--ease-out);
+  }
+
+  .js-reveal-ready .reveal.is-visible { opacity: 1; transform: none; }
+}

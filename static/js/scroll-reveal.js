@@ -12,6 +12,8 @@
 
   document.documentElement.classList.add('js-reveal-ready');
 
+  var elements = document.querySelectorAll('.reveal');
+
   var observer = new IntersectionObserver(
     function (entries) {
       entries.forEach(function (entry) {
@@ -24,7 +26,17 @@
     { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
   );
 
-  document.querySelectorAll('.reveal').forEach(function (el) {
+  elements.forEach(function (el) {
     observer.observe(el);
   });
+
+  // Rede de segurança: se por qualquer motivo o observer não disparar para
+  // algum elemento (ex.: geometria incomum, bugs de navegador), garante que
+  // nada fique invisível para sempre.
+  window.setTimeout(function () {
+    elements.forEach(function (el) {
+      el.classList.add('is-visible');
+    });
+    observer.disconnect();
+  }, 2500);
 })();

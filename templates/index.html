@@ -3,183 +3,227 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Luiz R. Dererita | Desenvolvedor Full Stack | Portfólio Profissional</title>
-  <meta name="description" content="Portfólio profissional de Luiz R. Dererita, desenvolvedor full stack. Conheça projetos web, aplicações Python, integração com IA e muito mais.">
+  <meta name="color-scheme" content="dark">
+  <title>Luiz R. Dererita | Desenvolvedor Full Stack</title>
+  <meta name="description" content="Portfólio profissional de Luiz R. Dererita, desenvolvedor full stack. Conheça projetos web, jogos em Python, integração com IA e muito mais.">
   <meta name="keywords" content="portfólio, desenvolvedor web, Python, Flask, tecnologia, Luiz Dererita, projetos, programador full stack">
   <meta name="author" content="Luiz Ricardo Dererita de Araújo">
   <meta name="robots" content="index, follow">
-  <meta property="og:title" content="Portfólio de Luiz R. Dererita – Desenvolvedor Full Stack">
-  <meta property="og:description" content="Conheça meus projetos de tecnologia, sistemas web, interfaces gráficas e muito mais.">
-  <meta property="og:image" content="{{ url_for('static', filename='img/bg.png', _external=True) }}">
+  <meta property="og:title" content="Luiz R. Dererita — Desenvolvedor Full Stack">
+  <meta property="og:description" content="Conheça meus projetos de tecnologia, sistemas web, jogos e interfaces gráficas.">
+  <meta property="og:image" content="{{ url_for('static', filename='img/luiz.jpeg', _external=True) }}">
   <meta property="og:url" content="https://luizdererita-dev.up.railway.app">
   <meta property="og:type" content="website">
-  <link rel="icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='img/favicon.svg') }}">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/tokens.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/shell.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+  <link rel="preload" as="image" href="{{ url_for('static', filename='img/luiz.jpeg') }}" fetchpriority="high">
 </head>
 <body>
 
+<a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
 {% include "partials/navbar_home.html" %}
 
-<!-- Espaço para compensar a navbar fixa -->
-<div style="height: 56px;"></div>
+<main id="conteudo">
 
-<!-- Seção HERO (capa com imagem e frase) -->
-<section class="hero d-flex flex-column align-items-center justify-content-center text-center py-5">
-  <img src="{{ url_for('static', filename='img/luiz.jpg') }}" alt="Foto de Luiz" class="profile-img mb-4">
-  <h1 class="text-white fw-bold">Olá, eu sou o Luiz 👋</h1>
-  <p class="lead text-light">Desenvolvedor apaixonado por transformar ideias em código.</p>
-  <a href="#projetos" class="btn btn-primary mt-3">Ver meus projetos</a>
-</section>
-
-<!-- Sobre mim -->
-<section class="container my-5 reveal" id="sobre">
-  <h2 class="section-title">Sobre mim</h2>
-  <p class="mt-3">{{ sobre.texto }}</p>
-
-  <!-- Botão de currículo -->
-  <a href="{{ url_for('static', filename='docs/curriculo-luiz-dererita.pdf') }}" class="btn btn-outline-light mt-3" download>
-    <i class="fas fa-download"></i> Baixar Currículo
-  </a>
-  <div class="post-separator"></div>
-</section>
-
-<!-- Minha jornada-->
-<section class="container my-5 reveal" id="trajetoria">
-  <h2 class="section-title">Minha Jornada</h2>
-  <ul class="mt-3 timeline-list">
-    {% for etapa in jornada %}
-      <li><strong>{{ etapa.ano }}</strong> – {{ etapa.descricao }}</li>
-    {% endfor %}
-  </ul>
-  <div class="post-separator"></div>
-</section>
-
-<!-- Habilidades -->
-<section class="container my-5 reveal" id="habilidades">
-  <h2 class="section-title mb-4">Habilidades Técnicas</h2>
-
-  <div class="accordion" id="accordionHabilidades">
-    {% for grupo in habilidades %}
-      <div class="accordion-item bg-dark text-white">
-        <h2 class="accordion-header" id="heading-{{ loop.index }}">
-          <button class="accordion-button bg-dark text-white collapsed" type="button"
-                  data-bs-toggle="collapse" data-bs-target="#collapse-{{ loop.index }}" aria-expanded="false">
-            {{ grupo.categoria }}
-          </button>
-        </h2>
-        <div id="collapse-{{ loop.index }}" class="accordion-collapse collapse" data-bs-parent="#accordionHabilidades">
-          <div class="accordion-body d-flex flex-wrap justify-content-start gap-4">
-            {% for item in grupo.itens %}
-              <div class="skill-item">
-                <i class="{{ item.icone }} fa-2x {{ item.cor }}" title="{{ item.nivel }}"></i>
-                <p>{{ item.nome }}</p>
-              </div>
-            {% endfor %}
-          </div>
-        </div>
-      </div>
-    {% endfor %}
-  </div>
-  <div class="post-separator"></div>
-</section>
-
-<!-- Certificados -->
-<section class="container my-5 reveal" id="certificados">
-  <h2 class="section-title">Certificados</h2>
-  <div class="row mt-4">
-
-    <!-- Botões de filtro -->
-    <div class="text-center mb-4 filter-bar">
-      <button class="btn btn-outline-light m-1" data-filter="all">Todos</button>
-      <button class="btn btn-outline-light m-1" data-filter="presencial">Presenciais</button>
-      <button class="btn btn-outline-light m-1" data-filter="online">Online</button>
-    </div>
-
-    {% for c in certificados %}
-      <div class="col-md-6 col-lg-4 mb-4">
-        <div class="card bg-dark text-white" data-category="{{ c.categoria }}">
-          <a href="{{ url_for('static', filename=c.get('documento', c.imagem_full)) }}" target="_blank" rel="noopener">
-            <img src="{{ url_for('static', filename=c.imagem_thumb) }}" class="card-img-top" alt="{{ c.titulo }}" loading="lazy">
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="hero__glow" aria-hidden="true"></div>
+    <div class="hero__inner">
+      <div class="hero__content">
+        <p class="eyebrow">Desenvolvedor Full Stack · Python &amp; Web</p>
+        <h1 class="hero__title text-balance">Luiz R.<br>Dererita</h1>
+        <p class="hero__lead text-pretty">
+          Construo aplicações reais do início ao deploy — sistemas web em Flask e Django,
+          jogos em Pygame e interfaces desktop — sempre com código modular e atenção ao detalhe.
+        </p>
+        <div class="hero__actions">
+          <a href="#projetos" class="btn btn--primary">Ver projetos</a>
+          <a href="{{ url_for('static', filename='docs/curriculo-luiz-dererita.pdf') }}" class="btn btn--ghost" download>
+            <i class="fas fa-download" aria-hidden="true"></i> Currículo
           </a>
-          <div class="card-body">
-            <h5 class="card-title">{{ c.titulo }}</h5>
-            <p class="card-text">{{ c.descricao }}</p>
-          </div>
+        </div>
+        <ul class="hero__stack" aria-label="Principais tecnologias">
+          <li>Python</li><li>Flask</li><li>Django</li><li>JavaScript</li><li>PostgreSQL</li><li>Pygame</li>
+        </ul>
+      </div>
+      <div class="hero__portrait">
+        <div class="hero__portrait-frame">
+          <img src="{{ url_for('static', filename='img/luiz.jpeg') }}" alt="Foto de Luiz R. Dererita" width="896" height="1200" fetchpriority="high">
         </div>
       </div>
-    {% endfor %}
+    </div>
+    <a class="scroll-cue" href="#sobre" aria-label="Rolar até a seção Sobre"><span></span></a>
+  </section>
 
-  </div>
-  <div class="post-separator"></div>
-</section>
+  <!-- SOBRE -->
+  <section class="section" id="sobre">
+    <div class="section__head reveal">
+      <p class="eyebrow">01 · Sobre</p>
+      <h2 class="text-balance">Quem constrói isso</h2>
+    </div>
+    <div class="about reveal">
+      <p class="about__lead text-pretty">{{ sobre.texto }}</p>
+      <a href="{{ url_for('static', filename='docs/curriculo-luiz-dererita.pdf') }}" class="btn btn--ghost" download>
+        <i class="fas fa-download" aria-hidden="true"></i> Baixar currículo
+      </a>
+    </div>
+  </section>
 
-<!-- Projetos -->
-<section class="container my-5 reveal" id="projetos">
-  <h2 class="section-title">Projetos</h2>
-  <div class="row mt-4">
+  <!-- JORNADA -->
+  <section class="section" id="jornada">
+    <div class="section__head reveal">
+      <p class="eyebrow">02 · Trajetória</p>
+      <h2 class="text-balance">Minha jornada</h2>
+    </div>
+    <ol class="timeline reveal">
+      {% for etapa in jornada %}
+        <li class="timeline__item">
+          <span class="timeline__year">{{ etapa.ano }}</span>
+          <span class="timeline__desc">{{ etapa.descricao }}</span>
+        </li>
+      {% endfor %}
+    </ol>
+  </section>
 
-    <!-- Botões de filtro -->
-    <div class="text-center mb-4 filter-bar">
-      <button class="btn btn-outline-light m-1" data-filter="all">Todos</button>
-      <button class="btn btn-outline-light m-1" data-filter="jogos">Jogos</button>
-      <button class="btn btn-outline-light m-1" data-filter="web">Web</button>
-      <button class="btn btn-outline-light m-1" data-filter="desktop">Desktop</button>
-      <button class="btn btn-outline-light m-1" data-filter="mobile">Mobile</button>
-      <button class="btn btn-outline-light m-1" data-filter="cli">CLI</button>
+  <!-- HABILIDADES -->
+  <section class="section" id="habilidades">
+    <div class="section__head reveal">
+      <p class="eyebrow">03 · Habilidades</p>
+      <h2 class="text-balance">Ferramentas do dia a dia</h2>
+    </div>
+    <div class="skills reveal">
+      {% for grupo in habilidades %}
+        <div class="skills__group">
+          <h3 class="skills__group-title">{{ grupo.categoria }}</h3>
+          <ul class="skills__list">
+            {% for item in grupo.itens %}
+              <li class="skill-chip" title="{{ item.nivel }}">
+                <i class="{{ item.icone }}" aria-hidden="true"></i>
+                <span>{{ item.nome }}</span>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <!-- CERTIFICADOS -->
+  <section class="section" id="certificados">
+    <div class="section__head reveal">
+      <p class="eyebrow">04 · Formação</p>
+      <h2 class="text-balance">Certificados</h2>
     </div>
 
-    {% for p in projetos %}
-      <div class="col-md-6 col-lg-4 mb-4">
-        <div class="card bg-dark text-white project-card" data-category="{{ p.home_card.categoria }}">
-          <img src="{{ url_for('static', filename=p.home_card.imagem) }}" class="card-img-top" alt="{{ p.ficha_tecnica.nome }}" loading="lazy">
-          <div class="card-body">
-            <h5 class="card-title">{{ p.ficha_tecnica.nome }}</h5>
-            <p class="card-text">{{ p.home_card.resumo }}</p>
-            <p><strong>Tecnologias:</strong> {{ p.home_card.tecnologias | join(', ') }}</p>
-            <a href="{{ url_for('blog_index', projeto=p.projeto) }}" class="btn btn-outline-light btn-sm">Ver mais</a>
+    <div class="filter-bar reveal" role="group" aria-label="Filtrar certificados">
+      <button type="button" class="filter-pill is-active" data-filter="all">Todos</button>
+      <button type="button" class="filter-pill" data-filter="presencial">Presenciais</button>
+      <button type="button" class="filter-pill" data-filter="online">Online</button>
+    </div>
+
+    <ul class="credential-list reveal">
+      {% for c in certificados %}
+        <li class="credential" data-category="{{ c.categoria }}">
+          <a class="credential__thumb" href="{{ url_for('static', filename=c.get('documento', c.imagem_full)) }}" target="_blank" rel="noopener">
+            <img src="{{ url_for('static', filename=c.imagem_thumb) }}" alt="Certificado: {{ c.titulo }}" loading="lazy" width="64" height="64">
+          </a>
+          <div class="credential__body">
+            <h3>{{ c.titulo }}</h3>
+            <p>{{ c.descricao }}</p>
           </div>
-        </div>
-      </div>
-    {% endfor %}
+          <span class="credential__tag">{{ 'Presencial' if c.categoria == 'presencial' else 'Online' }}</span>
+        </li>
+      {% endfor %}
+    </ul>
+  </section>
 
-  </div>
-  <div class="post-separator"></div>
-</section>
+  <!-- PROJETOS -->
+  <section class="section" id="projetos">
+    <div class="section__head reveal">
+      <p class="eyebrow">05 · Projetos</p>
+      <h2 class="text-balance">Projetos selecionados</h2>
+    </div>
 
-{% include "partials/contato.html" %}
+    <div class="filter-bar reveal" role="group" aria-label="Filtrar projetos">
+      <button type="button" class="filter-pill is-active" data-filter="all">Todos</button>
+      <button type="button" class="filter-pill" data-filter="jogos">Jogos</button>
+      <button type="button" class="filter-pill" data-filter="web">Web</button>
+      <button type="button" class="filter-pill" data-filter="desktop">Desktop</button>
+      <button type="button" class="filter-pill" data-filter="mobile">Mobile</button>
+      <button type="button" class="filter-pill" data-filter="cli">CLI</button>
+    </div>
+
+    <div class="projects-grid reveal">
+      {% for p in projetos %}
+        <article class="project-card{% if p.home_card.destaque %} project-card--featured{% endif %}" data-category="{{ p.home_card.categoria }}">
+          <a class="project-card__media" href="{{ url_for('blog_index', projeto=p.projeto) }}" tabindex="-1">
+            <img src="{{ url_for('static', filename=p.home_card.imagem) }}" alt="" loading="lazy">
+          </a>
+          <div class="project-card__body">
+            <div class="project-card__head">
+              <h3><a href="{{ url_for('blog_index', projeto=p.projeto) }}">{{ p.ficha_tecnica.nome }}</a></h3>
+              <span class="project-card__category">{{ p.home_card.categoria }}</span>
+            </div>
+            <p>{{ p.home_card.resumo }}</p>
+            <ul class="tech-tags">
+              {% for t in p.home_card.tecnologias %}<li>{{ t }}</li>{% endfor %}
+            </ul>
+            <a class="project-card__link" href="{{ url_for('blog_index', projeto=p.projeto) }}">
+              Ver projeto <i class="fas fa-arrow-right" aria-hidden="true"></i>
+            </a>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  </section>
+
+  {% include "partials/contato.html" %}
+
+</main>
 
 {% include "partials/footer.html" %}
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="{{ url_for('static', filename='js/scroll-reveal.js') }}"></script>
 <script>
   // Filtro de cards (projetos e certificados)
-  document.querySelectorAll("[data-filter]").forEach(button => {
-    button.addEventListener("click", () => {
-      const bar = button.closest(".filter-bar");
-      const category = button.getAttribute("data-filter");
+  document.querySelectorAll(".filter-bar").forEach(bar => {
+    const scope = bar.closest("section");
+    bar.querySelectorAll("[data-filter]").forEach(button => {
+      button.addEventListener("click", () => {
+        bar.querySelectorAll("[data-filter]").forEach(b => b.classList.remove("is-active"));
+        button.classList.add("is-active");
 
-      bar.querySelectorAll("[data-filter]").forEach(b => b.classList.remove("active"));
-      button.classList.add("active");
-
-      const scope = bar.closest("section");
-      scope.querySelectorAll("[data-category]").forEach(card => {
-        const match = category === "all" || card.getAttribute("data-category") === category;
-        card.parentElement.style.display = match ? "block" : "none";
+        const category = button.getAttribute("data-filter");
+        scope.querySelectorAll("[data-category]").forEach(card => {
+          const match = category === "all" || card.getAttribute("data-category") === category;
+          card.hidden = !match;
+        });
       });
     });
   });
 
   // Navbar com fundo reforçado ao rolar a página
   const navbar = document.getElementById("siteNavbar");
-  const onScroll = () => {
-    navbar.classList.toggle("is-scrolled", window.scrollY > 12);
-  };
+  const onScroll = () => navbar.classList.toggle("is-scrolled", window.scrollY > 12);
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
+
+  // Fecha o menu mobile (popover) ao clicar num link interno
+  const mobileMenu = document.getElementById("mobileMenu");
+  if (mobileMenu) {
+    mobileMenu.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => mobileMenu.hidePopover());
+    });
+  }
 </script>
 </body>
 </html>

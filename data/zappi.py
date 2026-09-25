@@ -136,7 +136,7 @@ roadmap = [
 imagens = [
     {"src": "img/zappi/preview-home.png", "descricao": "Layout inicial da homepage do Zappi"},
     {"src": "img/zappi/preview-login.png", "descricao": "Página de login"},
-    {"src": "img/zappi/preview-product.png", "descricao": "Detalhe do Produto (em desenvolvimento)"},
+    {"src": "img/zappi/preview-cart.png", "descricao": "Detalhe do Produto (em desenvolvimento)"},
     {"src": "img/zappi/preview-account.png", "descricao": "Painel da conta do cliente"},
 ]
 
@@ -174,6 +174,6 @@ home_card = {
     "resumo": "Projeto de plataforma para E-commerce. Posteriormente, será escalada para um SaaS de criação de lojas virtuais.",
     "categoria": "web",
     "tecnologias": ["Python", "Django"],
-    "imagem": "img/zappi_preview.png",
+    "imagem": "img/zappi_preview.webp",
     "ordem": 20,
 }

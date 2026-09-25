@@ -162,6 +162,6 @@ home_card = {
     "resumo": "Módulo simples em Python que aplica estilos ANSI em textos no terminal, permitindo destacar palavras, criar títulos centralizados e embelezar saídas de linha de comando.",
     "categoria": "cli",
     "tecnologias": ["Python", "ANSI Escape Codes", "Programação Modular"],
-    "imagem": "img/tomato_preview.png",
+    "imagem": "img/tomato_preview.webp",
     "ordem": 120,
 }

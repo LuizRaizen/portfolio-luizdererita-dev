@@ -186,6 +186,6 @@ home_card = {
     "resumo": "Sistema em Python com suporte à linha de comando para converter imagens entre formatos usando a biblioteca Pillow. Evoluiu para incluir interface gráfica com Tkinter e uma versão moderna com PySide6 (em desenvolvimento).",
     "categoria": "desktop",
     "tecnologias": ["Python", "Pillow", "Tkinter", "PySide6", "Qt Designer"],
-    "imagem": "img/img_convert_preview.png",
+    "imagem": "img/img_convert_preview.webp",
     "ordem": 80,
 }

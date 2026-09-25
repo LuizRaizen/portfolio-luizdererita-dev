@@ -178,6 +178,6 @@ home_card = {
     "resumo": "Aplicativo desktop desenvolvido com PySide6 para cadastro e gerenciamento de empresas, com interface visual criada no Qt Designer.",
     "categoria": "desktop",
     "tecnologias": ["Python", "PySide6", "Qt Designer"],
-    "imagem": "img/crud_cadastro_empresas_preview.png",
+    "imagem": "img/crud_cadastro_empresas_preview.webp",
     "ordem": 90,
 }

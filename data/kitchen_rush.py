@@ -229,9 +229,10 @@ downloads = []
 # ------------------------------------------------------------------------------
 
 home_card = {
-    "resumo": "Protótipo de jogo de gerenciamento de restaurante com arte original e interface modular interativa.",
+    "resumo": "Jogo de gerenciamento de restaurante com arte original, sistema de fases, tutorial e loja — arquitetura modular inspirada em MVC e State Pattern, com build empacotado via PyInstaller.",
     "categoria": "jogos",
-    "tecnologias": ["Python", "Pygame", "POO", "MVC"],
-    "imagem": "img/kitchen_rush_preview.png",
+    "tecnologias": ["Python", "Pygame", "POO", "State Pattern"],
+    "imagem": "img/kitchen_rush_preview.webp",
     "ordem": 40,
+    "destaque": True,
 }

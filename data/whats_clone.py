@@ -128,7 +128,7 @@ roadmap = [
 # ------------------------------------------------------------------------------
 
 imagens = [
-    {"src": "img/whats-clone/print.png", "descricao": "Testando o WhatsClone no Desktop"}
+    {"src": "img/whats-clone/print.jpg", "descricao": "Testando o WhatsClone no Desktop"}
 ]
 
 # ------------------------------------------------------------------------------
@@ -160,6 +160,6 @@ home_card = {
     "resumo": "Clone da interface do WhatsApp desenvolvido com Kivy como estudo de layout e design responsivo.",
     "categoria": "mobile",
     "tecnologias": ["Python", "Kivy", "KvLang", "UI Design"],
-    "imagem": "img/whats-clone-preview.png",
+    "imagem": "img/whats-clone-preview.webp",
     "ordem": 140,
 }
