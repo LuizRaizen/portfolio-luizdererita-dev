@@ -1,0 +1,355 @@
+{% extends "blogs/base.html" %}
+
+{% block title %}{{ ficha_tecnica.nome }} | Galeria de Vídeos{% endblock %}
+
+{% block styles %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/blogs/style.css') }}">
+  <style>
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .gallery-item {
+      background-color: #1a1a1a;
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+    }
+  
+    .no-videos {
+      text-align: center;
+      color: #888;
+      margin-top: 3rem;
+      font-size: .8rem;
+    }
+
+    .no-videos i {
+      margin-right: 8px;
+      color: #666;
+    }
+
+    .overlay-container {
+      position: relative;
+      width: 100%;
+      height: 180px;
+      overflow: hidden;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .video-thumb,
+    .overlay-container video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+
+    .overlay-container .video-thumb {
+      filter: brightness(60%);
+    }
+
+    .overlay-container:hover .video-thumb,
+    .overlay-container:hover video {
+      transform: scale(1.03);
+      filter: brightness(75%);
+    }
+
+    .play-overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: 3rem;
+      pointer-events: none;
+      opacity: 0.85;
+      transition: opacity 0.3s ease;
+    }
+
+    .overlay-container:hover .play-overlay {
+      opacity: 1;
+    }
+
+    .gallery-caption {
+      padding: 0.5rem;
+      font-size: 0.875rem;
+      color: #ccc;
+      text-align: center;
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(10px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1050;
+      padding: 2rem 1rem;
+    }
+
+    .modal-backdrop.active {
+      display: flex;
+      animation: fadeInScale 0.3s ease-out;
+    }
+
+    @keyframes fadeInScale {
+      from {
+        opacity: 0;
+        transform: scale(0.96);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .modal-video-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      max-width: 960px;
+      width: 90vw;
+      gap: 1.5rem;
+    }
+
+    .modal-video-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+
+    .modal-video-aspect {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      border-radius: 10px;
+      overflow: hidden;
+      background: black;
+      box-shadow: 0 0 20px rgba(0,0,0,0.6);
+    }
+
+    .modal-video-aspect iframe,
+    .modal-video-aspect video {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: black;
+    }
+
+    .modal-descricao {
+      margin-top: 1rem;
+      color: #ddd;
+      text-align: center;
+      font-size: 1rem;
+      max-width: 90%;
+    }
+
+    .modal-btn-left,
+    .modal-btn-right {
+      background: rgba(0, 0, 0, 0.5);
+      border: none;
+      padding: 14px 18px;
+      font-size: 1.5rem;
+      color: white;
+      cursor: pointer;
+      border-radius: 50%;
+      z-index: 2;
+      transition: background 0.3s ease;
+      position: relative;
+      top: 0;
+    }
+
+    .modal-btn-left:hover,
+    .modal-btn-right:hover {
+      background: rgba(94, 193, 255, 0.7);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 1.6rem;
+      color: #ccc;
+      background: none;
+      border: none;
+      cursor: pointer;
+      z-index: 1100;
+    }
+
+    .modal-close:hover {
+      color: white;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+<h2 class="section-title mb-4">🎮 Galeria de Vídeos</h2>
+
+{% if videos %}
+  <div class="gallery">
+    {% for item in videos %}
+      <div class="gallery-item">
+        <div class="overlay-container" onclick="abrirModal({{ loop.index0 }})">
+          {% if item.get('thumb') %}
+            <!-- Exibe thumb personalizada -->
+            <img src="{{ url_for('static', filename=item.thumb) }}" alt="{{ item.get('descricao', 'Prévia do vídeo') }}" class="video-thumb">
+          
+          {% elif item.get('youtube_id') %}
+            <!-- Exibe preview do YouTube com imagem de fundo -->
+            <img src="https://img.youtube.com/vi/{{ item.youtube_id }}/hqdefault.jpg" alt="{{ item.get('descricao', 'Vídeo do YouTube') }}" class="video-thumb">
+          
+          {% else %}
+            <!-- Exibe vídeo local como fallback -->
+            <video class="video-thumb" muted preload="metadata">
+              <source src="{{ url_for('static', filename=item.src) }}" type="video/mp4">
+              Seu navegador não suporta a tag de vídeo.
+            </video>
+          {% endif %}
+
+          <div class="play-overlay"><i class="fas fa-play-circle"></i></div>
+        </div>
+
+        {% if item.get('descricao') %}
+          <div class="gallery-caption">{{ item.descricao }}</div>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <p class="no-videos">
+    <i class="fas fa-video py-5 my-5"></i> Nenhuma vídeo foi adicionado a este projeto ainda.
+  </p>
+{% endif %}
+
+{% if total_paginas > 1 %}
+<nav class="blog-pagination">
+  <ul class="pagination justify-content-center">
+    {% if pagina_atual > 1 %}
+      <li class="page-item">
+        <a class="page-link custom-page-link" href="{{ url_for('galeria_imagens', projeto=projeto, pagina=pagina_atual - 1) }}">Anterior</a>
+      </li>
+    {% endif %}
+    {% for i in range(1, total_paginas + 1) %}
+      <li class="page-item {% if i == pagina_atual %}active{% endif %}">
+        <a class="page-link custom-page-link" href="{{ url_for('galeria_imagens', projeto=projeto, pagina=i) }}">{{ i }}</a>
+      </li>
+    {% endfor %}
+    {% if pagina_atual < total_paginas %}
+      <li class="page-item">
+        <a class="page-link custom-page-link" href="{{ url_for('galeria_imagens', projeto=projeto, pagina=pagina_atual + 1) }}">Próxima</a>
+      </li>
+    {% endif %}
+  </ul>
+</nav>
+{% endif %}
+
+<div class="modal-backdrop" id="modalGaleria" onclick="fecharModal(event)">
+  <button class="modal-close" onclick="fecharModal(event)">×</button>
+
+  <div class="modal-video-container">
+    <button class="modal-btn-left" onclick="navegar(-1)">◀</button>
+
+    <div class="modal-video-content">
+      <div class="modal-video-aspect">
+        <video id="modalVideo" controls autoplay muted style="display: none;"></video>
+        <iframe
+          id="modalIframe"
+          frameborder="0"
+          allowfullscreen
+          allow="autoplay; encrypted-media"
+          style="display: none;"></iframe>
+      </div>
+      <div id="modalDescricao" class="modal-descricao">Descrição do Vídeo</div>
+    </div>
+
+    <button class="modal-btn-right" onclick="navegar(1)">▶</button>
+  </div>
+</div>
+
+<!-- Scripts -->
+<script>
+  const videos = {{ videos | tojson }};
+  let videoAtual = 0;
+
+  function abrirModal(index) {
+    videoAtual = index;
+
+    const modal = document.getElementById('modalGaleria');
+    const video = document.getElementById('modalVideo');
+    const iframe = document.getElementById('modalIframe');
+    const desc = document.getElementById('modalDescricao');
+
+    const isYouTube = !!videos[videoAtual].youtube_id;
+
+    // Limpa o estado anterior
+    video.pause();
+    video.style.display = 'none';
+    iframe.style.display = 'none';
+    iframe.src = '';
+    video.src = '';
+
+    if (isYouTube) {
+      iframe.src = `https://www.youtube.com/embed/${videos[videoAtual].youtube_id}?autoplay=1`;
+      iframe.style.display = 'block';
+    } else {
+      video.src = `/static/${videos[videoAtual].src}`;
+      video.style.display = 'block';
+      video.play();
+    }
+
+    desc.textContent = videos[videoAtual].descricao || '';
+    modal.classList.add('active'); // <-- ESSENCIAL para exibir a modal
+  }
+
+  function fecharModal(event) {
+    if (event.target.id === 'modalGaleria' || event.target.classList.contains('modal-close')) {
+      const modal = document.getElementById('modalGaleria');
+      const video = document.getElementById('modalVideo');
+      const iframe = document.getElementById('modalIframe');
+
+      modal.classList.remove('active');
+
+      // Interrompe vídeo local
+      video.pause();
+      video.src = '';
+      video.style.display = 'none';
+
+      // Interrompe vídeo do YouTube
+      iframe.src = '';
+      iframe.style.display = 'none';
+    }
+  }
+
+  function navegar(direcao) {
+    videoAtual = (videoAtual + direcao + videos.length) % videos.length;
+    const video = document.getElementById('modalVideo');
+    const desc = document.getElementById('modalDescricao');
+
+    video.src = `/static/${videos[videoAtual].src}`;
+    desc.textContent = videos[videoAtual].descricao || '';
+    video.play();
+  }
+
+  document.addEventListener('keydown', (event) => {
+    const modal = document.getElementById('modalGaleria');
+    if (modal.classList.contains('active')) {
+      if (event.key === 'Escape') fecharModal({ target: { id: 'modalGaleria' } });
+      else if (event.key === 'ArrowLeft') navegar(-1);
+      else if (event.key === 'ArrowRight') navegar(1);
+    }
+  });
+</script>
+{% endblock %}

@@ -1,0 +1,32 @@
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyc
+
+# Environment
+.env
+.venv/
+env/
+venv/
+ENV/
+Pipfile.lock
+
+# Editor folders
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# PyInstaller
+*.spec
+
+# Flask-specific
+instance/
+*.db
+templates/blogs/test.html

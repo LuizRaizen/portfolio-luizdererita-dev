@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- SEO & Open Graph -->
+  <meta name="description" content="Blog técnico sobre o projeto {{ projeto|replace('_', ' ')|title }} criado por Luiz R. Dererita. Acompanhe o desenvolvimento, imagens, vídeos, downloads e roadmap do projeto.">
+  <meta name="author" content="Luiz R. Dererita" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="{{ projeto|replace('_', ' ')|title }} | Blog do Projeto | Luiz R. Dererita" />
+  <meta property="og:description" content="Acompanhe o desenvolvimento do projeto {{ projeto|replace('_', ' ')|title }}, um projeto independente criado por Luiz R. Dererita.">
+  <meta property="og:image" content="{{ url_for('static', filename='img/' ~ projeto ~ '/logo.png') }}" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="{{ request.url }}" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="{{ projeto|replace('_', ' ')|title }}" />
+  <meta name="twitter:description" content="Blog oficial do projeto com imagens, roadmap e reflexões do criador.">
+  <meta name="twitter:image" content="{{ url_for('static', filename='img/' ~ projeto ~ '/logo.png') }}" />
+
+  <!-- Título da página -->
+  <title>{% block title %}Blog do Projeto{% endblock %}</title>
+
+  <!-- CSS principal -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/tokens.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/blogs/style.css') }}">
+  {% block styles %}{% endblock %}
+</head>
+
+<body class="blog-page blog-popup">
+  {% include "partials/navbar_blog.html" %}
+
+  <!-- Capa do projeto -->
+  <section class="blog-cover">
+    <img src="{{ url_for('static', filename='img/' ~ projeto ~ '/banner.png') }}" alt="Capa do Projeto" class="banner-fundo">
+    {% if tem_logo %}
+      <img src="{{ url_for('static', filename='img/' ~ projeto ~ '/logo.png') }}" alt="Logo do Projeto" class="logo-central">
+    {% else %}
+      <h1 class="logo-central titulo-projeto">{{ ficha_tecnica.nome }}</h1>
+    {% endif %}
+  </section>
+
+  <!-- Navegação entre seções do blog -->
+  <nav class="section-nav shadow-sm py-2">
+    <div class="container-fluid text-center nav-links-responsive">
+      <a href="{{ url_for('blog_index', projeto=projeto) }}">Sobre</a>
+      <span class="separator">|</span>
+      <a href="{{ url_for('galeria_imagens', projeto=projeto) }}">Imagens</a>
+      <span class="separator">|</span>
+      <a href="{{ url_for('galeria_videos', projeto=projeto) }}">Vídeos</a>
+      <span class="separator">|</span>
+      <a href="{{ url_for('galeria_downloads', projeto=projeto) }}">Downloads</a>
+    </div>
+  </nav>
+
+  <!-- Conteúdo principal -->
+  <div class="container-fluid py-5">
+    <div class="row justify-content-center">
+
+      <!-- Barra lateral (Histórico de Postagens) -->
+      <aside class="col-lg-3 d-none d-lg-block">
+        <div class="sidebar">
+          <h4><i class="fas fa-clock"></i> Histórico de Postagens</h4>
+          <ul>
+            {% for post in todos_os_posts %}
+              <li>
+                <a href="{{ url_for('ver_post', projeto=projeto, nome=post.nome_arquivo) }}">
+                  [{{ post.data | data_curta }}] {{ post.titulo }}
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </aside>
+
+      <!-- Conteúdo principal -->
+      <main class="col-lg-6 col-md-12">
+        {% block content %}{% endblock %}
+
+        <!-- Separador -->
+        <div class="post-separator"></div>
+
+        <!-- Seção de Contato -->
+        {% include "partials/contato.html" %}
+
+        <!-- Apoio -->
+        <div class="post-separator"></div>
+        <div class="support-box mt-4">
+          <p>Este blog é um projeto pessoal e independente. Se ele foi útil para você ou te inspirou de alguma forma, considere <a href="#">apoiar meu trabalho</a> para que eu continue desenvolvendo e compartilhando novos projetos.</p>
+        </div>
+      </main>
+
+      <!-- Coluna direita vazia -->
+      <div class="col-lg-3 d-none d-lg-block"></div>
+
+    </div>
+  </div>
+
+  {% include "partials/footer.html" %}
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const siteNavbar = document.getElementById("siteNavbar");
+    const onNavbarScroll = () => siteNavbar.classList.toggle("is-scrolled", window.scrollY > 12);
+    window.addEventListener("scroll", onNavbarScroll, { passive: true });
+    onNavbarScroll();
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+  <script id="dsq-count-scr" src="//luiz-dererita-dev.disqus.com/count.js" async></script>
+
+  <script>
+    const tryFillDisqusCounts = () => {
+      const disqusCounts = document.querySelectorAll('.disqus-comment-count');
+      if (!disqusCounts.length) return;
+
+      let atualizado = false;
+
+      disqusCounts.forEach(el => {
+        const identifier = el.getAttribute("data-disqus-identifier");
+        const nomePost = identifier.split("/")[1];
+        const destino = document.getElementById(`contador-${nomePost}`);
+        const count = parseInt(el.textContent.trim()) || 0;
+
+        if (destino) {
+          destino.textContent = count;
+          atualizado = true;
+        }
+      });
+
+      return atualizado;
+    };
+
+    window.addEventListener('load', function () {
+      const intervalo = setInterval(() => {
+        if (tryFillDisqusCounts()) {
+          clearInterval(intervalo);
+        }
+      }, 800);
+    });
+  </script>
+
+  <!-- Popup de Compartilhamento -->
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const popup = document.getElementById("share-popup");
+    const overlay = document.getElementById("share-overlay");
+    const closeBtn = popup.querySelector(".btn-close-popup");
+    const inputUrl = document.getElementById("share-url");
+    const copyBtn = document.getElementById("share-copy");
+
+    // Preenche o campo com a URL da página atual ao carregar
+    inputUrl.value = window.location.href;
+
+    document.querySelectorAll(".share-icon-top").forEach(icon => {
+      icon.addEventListener("click", (e) => {
+        e.preventDefault();
+        const url = icon.getAttribute("data-url") || window.location.href;
+
+        inputUrl.value = url;
+
+        document.getElementById("share-whatsapp").href = `https://wa.me/?text=${encodeURIComponent(url)}`;
+        document.getElementById("share-facebook").href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+        document.getElementById("share-twitter").href = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}`;
+        document.getElementById("share-instagram").href = `https://www.instagram.com/`; // Instagram não tem API direta de compartilhamento
+
+        popup.classList.remove("hidden-popup");
+        overlay.classList.remove("hidden-popup");
+
+        setTimeout(() => {
+          popup.classList.add("active");
+          overlay.classList.add("active");
+        }, 10);
+      });
+    });
+
+    function fecharPopup() {
+      popup.classList.remove("active");
+      overlay.classList.remove("active");
+
+      setTimeout(() => {
+        popup.classList.add("hidden-popup");
+        overlay.classList.add("hidden-popup");
+      }, 300);
+    }
+
+    copyBtn.addEventListener("click", function (e) {
+      e.preventDefault();
+      inputUrl.select();
+      inputUrl.setSelectionRange(0, 99999); // Para mobile
+      document.execCommand("copy");
+
+      // Feedback visual e seleção
+      const feedback = document.getElementById("share-feedback");
+      feedback.classList.remove("d-none");
+      setTimeout(() => {
+        feedback.classList.add("d-none");
+      }, 2000);
+    });
+
+    overlay.addEventListener("click", fecharPopup);
+    closeBtn.addEventListener("click", function(e) {
+      e.preventDefault();
+      fecharPopup();
+    });
+  });
+  </script>
+</body>
+</html>

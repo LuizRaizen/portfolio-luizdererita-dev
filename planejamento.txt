@@ -1,0 +1,17 @@
+site-portfolio/
+│
+├── app.py                      # Arquivo principal da aplicação Flask
+├── requirements.txt            # Dependências do projeto
+│
+├── static/                     # Arquivos estáticos: CSS, JS, imagens
+│   ├── css/
+│   ├── js/
+│   └── images/
+│
+├── templates/                  # Templates HTML com Jinja2
+│   ├── base.html               # Template base com cabeçalho, rodapé etc.
+│   ├── index.html              # Página inicial
+│   ├── projetos.html           # Página de projetos
+│   └── blog.html               # Página de blog (opcional)
+│
+└── .venv/                      # Ambiente virtual (opcional)
