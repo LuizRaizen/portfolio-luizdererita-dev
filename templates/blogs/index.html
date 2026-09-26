@@ -290,6 +290,7 @@
 
 <!-- Roadmap -->
 {% set status_labels = {"concluido": "Concluído", "desenvolvimento": "Em desenvolvimento", "planejado": "Planejado"} %}
+{% set status_icons = {"concluido": "fas fa-circle-check", "desenvolvimento": "fas fa-spinner fa-spin", "planejado": "far fa-circle"} %}
 
 {% if roadmap %}
   {% set alerta = roadmap[0]['alerta'] if 'alerta' in roadmap[0] else None %}
@@ -309,7 +310,7 @@
     <ul class="roadmap-list">
       {% for item in metas %}
         <li class="roadmap-list__item" data-status="{{ item.status }}">
-          <span class="roadmap-list__dot" aria-hidden="true"></span>
+          <i class="{{ status_icons[item.status] }} roadmap-list__icon" aria-hidden="true"></i>
           {{ item.meta }}
         </li>
       {% endfor %}
@@ -319,7 +320,7 @@
   <!-- Legenda -->
   <ul class="roadmap-legend">
     {% for key in status_labels %}
-      <li data-status="{{ key }}"><span class="roadmap-list__dot" aria-hidden="true"></span>{{ status_labels[key] }}</li>
+      <li data-status="{{ key }}"><i class="{{ status_icons[key] }} roadmap-list__icon" aria-hidden="true"></i>{{ status_labels[key] }}</li>
     {% endfor %}
   </ul>
 {% endif %}

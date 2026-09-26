@@ -314,13 +314,41 @@
     font-family: var(--font-mono);
   }
 
-  /* === Scroll reveal (progressive enhancement — ver scroll-reveal.js) ===== */
+  /* === Scroll reveal — cada seção surge e sai conforme o scroll =========
+     Caminho nativo (Chrome/Edge/Safari mais recentes): scroll-driven
+     animation ligada à própria posição do elemento na tela, roda para
+     frente E para trás automaticamente, sem nenhuma linha de JS.
+     Caminho de apoio (Firefox e navegadores sem suporte): scroll-reveal.js
+     detecta a falta de suporte e assume via IntersectionObserver,
+     alternando .is-visible nos dois sentidos (nunca "unobserve"). Se o JS
+     falhar por qualquer motivo, o estado padrão continua visível. ========= */
 
-  .js-reveal-ready .reveal {
-    opacity: 0;
-    transform: translateY(28px);
-    transition: opacity var(--duration-slow) var(--ease-out), transform var(--duration-slow) var(--ease-out);
+  @media (prefers-reduced-motion: no-preference) {
+    @supports ((animation-timeline: view()) and (animation-range: entry)) {
+      @keyframes reveal-in {
+        from { opacity: 0; transform: translateY(32px); }
+      }
+
+      @keyframes reveal-out {
+        to { opacity: 0; transform: translateY(-24px); }
+      }
+
+      .reveal {
+        animation: reveal-in auto linear backwards, reveal-out auto linear forwards;
+        animation-timeline: view();
+        animation-range: entry, exit;
+      }
+    }
+
+    .js-reveal-fallback .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity var(--duration-slow) var(--ease-out), transform var(--duration-slow) var(--ease-out);
+    }
+
+    .js-reveal-fallback .reveal.is-visible {
+      opacity: 1;
+      transform: none;
+    }
   }
-
-  .js-reveal-ready .reveal.is-visible { opacity: 1; transform: none; }
 }
