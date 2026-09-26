@@ -18,6 +18,10 @@ from datetime import datetime
 
 projeto = "convertetudo"  # slug usado na pasta e na rota /blogs/convertetudo
 
+# O banner.png deste projeto já tem o logo e o nome "ConverteTudo" desenhados
+# na própria imagem — por isso a capa do blog não deve sobrepor um <h1> extra.
+banner_tem_titulo = True
+
 # ------------------------------------------------------------------------------
 # Ficha Técnica
 # ------------------------------------------------------------------------------

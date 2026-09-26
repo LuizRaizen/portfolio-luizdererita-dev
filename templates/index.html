@@ -39,6 +39,7 @@
     <div class="hero__glow" aria-hidden="true"></div>
     <div class="hero__inner">
       <div class="hero__content">
+        <span class="year-badge"><span class="year-badge__dot" aria-hidden="true"></span>Portfólio 2026</span>
         <p class="eyebrow">Desenvolvedor Full Stack · Python &amp; Web</p>
         <h1 class="hero__title text-balance">Luiz R.<br>Dererita</h1>
         <p class="hero__lead text-pretty">
@@ -56,8 +57,11 @@
         </ul>
       </div>
       <div class="hero__portrait">
+        <div class="hero__portrait-halo" aria-hidden="true"></div>
         <div class="hero__portrait-frame">
-          <img src="{{ url_for('static', filename='img/luiz.jpeg') }}" alt="Foto de Luiz R. Dererita" width="896" height="1200" fetchpriority="high">
+          <div class="hero__portrait-inner">
+            <img src="{{ url_for('static', filename='img/luiz.jpeg') }}" alt="Foto de Luiz R. Dererita" width="896" height="1200" fetchpriority="high">
+          </div>
         </div>
       </div>
     </div>
@@ -68,10 +72,15 @@
   <section class="section" id="sobre">
     <div class="section__head reveal">
       <p class="eyebrow">01 · Sobre</p>
-      <h2 class="text-balance">Quem constrói isso</h2>
+      <h2 class="text-balance">Quem eu sou hoje</h2>
     </div>
     <div class="about reveal">
       <p class="about__lead text-pretty">{{ sobre.texto }}</p>
+      <ul class="about__stats">
+        {% for stat in sobre.stats %}
+          <li><strong>{{ stat.numero }}</strong><span>{{ stat.legenda }}</span></li>
+        {% endfor %}
+      </ul>
       <a href="{{ url_for('static', filename='docs/curriculo-luiz-dererita.pdf') }}" class="btn btn--ghost" download>
         <i class="fas fa-download" aria-hidden="true"></i> Baixar currículo
       </a>
@@ -84,36 +93,65 @@
       <p class="eyebrow">02 · Trajetória</p>
       <h2 class="text-balance">Minha jornada</h2>
     </div>
-    <ol class="timeline reveal">
-      {% for etapa in jornada %}
-        <li class="timeline__item">
-          <span class="timeline__year">{{ etapa.ano }}</span>
-          <span class="timeline__desc">{{ etapa.descricao }}</span>
-        </li>
-      {% endfor %}
-    </ol>
+    <div class="timeline-wrap">
+      <div class="timeline__progress" aria-hidden="true"></div>
+      <ol class="timeline">
+        {% for etapa in jornada %}
+          <li class="timeline__item reveal">
+            <span class="timeline__year">{{ etapa.ano }}</span>
+            <span class="timeline__desc">{{ etapa.descricao }}</span>
+          </li>
+        {% endfor %}
+      </ol>
+    </div>
   </section>
 
   <!-- HABILIDADES -->
+  {% set todas_habilidades = [] %}
+  {% for grupo in habilidades %}
+    {% for item in grupo.itens %}
+      {% set _ = todas_habilidades.append(item) %}
+    {% endfor %}
+  {% endfor %}
+  {% set metade = (todas_habilidades | length // 2) %}
+  {% set linha_1 = todas_habilidades[:metade] %}
+  {% set linha_2 = todas_habilidades[metade:] %}
+
   <section class="section" id="habilidades">
     <div class="section__head reveal">
       <p class="eyebrow">03 · Habilidades</p>
       <h2 class="text-balance">Ferramentas do dia a dia</h2>
     </div>
-    <div class="skills reveal">
-      {% for grupo in habilidades %}
-        <div class="skills__group">
-          <h3 class="skills__group-title">{{ grupo.categoria }}</h3>
-          <ul class="skills__list">
-            {% for item in grupo.itens %}
-              <li class="skill-chip" title="{{ item.nivel }}">
-                <i class="{{ item.icone }}" aria-hidden="true"></i>
-                <span>{{ item.nome }}</span>
-              </li>
+
+    <div class="skills-carousel reveal" role="group" aria-label="Tecnologias e ferramentas que utilizo">
+      <div class="skills-lane">
+        <div class="skills-track skills-track--right">
+          <ul class="skills-track__list">
+            {% for item in linha_1 %}
+              <li class="skill-chip" title="{{ item.nivel }}"><i class="{{ item.icone }}" aria-hidden="true"></i><span>{{ item.nome }}</span></li>
+            {% endfor %}
+          </ul>
+          <ul class="skills-track__list" aria-hidden="true">
+            {% for item in linha_1 %}
+              <li class="skill-chip"><i class="{{ item.icone }}" aria-hidden="true"></i><span>{{ item.nome }}</span></li>
             {% endfor %}
           </ul>
         </div>
-      {% endfor %}
+      </div>
+      <div class="skills-lane">
+        <div class="skills-track skills-track--left">
+          <ul class="skills-track__list">
+            {% for item in linha_2 %}
+              <li class="skill-chip" title="{{ item.nivel }}"><i class="{{ item.icone }}" aria-hidden="true"></i><span>{{ item.nome }}</span></li>
+            {% endfor %}
+          </ul>
+          <ul class="skills-track__list" aria-hidden="true">
+            {% for item in linha_2 %}
+              <li class="skill-chip"><i class="{{ item.icone }}" aria-hidden="true"></i><span>{{ item.nome }}</span></li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
     </div>
   </section>
 

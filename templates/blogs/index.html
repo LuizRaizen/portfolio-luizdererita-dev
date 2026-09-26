@@ -150,53 +150,46 @@
 <h2 class="section-title mb-4 anchor-offset" id="novidades">📢 Novidades</h2>
 
 {% for post in posts %}
-  <div class="card bg-dark text-white mb-4">
-    <div class="card-body position-relative">
+  <article class="post-card">
+    <a href="#" class="share-icon-top" title="Compartilhar este post">
+      <i class="fas fa-share-nodes"></i>
+    </a>
 
-      <!-- Ícone de Compartilhamento -->
-      <a href="#" class="share-icon-top" title="Compartilhar este post">
-        <i class="fas fa-share-nodes"></i>
+    {% if post.imagem %}
+      <a href="{{ url_for('ver_post', projeto=projeto, nome=post.nome_arquivo) }}" class="post-card__media">
+        <img src="{{ url_for('static', filename=post.imagem) }}" alt="" loading="lazy">
       </a>
+    {% endif %}
 
-      <h5 class="card-title">{{ post.titulo }}</h5>
+    <div class="post-card__body">
+      <h3 class="post-card__title">
+        <a href="{{ url_for('ver_post', projeto=projeto, nome=post.nome_arquivo) }}">{{ post.titulo }}</a>
+      </h3>
       <p class="meta-info post-data">
-        Postado em <strong>{{ post.data|data_extensa }}</strong> por <strong>{{ post.autor }}</strong>
+        {{ post.data|data_extensa }} · {{ post.autor }}
       </p>
 
-      <div class="preview-separator"></div>
-
-      {% if post.imagem %}
-        <img src="{{ url_for('static', filename=post.imagem) }}"
-             alt="Preview de {{ post.titulo }}"
-             class="preview-img-fluid">
-      {% endif %}
-
-      <p class="card-text mt-3">
-        {{ post.conteudo|striptags|truncate(500, True, '...') }}
+      <p class="post-card__excerpt">
+        {{ post.conteudo|striptags|truncate(320, True, '...') }}
       </p>
 
-      <a href="{{ url_for('ver_post', projeto=projeto, nome=post.nome_arquivo) }}"
-         class="btn btn-outline-light btn-sm">
-        Ler mais
-      </a>
+      <div class="post-card__footer">
+        <a href="{{ url_for('ver_post', projeto=projeto, nome=post.nome_arquivo) }}" class="project-card__link">
+          Ler mais <i class="fas fa-arrow-right" aria-hidden="true"></i>
+        </a>
 
-    <div class="preview-separator"></div>
-
-    <div class="post-meta d-flex justify-content-start align-items-center gap-4 mt-2">
-      <!-- Visualizações -->
-      <span><i class="far fa-eye"></i> {{ post.visualizacoes or 0 }}</span>
-      <!-- Comentários -->
-      <span><i class="far fa-comment"></i> <span id="contador-{{ post.nome_arquivo }}">0</span></span>
-      <!-- Disqus contador invisível para pegar os dados -->
-      <a href="{{ url_for('ver_post', projeto=projeto, nome=post.nome_arquivo) }}#disqus_thread"
-        class="disqus-comment-count d-none"
-        data-disqus-identifier="{{ projeto }}/{{ post.nome_arquivo }}">
-        0
-      </a>
+        <div class="post-meta">
+          <span><i class="far fa-eye"></i> {{ post.visualizacoes or 0 }}</span>
+          <span><i class="far fa-comment"></i> <span id="contador-{{ post.nome_arquivo }}">0</span></span>
+          <a href="{{ url_for('ver_post', projeto=projeto, nome=post.nome_arquivo) }}#disqus_thread"
+            class="disqus-comment-count d-none"
+            data-disqus-identifier="{{ projeto }}/{{ post.nome_arquivo }}">
+            0
+          </a>
+        </div>
+      </div>
     </div>
-
-    </div>
-  </div>
+  </article>
 {% endfor %}
 
 <!-- Paginação -->
@@ -248,60 +241,55 @@
 
 <!-- Ficha Técnica -->
 <h2 class="section-title mb-4 anchor-offset" id="ficha-tecnica">🔧 Ficha Técnica</h2>
-<ul>
+<dl class="spec-grid">
   {% if ficha_tecnica.linguagem %}
-    <li><strong>Linguagem principal:</strong> {{ ficha_tecnica.linguagem }}</li>
+    <div class="spec-grid__item"><dt>Linguagem principal</dt><dd>{{ ficha_tecnica.linguagem }}</dd></div>
   {% endif %}
   {% if ficha_tecnica.framework %}
-    <li><strong>Framework:</strong> {{ ficha_tecnica.framework }}</li>
+    <div class="spec-grid__item"><dt>Framework</dt><dd>{{ ficha_tecnica.framework }}</dd></div>
   {% endif %}
   {% if ficha_tecnica.paradigma %}
-    <li><strong>Paradigma:</strong> {{ ficha_tecnica.paradigma }}</li>
+    <div class="spec-grid__item"><dt>Paradigma</dt><dd>{{ ficha_tecnica.paradigma }}</dd></div>
   {% endif %}
   {% if ficha_tecnica.arquitetura %}
-    <li><strong>Arquitetura:</strong> {{ ficha_tecnica.arquitetura }}</li>
+    <div class="spec-grid__item"><dt>Arquitetura</dt><dd>{{ ficha_tecnica.arquitetura }}</dd></div>
   {% endif %}
   {% if ficha_tecnica.tipo_projeto %}
-    <li><strong>Tipo de Projeto:</strong> {{ ficha_tecnica.tipo_projeto }}</li>
+    <div class="spec-grid__item spec-grid__item--wide"><dt>Tipo de projeto</dt><dd>{{ ficha_tecnica.tipo_projeto }}</dd></div>
   {% endif %}
   {% if ficha_tecnica.interface %}
-    <li><strong>Interface:</strong> {{ ficha_tecnica.interface }}</li>
-  {% endif %}
-  {% if ficha_tecnica.funcionalidades %}
-    <li><strong>Funcionalidades:</strong>
-      <ul>
-        {% for item in ficha_tecnica.funcionalidades %}
-          <li>{{ item }}</li>
-        {% endfor %}
-      </ul>
-    </li>
+    <div class="spec-grid__item"><dt>Interface</dt><dd>{{ ficha_tecnica.interface }}</dd></div>
   {% endif %}
   {% if ficha_tecnica.bibliotecas %}
-    <li><strong>Bibliotecas Utilizadas:</strong> {{ ficha_tecnica.bibliotecas | join(', ') }}</li>
+    <div class="spec-grid__item"><dt>Bibliotecas</dt><dd>{{ ficha_tecnica.bibliotecas | join(', ') }}</dd></div>
   {% endif %}
   {% if ficha_tecnica.banco_de_dados %}
-    <li><strong>Banco de Dados:</strong> {{ ficha_tecnica.banco_de_dados }}</li>
+    <div class="spec-grid__item"><dt>Banco de dados</dt><dd>{{ ficha_tecnica.banco_de_dados }}</dd></div>
   {% endif %}
   {% if ficha_tecnica.api_externa %}
-    <li><strong>APIs Externas:</strong> {{ ficha_tecnica.api_externa }}</li>
+    <div class="spec-grid__item"><dt>APIs externas</dt><dd>{{ ficha_tecnica.api_externa }}</dd></div>
   {% endif %}
   {% if ficha_tecnica.plataforma %}
-    <li><strong>Plataforma Alvo:</strong> {{ ficha_tecnica.plataforma }}</li>
+    <div class="spec-grid__item"><dt>Plataforma alvo</dt><dd>{{ ficha_tecnica.plataforma }}</dd></div>
   {% endif %}
   {% if ficha_tecnica.resolucao %}
-    <li><strong>Resolução Padrão:</strong> {{ ficha_tecnica.resolucao }}</li>
+    <div class="spec-grid__item"><dt>Resolução padrão</dt><dd>{{ ficha_tecnica.resolucao }}</dd></div>
   {% endif %}
   {% if ficha_tecnica.status %}
-    <li><strong>Status do Projeto:</strong> {{ ficha_tecnica.status }}</li>
+    <div class="spec-grid__item"><dt>Status do projeto</dt><dd>{{ ficha_tecnica.status }}</dd></div>
   {% endif %}
-</ul>
+</dl>
+{% if ficha_tecnica.funcionalidades %}
+  <h3 class="spec-grid__subtitle">Funcionalidades</h3>
+  <ul class="spec-list">
+    {% for item in ficha_tecnica.funcionalidades %}
+      <li>{{ item }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
 
 <!-- Roadmap -->
-{% set status_icons = {
-  "concluido": "fas fa-check-circle text-success",
-  "desenvolvimento": "fas fa-spinner text-warning",
-  "planejado": "far fa-circle text-secondary"
-} %}
+{% set status_labels = {"concluido": "Concluído", "desenvolvimento": "Em desenvolvimento", "planejado": "Planejado"} %}
 
 {% if roadmap %}
   {% set alerta = roadmap[0]['alerta'] if 'alerta' in roadmap[0] else None %}
@@ -313,25 +301,25 @@
     <h2 class="section-title mb-4 anchor-offset" id="roadmap">📌 Roadmap do Projeto</h2>
 
     {% if alerta %}
-      <p class="text-warning mt-3">
-        <i class="fas fa-exclamation-triangle me-2"></i> {{ alerta }}
+      <p class="roadmap-alert">
+        <i class="fas fa-exclamation-triangle" aria-hidden="true"></i> {{ alerta }}
       </p>
     {% endif %}
 
-    <ul class="list-unstyled mt-4">
+    <ul class="roadmap-list">
       {% for item in metas %}
-        <li><i class="{{ status_icons[item.status] }} me-2"></i>{{ item.meta }}</li>
+        <li class="roadmap-list__item" data-status="{{ item.status }}">
+          <span class="roadmap-list__dot" aria-hidden="true"></span>
+          {{ item.meta }}
+        </li>
       {% endfor %}
     </ul>
   {% endif %}
 
   <!-- Legenda -->
-  <h5 class="mt-4">Legenda:</h5>
-  <ul class="list-inline">
-    {% for key, icon in status_icons.items() %}
-      <li class="list-inline-item me-3">
-        <i class="{{ icon }}"></i> {{ key.capitalize() }}
-      </li>
+  <ul class="roadmap-legend">
+    {% for key in status_labels %}
+      <li data-status="{{ key }}"><span class="roadmap-list__dot" aria-hidden="true"></span>{{ status_labels[key] }}</li>
     {% endfor %}
   </ul>
 {% endif %}

@@ -10,15 +10,25 @@ isso é ignorado explicitamente pela descoberta automática em data/__init__.py.
 
 sobre = {
     "texto": (
-        "Estudante de Análise e Desenvolvimento de Sistemas em transição de carreira "
-        "para a área de TI, com foco em desenvolvimento web full stack. Construo "
-        "aplicações reais do início ao deploy — como este próprio portfólio, um "
-        "sistema Flask com roteamento dinâmico, PostgreSQL e um blog técnico "
-        "individual para cada projeto — e também exploro interfaces gráficas "
-        "(Pygame, Tkinter, PySide6, Kivy) e integrações com APIs externas e IA. "
-        "Gosto de estruturar código modular, documentar o processo de construção "
-        "de cada projeto e aprender fazendo, um projeto de cada vez."
+        "Sou o Luiz, desenvolvedor com Python como base e trânsito por praticamente "
+        "toda a pilha web: Flask e Django no backend, JavaScript no front, PostgreSQL "
+        "e Redis quando o projeto pede escala, além de uma temporada e tanto explorando "
+        "Pygame, PySide6, Tkinter e Kivy no universo desktop e dos jogos. Em 2026 estou "
+        "na reta final da faculdade de Análise e Desenvolvimento de Sistemas e vivendo a "
+        "fase de aprendizado mais intensa da minha carreira até aqui — estudando IA "
+        "aplicada, arquitetura de sistemas e as tendências que estão redefinindo como "
+        "construímos software. Não sou um dev de stack única: gosto de entender o "
+        "problema primeiro e escolher a ferramenta depois — e é isso que aparece nos "
+        "projetos abaixo, de um e-commerce em Django com fila assíncrona em Redis a um "
+        "jogo de simulação com State Pattern, passando por integrações com a API da "
+        "OpenAI. Ainda estou construindo, errando e aprendendo todos os dias — e é "
+        "exatamente esse processo que quero compartilhar aqui."
     ),
+    "stats": [
+        {"numero": "2026", "legenda": "reta final da faculdade de ADS"},
+        {"numero": "Python", "legenda": "minha stack principal"},
+        {"numero": "full stack", "legenda": "web, desktop e jogos"},
+    ],
 }
 
 # ------------------------------------------------------------------------------
@@ -30,6 +40,7 @@ jornada = [
     {"ano": "2023", "descricao": "Criação dos primeiros projetos pessoais e sistemas para empresas"},
     {"ano": "2024", "descricao": "Entrada na faculdade de Análise e Desenvolvimento de Sistemas"},
     {"ano": "2025", "descricao": "Foco total na transição de carreira e construção de portfólio"},
+    {"ano": "2026", "descricao": "Reta final da faculdade, estudando IA aplicada e novas arquiteturas — evoluindo o portfólio sem parar"},
 ]
 
 # ------------------------------------------------------------------------------

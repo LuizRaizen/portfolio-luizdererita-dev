@@ -27,7 +27,10 @@ def carregar_projeto(nome):
             "downloads": getattr(modulo, "downloads", []),
             "home_card": getattr(modulo, "home_card", None),
             "tem_logo": tem_logo,
-            "tem_banner": tem_banner
+            "tem_banner": tem_banner,
+            # Alguns banners já têm o nome do projeto desenhado na própria imagem
+            # (ex.: convertetudo). Nesses casos não sobrepomos o <h1> na capa.
+            "banner_tem_titulo": getattr(modulo, "banner_tem_titulo", False)
         }
 
     except ModuleNotFoundError:

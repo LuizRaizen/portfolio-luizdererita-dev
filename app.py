@@ -71,7 +71,8 @@ def blog_index(projeto):
         total_paginas=total_paginas,
         roadmap=dados["roadmap"],
         tem_logo=dados["tem_logo"],
-        tem_banner=dados["tem_banner"]
+        tem_banner=dados["tem_banner"],
+        banner_tem_titulo=dados["banner_tem_titulo"]
     )
 
 
@@ -96,6 +97,7 @@ def ver_post(projeto, nome):
         todos_os_posts=dados["posts"],
         tem_logo=dados["tem_logo"],
         tem_banner=dados["tem_banner"],
+        banner_tem_titulo=dados["banner_tem_titulo"],
         visualizacoes=visualizacoes
     )
 
@@ -123,7 +125,8 @@ def galeria_imagens(projeto):
         total_paginas=total_paginas,
         todos_os_posts=dados["posts"],
         tem_logo=dados["tem_logo"],
-        tem_banner=dados["tem_banner"]
+        tem_banner=dados["tem_banner"],
+        banner_tem_titulo=dados["banner_tem_titulo"]
     )
 
 
@@ -150,7 +153,8 @@ def galeria_videos(projeto):
         total_paginas=total_paginas,
         todos_os_posts=dados["posts"],
         tem_logo=dados["tem_logo"],
-        tem_banner=dados["tem_banner"]
+        tem_banner=dados["tem_banner"],
+        banner_tem_titulo=dados["banner_tem_titulo"]
     )
 
 
@@ -167,7 +171,8 @@ def galeria_downloads(projeto):
         downloads=dados.get("downloads", []),
         todos_os_posts=dados["posts"],
         tem_logo=dados["tem_logo"],
-        tem_banner=dados["tem_banner"]
+        tem_banner=dados["tem_banner"],
+        banner_tem_titulo=dados["banner_tem_titulo"]
     )
 
 

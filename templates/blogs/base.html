@@ -52,7 +52,7 @@
     <div class="blog-cover__content">
       {% if tem_logo %}
         <img src="{{ url_for('static', filename='img/' ~ projeto ~ '/logo.png') }}" alt="Logo do Projeto" class="logo-central">
-      {% else %}
+      {% elif not banner_tem_titulo %}
         <h1 class="titulo-projeto text-balance">{{ ficha_tecnica.nome }}</h1>
       {% endif %}
       {% if ficha_tecnica.status %}<p class="blog-cover__status">{{ ficha_tecnica.status }}</p>{% endif %}
