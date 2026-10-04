@@ -98,3 +98,26 @@
      seleção de texto, controles de formulário) acompanhe o visual do site. */
   color-scheme: dark;
 }
+
+
+/* ==========================================================================
+   Escala para telas pequenas (< 860px, o mesmo ponto em que a navegação
+   desktop aparece). Em vez de corrigir componente por componente, ajustamos
+   os tokens: ritmo vertical mais curto, texto auxiliar legível e títulos
+   proporcionais. Acima de 860px nada muda.
+   ========================================================================== */
+@media (max-width: 859px) {
+  :root {
+    --header-h: 3.75rem;
+
+    /* Texto auxiliar: o cinza "faint" desktop (~3:1 sobre o fundo) não atinge AA em corpo pequeno. */
+    --color-text-faint: oklch(63% 0.012 285);
+
+    --text-xs: 0.8125rem;
+    --text-3xl: clamp(2rem, 1.2rem + 3.6vw, 3.5rem);
+
+    --space-6: 2.75rem;
+    --space-7: 3.75rem;
+    --space-8: 5rem;
+  }
+}

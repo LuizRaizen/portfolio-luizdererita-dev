@@ -889,6 +889,9 @@
   .news { --slide-w: 88%; position: relative; }
 
   .news__viewport {
+    /* Causa-raiz do "scroll horizontal fantasma": elementos absolutos (.visually-hidden dos links)
+       dentro de um scroller só são recortados por ele se o scroller for o bloco de contenção. */
+    position: relative;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -1111,6 +1114,7 @@
   /* Celular: os destaques viram uma faixa deslizante (4 cards empilhados seriam 4 telas). */
   @media (max-width: 719px) {
     .cert-cards {
+      position: relative; /* contém os .visually-hidden dentro da faixa rolável */
       display: flex;
       gap: var(--space-3);
       overflow-x: auto;
@@ -1260,5 +1264,154 @@
     .news__dot span, .news-slide__cta i { transition: none; }
     .news-slide__cta:hover i { transform: none; }
     .section__more:hover i, .project-card:hover .project-card__link i { transform: none; }
+  }
+
+  /* === Telas pequenas (< 860px) ============================================
+     Composição pensada para o toque; acima de 860px nada aqui se aplica. */
+
+  @media (max-width: 859px) {
+
+    /* Hero: retrato compacto no topo, depois o texto — a primeira tela mostra quem sou
+       e o que faço, sem depender de rolar até a foto. */
+    .hero {
+      min-block-size: auto;
+      padding-block: calc(var(--header-h) + var(--space-5)) var(--space-6);
+    }
+
+    /* Composição: nome à esquerda e retrato à direita na mesma linha; a faixa
+       "Desenvolvedor Full Stack…" vem logo abaixo dos dois, depois texto, botões e stack.
+       `display: contents` promove os filhos de .hero__content a itens da grade, o que
+       permite posicionar o título ao lado do retrato sem mexer no HTML. */
+    .hero__inner {
+      grid-template-columns: minmax(0, 1fr) auto;
+      column-gap: var(--space-4);
+      row-gap: 0;
+    }
+
+    .hero__content { display: contents; }
+    .hero__content > * { grid-column: 1 / -1; min-inline-size: 0; max-inline-size: none; }
+
+    .hero__title {
+      grid-column: 1;
+      grid-row: 1;
+      align-self: center;
+      margin-block-end: 0;
+      font-size: clamp(2.1rem, 9.5vw, 4.25rem);
+    }
+
+    /* fit-content: o halo (inset em %) acompanha o retrato, não a largura da célula */
+    .hero__portrait {
+      grid-column: 2;
+      grid-row: 1;
+      align-self: center;
+      justify-self: end;
+      inline-size: fit-content;
+    }
+
+    .hero__portrait-frame { inline-size: clamp(5.5rem, 28vw, 10rem); border-width: 5px; }
+    .hero__portrait-halo { filter: blur(26px) saturate(1.15); }
+
+    .hero .eyebrow { grid-row: 2; margin-block: var(--space-4) var(--space-3); }
+    .hero__lead { grid-row: 3; }
+    .hero__actions { grid-row: 4; }
+    .hero__stack { grid-row: 5; }
+    .hero__lead { font-size: var(--text-base); margin-block-end: var(--space-4); }
+    .hero__actions { margin-block-end: var(--space-4); }
+    .hero__actions .btn { flex: 1 1 9rem; justify-content: center; }
+  }
+
+  @media (min-width: 560px) and (max-width: 859px) {
+    .hero__actions .btn { flex: 0 0 auto; }
+    .hero__stack { margin-block-end: 0; }
+
+    .section__head { margin-block-end: var(--space-4); }
+    .section__head--split { align-items: flex-start; }
+
+    /* Sobre: números em lista, com legenda legível em vez de um mono minúsculo. */
+    .about__stats {
+      display: grid;
+      gap: var(--space-3);
+      margin-block-end: 0;
+    }
+
+    .about__stats li {
+      flex-direction: row;
+      align-items: baseline;
+      gap: var(--space-3);
+    }
+
+    .about__stats strong { min-inline-size: 5.5rem; }
+    .about__stats span { font-size: var(--text-sm); }
+
+    /* Habilidades: no toque não existe "pausar com o mouse" e uma faixa em movimento
+       contínuo corta o conteúdo. Aqui os chips ficam parados, todos visíveis. */
+    .skills-carousel { gap: var(--space-2); }
+    .skills-lane { overflow: visible; mask-image: none; -webkit-mask-image: none; }
+    .skills-track { display: block; inline-size: auto; animation: none; }
+    .skills-track__list { flex-wrap: wrap; gap: var(--space-2); padding-inline-end: 0; }
+    .skills-track__list[aria-hidden="true"] { display: none; }
+    .skill-chip {
+      white-space: normal;
+      max-inline-size: 100%;
+      padding: 6px var(--space-3);
+      font-size: var(--text-xs);
+      line-height: 1.35;
+    }
+    .skill-chip:hover { transform: none; box-shadow: none; }
+
+    /* Filtros: uma faixa deslizante em vez de 4 linhas de botões. */
+    .filter-bar {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      margin-inline: calc(var(--space-4) * -1);
+      padding-inline: var(--space-4);
+      padding-block-end: var(--space-1);
+      scrollbar-width: none;
+      overscroll-behavior-x: contain;
+    }
+
+    .filter-bar::-webkit-scrollbar { display: none; }
+    .filter-pill { flex: none; min-block-size: 44px; padding-inline: var(--space-4); }
+
+    /* Projetos */
+    .projects-grid { gap: var(--space-3); }
+    .project-card__media { aspect-ratio: 2 / 1; }
+    .project-card__body { padding: var(--space-4); gap: var(--space-2); }
+    .project-card__link { min-block-size: 44px; align-items: center; padding-block: 0; }
+    .project-card:hover, .project-card:focus-within { transform: none; box-shadow: none; }
+
+    /* Certificados em lista e demais cartões: toque, não hover */
+    .cert-card:hover, .cert-card:focus-within,
+    .post-card:hover, .post-card:focus-within { box-shadow: none; }
+
+    .cert-tools { gap: var(--space-3); }
+    .cert-search { flex: 1 1 100%; }
+    .cert-more { inline-size: 100%; justify-content: center; }
+
+    /* Páginas internas (/projetos, /certificados) */
+    .page-section { padding-block-start: calc(var(--header-h) + var(--space-5)); }
+    .page-title { font-size: var(--text-2xl); }
+    .breadcrumb a { display: inline-flex; align-items: center; min-block-size: 44px; }
+    .breadcrumb { align-items: center; margin-block-end: var(--space-2); }
+  }
+
+  @media (max-width: 599px) {
+    /* Posts recentes: faixa deslizante (3 cartões empilhados seriam ~1700px de rolagem). */
+    .posts-grid {
+      position: relative;
+      display: flex;
+      gap: var(--space-3);
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      overscroll-behavior-x: contain;
+      scrollbar-width: none;
+      margin-inline: calc(var(--space-4) * -1);
+      padding-inline: var(--space-4);
+      scroll-padding-inline: var(--space-4);
+    }
+
+    .posts-grid::-webkit-scrollbar { display: none; }
+    .posts-grid > .post-card { flex: 0 0 84%; scroll-snap-align: start; }
+    .post-card__media { aspect-ratio: 2 / 1; }
   }
 }

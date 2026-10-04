@@ -436,4 +436,103 @@
       transform: none;
     }
   }
+
+  /* === Telas pequenas (< 860px) ========================================== */
+
+  /* O botão de fechar vive dentro do popover (que cobre a tela inteira): sem ele,
+     no celular não há como fechar o menu sem escolher um link (não existe Esc). */
+  .mobile-menu__close {
+    position: absolute;
+    inset-block-start: var(--space-2);
+    inset-inline-end: var(--space-4);
+    display: grid;
+    place-items: center;
+    inline-size: 44px;
+    block-size: 44px;
+    background: none;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    color: var(--color-text);
+    font-size: var(--text-lg);
+    cursor: pointer;
+  }
+
+  @media (max-width: 859px) {
+    .site-header__inner { padding-block: var(--space-2); }
+
+    .brand { min-block-size: 44px; }
+    .menu-toggle { inline-size: 44px; block-size: 44px; }
+
+    .mobile-menu {
+      padding: calc(var(--header-h) + var(--space-3)) max(var(--space-4), env(safe-area-inset-right)) max(var(--space-4), env(safe-area-inset-bottom)) max(var(--space-4), env(safe-area-inset-left));
+      overflow-y: auto;
+      overscroll-behavior: contain;
+    }
+
+    .mobile-menu nav { gap: 0; }
+
+    .mobile-menu a {
+      display: flex;
+      align-items: center;
+      min-block-size: 56px;
+      padding-block: var(--space-2);
+      font-size: var(--text-xl);
+    }
+
+    .mobile-menu a:active { color: var(--color-accent-text); }
+
+    body:has(#mobileMenu:popover-open) { overflow: hidden; }
+
+    .section--contact { padding-block: var(--space-6); }
+    .section--contact h2 { font-size: var(--text-2xl); }
+    .contact__lead { margin-block-end: var(--space-4); }
+
+    .contact__links {
+      flex-direction: column;
+      align-items: stretch;
+      max-inline-size: 22rem;
+      margin-inline: auto;
+    }
+
+    .contact__links a {
+      justify-content: center;
+      min-block-size: 48px;
+      overflow-wrap: anywhere;
+    }
+
+    .site-footer { padding-block: var(--space-4); }
+
+    .site-footer__inner {
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-1);
+      text-align: center;
+    }
+
+    .site-footer__sep { display: none; }
+
+    /* Hover não existe no toque: sem "salto" grudado depois de tocar em um link. */
+    .contact__links a:hover { transform: none; }
+
+    /* Só a entrada: o fade de saída em seções altas apagava o conteúdo ainda visível. */
+    @media (prefers-reduced-motion: no-preference) {
+      @supports ((animation-timeline: view()) and (animation-range: entry)) {
+        .reveal {
+          animation: reveal-in auto linear backwards;
+          animation-range: entry;
+        }
+      }
+    }
+  }
+
+  @media (min-width: 520px) and (max-width: 859px) {
+    .contact__links {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      max-inline-size: none;
+    }
+
+    .contact__links a { padding-inline: var(--space-5); }
+  }
 }

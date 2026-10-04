@@ -12,12 +12,13 @@
  * automaticamente — o carrossel só navega entre os visíveis.
  */
 (function () {
+  /* Retorna uma função que desfaz tudo (usada ao entrar no modo "lista" do mobile). */
   function initCarousel(root) {
     var track = root.querySelector('[data-carousel-track]');
     var dotsWrap = root.querySelector('[data-carousel-dots]');
     var prevBtn = root.querySelector('[data-carousel-prev]');
     var nextBtn = root.querySelector('[data-carousel-next]');
-    if (!track || !dotsWrap) return;
+    if (!track || !dotsWrap) return function () {};
 
     var index = 0;
 
@@ -72,8 +73,10 @@
       if (nextBtn) nextBtn.disabled = single;
     }
 
-    if (prevBtn) prevBtn.addEventListener('click', function () { goTo(index - 1); });
-    if (nextBtn) nextBtn.addEventListener('click', function () { goTo(index + 1); });
+    function onPrev() { goTo(index - 1); }
+    function onNext() { goTo(index + 1); }
+    if (prevBtn) prevBtn.addEventListener('click', onPrev);
+    if (nextBtn) nextBtn.addEventListener('click', onNext);
 
     // Swipe horizontal (touch/caneta). Mouse continua usando as setas/bolinhas.
     var viewport = track.parentElement;
@@ -90,11 +93,32 @@
     viewport.addEventListener('pointercancel', function () { startX = null; });
 
     // Recalcula quando slides são escondidos/mostrados (ex.: filtro de categoria).
-    new MutationObserver(function () { goTo(0); })
-      .observe(track, { attributes: true, attributeFilter: ['hidden'], subtree: true });
+    var observer = new MutationObserver(function () { goTo(0); });
+    observer.observe(track, { attributes: true, attributeFilter: ['hidden'], subtree: true });
 
     render();
+
+    return function destroy() {
+      observer.disconnect();
+      if (prevBtn) prevBtn.removeEventListener('click', onPrev);
+      if (nextBtn) nextBtn.removeEventListener('click', onNext);
+      track.style.transform = '';
+      dotsWrap.innerHTML = '';
+      Array.prototype.forEach.call(track.children, function (s) { s.inert = false; s.classList.remove('is-active'); });
+    };
   }
 
-  document.querySelectorAll('[data-carousel]').forEach(initCarousel);
+  var mobile = window.matchMedia('(max-width: 859px)');
+
+  document.querySelectorAll('[data-carousel]').forEach(function (root) {
+    // Componentes marcados com data-carousel-desktop-only viram lista no mobile (via CSS).
+    if (!root.hasAttribute('data-carousel-desktop-only')) { initCarousel(root); return; }
+    var destroy = null;
+    function sync() {
+      if (mobile.matches) { if (destroy) { destroy(); destroy = null; } }
+      else if (!destroy) { destroy = initCarousel(root); }
+    }
+    sync();
+    mobile.addEventListener('change', sync);
+  });
 })();
