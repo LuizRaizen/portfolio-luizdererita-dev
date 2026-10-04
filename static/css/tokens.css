@@ -23,6 +23,7 @@
   --violet-400: oklch(74% 0.17 300);
 
   --green-500: oklch(74% 0.16 148);
+  --amber-400: oklch(82% 0.15 85);
 
   /* --- Tier 2: tokens semânticos ------------------------------------------ */
   --color-bg: var(--gray-950);
@@ -46,6 +47,8 @@
   --color-status-done: var(--green-500);
   --color-status-progress: var(--color-accent);
   --color-status-planned: var(--color-text-faint);
+
+  --color-highlight: var(--amber-400);
 
   /* --- Tier 3: tipografia -------------------------------------------------- */
   --font-display: 'Space Grotesk', system-ui, sans-serif;

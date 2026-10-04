@@ -30,11 +30,12 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: #1c1c1c;
-    color: white;
+    background: var(--color-surface-raised);
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
     padding: 1.5rem 2rem;
-    border-radius: 12px;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
     z-index: 999;
     width: 300px;
     max-width: 90%;
@@ -52,7 +53,7 @@
     top: 10px;
     right: 12px;
     font-size: 1.25rem;
-    color: white;
+    color: var(--color-text);
     cursor: pointer;
     text-decoration: none;
     background: none;
@@ -61,7 +62,7 @@
     line-height: 1;
   }
   .blog-popup .btn-close-popup:hover {
-    color: #ff5e5e;
+    color: var(--color-accent-text);
   }
 
   #share-popup p {
@@ -79,7 +80,7 @@
 
   /* Estilização da linha dos ícones */
   .social-icons-wrapper a {
-    color: white;
+    color: var(--color-text);
     transition: transform 0.2s ease;
   }
 
@@ -96,7 +97,7 @@
 
   /* Ícones de redes sociais com hover */
   .share-container a {
-    color: white;
+    color: var(--color-text);
     transition: transform 0.2s ease, color 0.2s ease;
   }
 
@@ -108,34 +109,28 @@
   /* Caixa de embed */
   .embed-row input {
     flex: 1;
-    min-width: 0;
-    background-color: #2a2a2a;
-    color: white;
-    border: 1px solid #444;
-    border-radius: 4px;
+    min-width: 220px;
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-sm);
     padding: 4px 8px;
     font-size: 0.85rem;
   }
 
-  /* Embed row abaixo com alinhamento bonito */
-  .embed-row input {
-    min-width: 220px;
-  }
-
   .embed-row a {
-    color: #ccc;
+    color: var(--color-text-muted);
   }
 
   .embed-row a:hover {
     color: var(--color-accent);
   }
 
-
   #share-url {
-    background-color: #2a2a2a;
-    color: #ccc;
-    border: 1px solid #444;
-    border-radius: 4px;
+    background-color: var(--color-surface);
+    color: var(--color-text-muted);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-sm);
     width: 100%;
   }
 
@@ -146,6 +141,22 @@
 {% endblock %}
 
 {% block content %}
+{% if home_card and home_card.resumo %}
+  <!-- Descrição completa do projeto (a versão resumida no card da home é
+       truncada com "..."; aqui o texto aparece por inteiro). -->
+  <section class="project-intro">
+    <div class="project-intro__head">
+      {% if home_card.categoria %}<span class="project-intro__category">{{ home_card.categoria }}</span>{% endif %}
+      {% if home_card.tecnologias %}
+        <ul class="tech-tags">
+          {% for t in home_card.tecnologias %}<li>{{ t }}</li>{% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+    <p class="project-intro__lead">{{ home_card.resumo }}</p>
+  </section>
+{% endif %}
+
 <!-- Seção de Postagens -->
 <h2 class="section-title mb-4 anchor-offset" id="novidades">📢 Novidades</h2>
 
@@ -231,7 +242,7 @@
 <h2 class="section-title mb-4 anchor-offset" id="codigo-fonte">🔗 Código Fonte</h2>
 <p>Você pode acessar o código fonte do projeto no GitHub através do botão abaixo:</p>
 <div class="my-4">
-  <a href="https://github.com/LuizRaizen/{{ projeto | replace(' ', '_') | lower }}"
+  <a href="{{ repositorio or ('https://github.com/LuizRaizen/' ~ (projeto | replace(' ', '_') | lower)) }}"
      class="btn btn-outline-light btn-lg" target="_blank">
     <i class="fab fa-github"></i> Ver Código no GitHub
   </a>
@@ -241,52 +252,68 @@
 
 <!-- Ficha Técnica -->
 <h2 class="section-title mb-4 anchor-offset" id="ficha-tecnica">🔧 Ficha Técnica</h2>
-<dl class="spec-grid">
-  {% if ficha_tecnica.linguagem %}
-    <div class="spec-grid__item"><dt>Linguagem principal</dt><dd>{{ ficha_tecnica.linguagem }}</dd></div>
-  {% endif %}
-  {% if ficha_tecnica.framework %}
-    <div class="spec-grid__item"><dt>Framework</dt><dd>{{ ficha_tecnica.framework }}</dd></div>
-  {% endif %}
-  {% if ficha_tecnica.paradigma %}
-    <div class="spec-grid__item"><dt>Paradigma</dt><dd>{{ ficha_tecnica.paradigma }}</dd></div>
-  {% endif %}
-  {% if ficha_tecnica.arquitetura %}
-    <div class="spec-grid__item"><dt>Arquitetura</dt><dd>{{ ficha_tecnica.arquitetura }}</dd></div>
-  {% endif %}
-  {% if ficha_tecnica.tipo_projeto %}
-    <div class="spec-grid__item spec-grid__item--wide"><dt>Tipo de projeto</dt><dd>{{ ficha_tecnica.tipo_projeto }}</dd></div>
-  {% endif %}
-  {% if ficha_tecnica.interface %}
-    <div class="spec-grid__item"><dt>Interface</dt><dd>{{ ficha_tecnica.interface }}</dd></div>
-  {% endif %}
-  {% if ficha_tecnica.bibliotecas %}
-    <div class="spec-grid__item"><dt>Bibliotecas</dt><dd>{{ ficha_tecnica.bibliotecas | join(', ') }}</dd></div>
-  {% endif %}
-  {% if ficha_tecnica.banco_de_dados %}
-    <div class="spec-grid__item"><dt>Banco de dados</dt><dd>{{ ficha_tecnica.banco_de_dados }}</dd></div>
-  {% endif %}
-  {% if ficha_tecnica.api_externa %}
-    <div class="spec-grid__item"><dt>APIs externas</dt><dd>{{ ficha_tecnica.api_externa }}</dd></div>
-  {% endif %}
-  {% if ficha_tecnica.plataforma %}
-    <div class="spec-grid__item"><dt>Plataforma alvo</dt><dd>{{ ficha_tecnica.plataforma }}</dd></div>
-  {% endif %}
-  {% if ficha_tecnica.resolucao %}
-    <div class="spec-grid__item"><dt>Resolução padrão</dt><dd>{{ ficha_tecnica.resolucao }}</dd></div>
-  {% endif %}
-  {% if ficha_tecnica.status %}
-    <div class="spec-grid__item"><dt>Status do projeto</dt><dd>{{ ficha_tecnica.status }}</dd></div>
-  {% endif %}
-</dl>
-{% if ficha_tecnica.funcionalidades %}
-  <h3 class="spec-grid__subtitle">Funcionalidades</h3>
-  <ul class="spec-list">
-    {% for item in ficha_tecnica.funcionalidades %}
-      <li>{{ item }}</li>
-    {% endfor %}
-  </ul>
-{% endif %}
+
+<div class="spec-carousel" data-carousel>
+  <div class="spec-carousel__viewport">
+    <dl class="spec-carousel__track" data-carousel-track>
+      {% if ficha_tecnica.linguagem %}
+        <div class="spec-slide"><dt>Linguagem principal</dt><dd>{{ ficha_tecnica.linguagem }}</dd></div>
+      {% endif %}
+      {% if ficha_tecnica.framework %}
+        <div class="spec-slide"><dt>Framework</dt><dd>{{ ficha_tecnica.framework }}</dd></div>
+      {% endif %}
+      {% if ficha_tecnica.paradigma %}
+        <div class="spec-slide"><dt>Paradigma</dt><dd>{{ ficha_tecnica.paradigma }}</dd></div>
+      {% endif %}
+      {% if ficha_tecnica.arquitetura %}
+        <div class="spec-slide"><dt>Arquitetura</dt><dd>{{ ficha_tecnica.arquitetura }}</dd></div>
+      {% endif %}
+      {% if ficha_tecnica.tipo_projeto %}
+        <div class="spec-slide"><dt>Tipo de projeto</dt><dd>{{ ficha_tecnica.tipo_projeto }}</dd></div>
+      {% endif %}
+      {% if ficha_tecnica.interface %}
+        <div class="spec-slide"><dt>Interface</dt><dd>{{ ficha_tecnica.interface }}</dd></div>
+      {% endif %}
+      {% if ficha_tecnica.bibliotecas %}
+        <div class="spec-slide"><dt>Bibliotecas</dt><dd>{{ ficha_tecnica.bibliotecas | join(', ') }}</dd></div>
+      {% endif %}
+      {% if ficha_tecnica.banco_de_dados %}
+        <div class="spec-slide"><dt>Banco de dados</dt><dd>{{ ficha_tecnica.banco_de_dados }}</dd></div>
+      {% endif %}
+      {% if ficha_tecnica.api_externa %}
+        <div class="spec-slide">
+          <dt>APIs externas</dt>
+          <dd>{{ ficha_tecnica.api_externa | join(', ') if ficha_tecnica.api_externa is not string else ficha_tecnica.api_externa }}</dd>
+        </div>
+      {% endif %}
+      {% if ficha_tecnica.plataforma %}
+        <div class="spec-slide"><dt>Plataforma alvo</dt><dd>{{ ficha_tecnica.plataforma }}</dd></div>
+      {% endif %}
+      {% if ficha_tecnica.resolucao %}
+        <div class="spec-slide"><dt>Resolução padrão</dt><dd>{{ ficha_tecnica.resolucao }}</dd></div>
+      {% endif %}
+      {% if ficha_tecnica.status %}
+        <div class="spec-slide"><dt>Status do projeto</dt><dd>{{ ficha_tecnica.status }}</dd></div>
+      {% endif %}
+      {% if ficha_tecnica.funcionalidades %}
+        <div class="spec-slide">
+          <dt>Funcionalidades</dt>
+          <dd>
+            <ul class="spec-list">
+              {% for item in ficha_tecnica.funcionalidades %}<li>{{ item }}</li>{% endfor %}
+            </ul>
+          </dd>
+        </div>
+      {% endif %}
+    </dl>
+  </div>
+
+  <div class="carousel-controls">
+    <button type="button" class="carousel-arrow" data-carousel-prev aria-label="Campo anterior da ficha técnica"><i class="fas fa-chevron-left" aria-hidden="true"></i></button>
+    <div class="carousel-dots" data-carousel-dots role="tablist" aria-label="Selecionar campo da ficha técnica"></div>
+    <button type="button" class="carousel-arrow" data-carousel-next aria-label="Próximo campo da ficha técnica"><i class="fas fa-chevron-right" aria-hidden="true"></i></button>
+  </div>
+</div>
 
 <!-- Roadmap -->
 {% set status_labels = {"concluido": "Concluído", "desenvolvimento": "Em desenvolvimento", "planejado": "Planejado"} %}

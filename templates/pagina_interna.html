@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>{% block titulo %}{% endblock %} | Luiz R. Dererita</title>
+  <meta name="description" content="{% block descricao %}{% endblock %}">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="{{ request.base_url }}">
+  <meta property="og:title" content="{{ self.titulo() }} | Luiz R. Dererita">
+  <meta property="og:description" content="{{ self.descricao() }}">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='img/favicon.svg') }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/tokens.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/shell.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+{% set home_url = url_for('portfolio') %}
+{% include "partials/navbar_home.html" %}
+
+<main id="conteudo">
+  <section class="section page-section">
+    <nav class="breadcrumb" aria-label="Você está em">
+      <a href="{{ url_for('portfolio') }}">Início</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">{% block crumb %}{% endblock %}</span>
+    </nav>
+    <div class="section__head">
+      <p class="eyebrow">{% block eyebrow %}{% endblock %}</p>
+      <h1 class="page-title text-balance">{% block h1 %}{% endblock %}</h1>
+      <p class="section__lead">{% block lead %}{% endblock %}</p>
+    </div>
+    {% block conteudo %}{% endblock %}
+  </section>
+</main>
+
+{% include "partials/footer.html" %}
+
+<script src="{{ url_for('static', filename='js/scroll-reveal.js') }}"></script>
+<script src="{{ url_for('static', filename='js/filter-bar.js') }}"></script>
+{% block scripts %}{% endblock %}
+<script>
+  const navbar = document.getElementById("siteNavbar");
+  const onScroll = () => navbar.classList.toggle("is-scrolled", window.scrollY > 12);
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+  const mobileMenu = document.getElementById("mobileMenu");
+  if (mobileMenu) {
+    mobileMenu.querySelectorAll("a").forEach(link => link.addEventListener("click", () => mobileMenu.hidePopover()));
+  }
+</script>
+</body>
+</html>

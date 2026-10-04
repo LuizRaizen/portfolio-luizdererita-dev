@@ -1,0 +1,25 @@
+{# Card de projeto (home e /projetos). Espera `p` (projeto enriquecido). #}
+{% set url = url_for('blog_index', projeto=p.projeto) %}
+{% set techs = p.home_card.tecnologias %}
+<article class="project-card reveal" data-category="{{ p.home_card.categoria }}">
+  <a class="project-card__media" href="{{ url }}" tabindex="-1" aria-hidden="true">
+    <img src="{{ url_for('static', filename=p.home_card.imagem) }}" alt="" loading="lazy" width="640" height="360">
+  </a>
+  {% if p.novidade_blog %}
+    <span class="project-card__badge"><span class="project-card__badge-dot" aria-hidden="true"></span>Novidades no blog</span>
+  {% endif %}
+  <div class="project-card__body">
+    <div class="project-card__head">
+      <h3><a href="{{ url }}">{{ p.ficha_tecnica.nome }}</a></h3>
+      <span class="project-card__category">{{ p.home_card.categoria }}</span>
+    </div>
+    <p class="project-card__summary">{{ p.home_card.resumo }}</p>
+    <ul class="tech-tags tech-tags--inline" aria-label="Tecnologias">
+      {% for t in techs[:2] %}<li>{{ t }}</li>{% endfor %}
+      {% if techs|length > 2 %}<li class="tech-tags__more">+{{ techs|length - 2 }}</li>{% endif %}
+    </ul>
+    <a class="project-card__link" href="{{ url }}">
+      Ver projeto <i class="fas fa-arrow-right" aria-hidden="true"></i>
+    </a>
+  </div>
+</article>

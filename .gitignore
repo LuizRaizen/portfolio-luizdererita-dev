@@ -30,3 +30,7 @@ Thumbs.db
 instance/
 *.db
 templates/blogs/test.html
+
+# Ambientes virtuais locais de verificacao
+.venv_check/
+.venv*/

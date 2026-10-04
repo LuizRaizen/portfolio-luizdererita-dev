@@ -1,0 +1,31 @@
+{# Certificado em destaque. Espera `c` (enriquecido). #}
+{% set mod = 'Presencial' if c.categoria == 'presencial' else 'Online' %}
+<li class="cert-card reveal">
+  {% set img = c.imagem_preview or c.imagem_thumb %}
+  {% if img %}
+    {% if c.link %}<a class="cert-card__media" href="{{ url_item(c.link) }}" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">{% else %}<div class="cert-card__media">{% endif %}
+      <img src="{{ url_for('static', filename=img) }}" alt="" loading="lazy" width="640" height="320">
+    {% if c.link %}</a>{% else %}</div>{% endif %}
+  {% else %}
+    <div class="cert-card__media cert-card__media--placeholder" aria-hidden="true">
+      <span>{{ c.carga_horaria }}</span>
+      <small>{{ c.instituicao }}</small>
+    </div>
+  {% endif %}
+  <div class="cert-card__body">
+    {% if c.instituicao %}<p class="cert-card__inst">{{ c.instituicao }}</p>{% endif %}
+    <h3>{{ c.titulo_curto }}</h3>
+    {% if c.descricao %}<p class="cert-card__desc">{{ c.descricao }}</p>{% endif %}
+    <ul class="cert-card__facts" aria-label="Detalhes do certificado">
+      {% if c.carga_horaria %}<li><i class="far fa-clock" aria-hidden="true"></i> {{ c.carga_horaria }}</li>{% endif %}
+      <li><i class="fas {{ 'fa-location-dot' if c.categoria == 'presencial' else 'fa-laptop' }}" aria-hidden="true"></i> {{ mod }}</li>
+      {% if c.data %}<li><i class="far fa-calendar" aria-hidden="true"></i> <time datetime="{{ c.data.date().isoformat() }}">{{ c.data|mes_ano }}</time></li>{% endif %}
+    </ul>
+    {% if c.link %}
+      <a class="project-card__link" href="{{ url_item(c.link) }}" target="_blank" rel="noopener">
+        Ver certificado <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
+        <span class="visually-hidden">: {{ c.titulo_curto }} (abre em nova aba)</span>
+      </a>
+    {% endif %}
+  </div>
+</li>

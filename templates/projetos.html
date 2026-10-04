@@ -1,0 +1,20 @@
+{% extends "pagina_interna.html" %}
+{% block titulo %}Projetos{% endblock %}
+{% block descricao %}Todos os projetos de Luiz R. Dererita: web, jogos, desktop, mobile e CLI, com blog técnico em cada um.{% endblock %}
+{% block crumb %}Projetos{% endblock %}
+{% block eyebrow %}Portfólio{% endblock %}
+{% block h1 %}Todos os projetos{% endblock %}
+{% block lead %}{{ projetos|length }} projetos, dos mais recentemente ativos aos mais antigos. Cada um tem um blog com decisões técnicas e evolução.{% endblock %}
+{% block conteudo %}
+  <div class="filter-bar" role="group" aria-label="Filtrar projetos por categoria">
+    <button type="button" class="filter-pill is-active" data-filter="all" aria-pressed="true">Todos</button>
+    {% for c in categorias %}
+      <button type="button" class="filter-pill" data-filter="{{ c }}" aria-pressed="false">{{ c|capitalize }}</button>
+    {% endfor %}
+  </div>
+  <p class="visually-hidden" role="status" aria-live="polite" data-filter-status></p>
+
+  <div class="projects-grid">
+    {% for p in projetos %}{% include "partials/card_projeto.html" %}{% endfor %}
+  </div>
+{% endblock %}

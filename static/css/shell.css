@@ -111,12 +111,13 @@
     letter-spacing: -0.01em;
     display: inline-flex;
     align-items: center;
-    gap: var(--space-2);
+    gap: 0; /* "luizdererita-dev" é uma palavra só: sem espaço entre os spans */
   }
 
   .brand__dot { color: var(--color-accent); }
 
   .brand--back {
+    gap: var(--space-2);
     font-family: var(--font-body);
     font-weight: 500;
     font-size: var(--text-sm);
@@ -296,6 +297,83 @@
     transform: translateY(-2px);
   }
 
+  /* === Tags de tecnologia (cards de projeto na home + topo do blog) ======= */
+
+  .tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .tech-tags li {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-text-faint);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: 2px var(--space-2);
+  }
+
+  /* === Carrossel com bolinhas (static/js/carousel.js) =====================
+     Usado tanto nos Certificados da home quanto na Ficha Técnica do blog —
+     por isso mora aqui, no CSS compartilhado. */
+
+  .carousel-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-4);
+    margin-block-start: var(--space-4);
+  }
+
+  .carousel-arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: 40px;
+    block-size: 40px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    border: 1px solid var(--color-border-strong);
+    background: transparent;
+    color: var(--color-text);
+    cursor: pointer;
+    transition: border-color var(--duration-fast), color var(--duration-fast), transform var(--duration-fast);
+  }
+
+  .carousel-arrow:hover:not(:disabled) {
+    border-color: var(--color-accent);
+    color: var(--color-accent-text);
+    transform: translateY(-1px);
+  }
+
+  .carousel-arrow:disabled { opacity: 0.35; cursor: default; }
+
+  .carousel-dots {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .carousel-dot {
+    inline-size: 10px;
+    block-size: 10px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: color-mix(in oklab, var(--color-accent) 35%, var(--color-border-strong));
+    cursor: pointer;
+    transition: background-color var(--duration-fast), transform var(--duration-fast), box-shadow var(--duration-fast);
+  }
+
+  .carousel-dot:hover { background: var(--color-accent-strong); }
+
+  .carousel-dot.is-active {
+    background: var(--color-accent);
+    transform: scale(1.3);
+    box-shadow: 0 0 0 4px var(--color-accent-soft);
+  }
+
   /* === Rodapé (partials/footer.html) ===================================== */
 
   .site-footer {
@@ -325,12 +403,19 @@
 
   @media (prefers-reduced-motion: no-preference) {
     @supports ((animation-timeline: view()) and (animation-range: entry)) {
+      /* Paradas intermediárias "falseiam" um ease-out dentro de uma timeline
+         ligada linearmente ao scroll: sobe rápido no começo e assenta no
+         final, em vez de um movimento uniforme do início ao fim. */
       @keyframes reveal-in {
-        from { opacity: 0; transform: translateY(32px); }
+        0% { opacity: 0; transform: translateY(36px) scale(0.97); }
+        65% { opacity: 1; transform: translateY(-2px) scale(1.002); }
+        100% { opacity: 1; transform: translateY(0) scale(1); }
       }
 
       @keyframes reveal-out {
-        to { opacity: 0; transform: translateY(-24px); }
+        0% { opacity: 1; transform: translateY(0) scale(1); }
+        35% { opacity: 1; transform: translateY(-6px) scale(0.998); }
+        100% { opacity: 0; transform: translateY(-30px) scale(0.97); }
       }
 
       .reveal {
@@ -342,7 +427,7 @@
 
     .js-reveal-fallback .reveal {
       opacity: 0;
-      transform: translateY(32px);
+      transform: translateY(32px) scale(0.97);
       transition: opacity var(--duration-slow) var(--ease-out), transform var(--duration-slow) var(--ease-out);
     }
 

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark">
   <title>Luiz R. Dererita | Desenvolvedor Full Stack</title>
-  <meta name="description" content="Portfólio profissional de Luiz R. Dererita, desenvolvedor full stack. Conheça projetos web, jogos em Python, integração com IA e muito mais.">
+  <meta name="description" content="Portfólio profissional de Luiz R. Dererita, desenvolvedor full stack. Projetos reais, certificações e um blog técnico em cada projeto, sempre em evolução.">
   <meta name="keywords" content="portfólio, desenvolvedor web, Python, Flask, tecnologia, Luiz Dererita, projetos, programador full stack">
   <meta name="author" content="Luiz Ricardo Dererita de Araújo">
   <meta name="robots" content="index, follow">
@@ -14,6 +14,15 @@
   <meta property="og:image" content="{{ url_for('static', filename='img/luiz.jpeg', _external=True) }}">
   <meta property="og:url" content="https://luizdererita-dev.up.railway.app">
   <meta property="og:type" content="website">
+  <link rel="canonical" href="https://luizdererita-dev.up.railway.app/">
+  <script type="application/ld+json">{{ {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Luiz R. Dererita",
+    "jobTitle": "Desenvolvedor Full Stack",
+    "url": "https://luizdererita-dev.up.railway.app/",
+    "sameAs": ["https://www.linkedin.com/in/luiz-r-dererita-801132135/", "https://github.com/LuizRaizen"]
+  } | tojson }}</script>
   <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='img/favicon.svg') }}">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -39,12 +48,11 @@
     <div class="hero__glow" aria-hidden="true"></div>
     <div class="hero__inner">
       <div class="hero__content">
-        <span class="year-badge"><span class="year-badge__dot" aria-hidden="true"></span>Portfólio 2026</span>
-        <p class="eyebrow">Desenvolvedor Full Stack · Python &amp; Web</p>
-        <h1 class="hero__title text-balance">Luiz R.<br>Dererita</h1>
+        <p class="eyebrow">Desenvolvedor Full Stack · Python, Web &amp; IA</p>
+        <h1 class="hero__title text-balance">Luiz R.<br>Dererita<br></h1>
         <p class="hero__lead text-pretty">
-          Construo aplicações reais do início ao deploy — sistemas web em Flask e Django,
-          jogos em Pygame e interfaces desktop — sempre com código modular e atenção ao detalhe.
+          Transformo ideias em software real — do primeiro código ao deploy.
+          Aplicações web, APIs, ferramentas, automações, análise de dados e soluções com IA. As melhores práticas, arquitetura modular e engenharia de software para transformar ideias em produtos funcionais.
         </p>
         <div class="hero__actions">
           <a href="#projetos" class="btn btn--primary">Ver projetos</a>
@@ -53,7 +61,7 @@
           </a>
         </div>
         <ul class="hero__stack" aria-label="Principais tecnologias">
-          <li>Python</li><li>Flask</li><li>Django</li><li>JavaScript</li><li>PostgreSQL</li><li>Pygame</li>
+          <li>Flask</li><li>Django</li><li>PySide6</li><li>JavaScript</li><li>React</li><li>PostgreSQL</li><li>MySQL</li>
         </ul>
       </div>
       <div class="hero__portrait">
@@ -65,8 +73,10 @@
         </div>
       </div>
     </div>
-    <a class="scroll-cue" href="#sobre" aria-label="Rolar até a seção Sobre"><span></span></a>
+    <a class="scroll-cue" href="#{{ 'novidades' if novidades else 'sobre' }}" aria-label="Rolar para o conteúdo"><span></span></a>
   </section>
+
+  {% include "partials/novidades.html" %}
 
   <!-- SOBRE -->
   <section class="section" id="sobre">
@@ -81,9 +91,6 @@
           <li><strong>{{ stat.numero }}</strong><span>{{ stat.legenda }}</span></li>
         {% endfor %}
       </ul>
-      <a href="{{ url_for('static', filename='docs/curriculo-luiz-dererita.pdf') }}" class="btn btn--ghost" download>
-        <i class="fas fa-download" aria-hidden="true"></i> Baixar currículo
-      </a>
     </div>
   </section>
 
@@ -97,8 +104,11 @@
       <div class="timeline__progress" aria-hidden="true"></div>
       <ol class="timeline">
         {% for etapa in jornada %}
-          <li class="timeline__item reveal">
-            <span class="timeline__year">{{ etapa.ano }}</span>
+          <li class="timeline__item reveal{% if etapa.ano == '2026' %} timeline__item--current{% endif %}">
+            <span class="timeline__year">
+              {{ etapa.ano }}
+              {% if etapa.ano == '2026' %}<span class="timeline__badge">Agora</span>{% endif %}
+            </span>
             <span class="timeline__desc">{{ etapa.descricao }}</span>
           </li>
         {% endfor %}
@@ -120,7 +130,7 @@
   <section class="section" id="habilidades">
     <div class="section__head reveal">
       <p class="eyebrow">03 · Habilidades</p>
-      <h2 class="text-balance">Ferramentas do dia a dia</h2>
+      <h2 class="text-balance">Minhas experiencias</h2>
     </div>
 
     <div class="skills-carousel reveal" role="group" aria-label="Tecnologias e ferramentas que utilizo">
@@ -155,74 +165,81 @@
     </div>
   </section>
 
+  <!-- PROJETOS -->
+  <section class="section" id="projetos">
+    <div class="section__head section__head--split reveal">
+      <div>
+        <p class="eyebrow">04 · Projetos</p>
+        <h2 class="text-balance">Projetos recentes</h2>
+      </div>
+      <a class="section__more" href="{{ url_for('projetos_lista') }}">Ver todos os projetos ({{ total_projetos }}) <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+    </div>
+
+    <div class="projects-grid">
+      {% for p in projetos %}
+        {% include "partials/card_projeto.html" %}
+      {% endfor %}
+    </div>
+  </section>
+
   <!-- CERTIFICADOS -->
   <section class="section" id="certificados">
-    <div class="section__head reveal">
-      <p class="eyebrow">04 · Formação</p>
-      <h2 class="text-balance">Certificados</h2>
+    <div class="section__head section__head--split reveal">
+      <div>
+        <p class="eyebrow">05 · Formação</p>
+        <h2 class="text-balance">Certificações</h2>
+        <p class="section__lead">{{ resumo_certs.total }} certificações e {{ '{:,}'.format(resumo_certs.horas).replace(',', '.') }} horas de estudo, em Python, dados, IA e segurança.</p>
+      </div>
+      <a class="section__more" href="{{ url_for('certificados_lista') }}">Ver todas as certificações <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
     </div>
 
-    <div class="filter-bar reveal" role="group" aria-label="Filtrar certificados">
-      <button type="button" class="filter-pill is-active" data-filter="all">Todos</button>
-      <button type="button" class="filter-pill" data-filter="presencial">Presenciais</button>
-      <button type="button" class="filter-pill" data-filter="online">Online</button>
-    </div>
+    <ul class="cert-cards">
+      {% for c in certificados_destaque %}{% include "partials/cert_card.html" %}{% endfor %}
+    </ul>
 
-    <ul class="credential-list reveal">
-      {% for c in certificados %}
-        <li class="credential" data-category="{{ c.categoria }}">
-          <a class="credential__thumb" href="{{ url_for('static', filename=c.get('documento', c.imagem_full)) }}" target="_blank" rel="noopener">
-            <img src="{{ url_for('static', filename=c.imagem_thumb) }}" alt="Certificado: {{ c.titulo }}" loading="lazy" width="64" height="64">
+    <h3 class="subsection-title reveal">Por área</h3>
+    <ul class="cert-temas reveal">
+      {% for g in resumo_certs.temas %}
+        <li>
+          <a class="cert-tema" href="{{ url_for('certificados_lista', tema=g.nome) }}">
+            <span class="cert-tema__nome">{{ g.nome }}</span>
+            <span class="cert-tema__dados">{{ g.total }} {{ 'certificação' if g.total == 1 else 'certificações' }}{% if g.horas %} · {{ g.horas }}h{% endif %}</span>
           </a>
-          <div class="credential__body">
-            <h3>{{ c.titulo }}</h3>
-            <p>{{ c.descricao }}</p>
-          </div>
-          <span class="credential__tag">{{ 'Presencial' if c.categoria == 'presencial' else 'Online' }}</span>
         </li>
       {% endfor %}
     </ul>
   </section>
+  {% if posts_recentes %}
+    <!-- POSTS RECENTES -->
+    <section class="section" id="do-blog">
+      <div class="section__head reveal">
+        <p class="eyebrow">06 · Do blog</p>
+        <h2 class="text-balance">Posts recentes</h2>
+        <p class="section__lead">Decisões técnicas e bastidores, publicados nos blogs de cada projeto.</p>
+      </div>
 
-  <!-- PROJETOS -->
-  <section class="section" id="projetos">
-    <div class="section__head reveal">
-      <p class="eyebrow">05 · Projetos</p>
-      <h2 class="text-balance">Projetos selecionados</h2>
-    </div>
-
-    <div class="filter-bar reveal" role="group" aria-label="Filtrar projetos">
-      <button type="button" class="filter-pill is-active" data-filter="all">Todos</button>
-      <button type="button" class="filter-pill" data-filter="jogos">Jogos</button>
-      <button type="button" class="filter-pill" data-filter="web">Web</button>
-      <button type="button" class="filter-pill" data-filter="desktop">Desktop</button>
-      <button type="button" class="filter-pill" data-filter="mobile">Mobile</button>
-      <button type="button" class="filter-pill" data-filter="cli">CLI</button>
-    </div>
-
-    <div class="projects-grid reveal">
-      {% for p in projetos %}
-        <article class="project-card{% if p.home_card.destaque %} project-card--featured{% endif %}" data-category="{{ p.home_card.categoria }}">
-          <a class="project-card__media" href="{{ url_for('blog_index', projeto=p.projeto) }}" tabindex="-1">
-            <img src="{{ url_for('static', filename=p.home_card.imagem) }}" alt="" loading="lazy">
-          </a>
-          <div class="project-card__body">
-            <div class="project-card__head">
-              <h3><a href="{{ url_for('blog_index', projeto=p.projeto) }}">{{ p.ficha_tecnica.nome }}</a></h3>
-              <span class="project-card__category">{{ p.home_card.categoria }}</span>
-            </div>
-            <p>{{ p.home_card.resumo }}</p>
-            <ul class="tech-tags">
-              {% for t in p.home_card.tecnologias %}<li>{{ t }}</li>{% endfor %}
-            </ul>
-            <a class="project-card__link" href="{{ url_for('blog_index', projeto=p.projeto) }}">
-              Ver projeto <i class="fas fa-arrow-right" aria-hidden="true"></i>
+      <div class="posts-grid">
+        {% for post in posts_recentes %}
+          <article class="post-card reveal">
+            <a class="post-card__media" href="{{ url_item(post.link) }}" tabindex="-1" aria-hidden="true">
+              <img src="{{ url_for('static', filename=post.imagem) }}" alt="" loading="lazy" width="640" height="360">
             </a>
-          </div>
-        </article>
-      {% endfor %}
-    </div>
-  </section>
+            <div class="post-card__body">
+              <p class="post-card__project"><a href="{{ url_item(post.link_projeto) }}">{{ post.nome_projeto }}</a></p>
+              <h3><a href="{{ url_item(post.link) }}">{{ post.titulo }}</a></h3>
+              <p class="post-card__meta">
+                <time datetime="{{ post.data.date().isoformat() }}">{{ post.data|data_extensa }}</time> · {{ post.tempo_leitura }} min de leitura
+              </p>
+              <p class="post-card__summary">{{ post.resumo }}</p>
+              {% if post.tags %}
+                <ul class="tech-tags" aria-label="Tags">{% for t in post.tags %}<li>{{ t }}</li>{% endfor %}</ul>
+              {% endif %}
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+    </section>
+  {% endif %}
 
   {% include "partials/contato.html" %}
 
@@ -231,24 +248,8 @@
 {% include "partials/footer.html" %}
 
 <script src="{{ url_for('static', filename='js/scroll-reveal.js') }}"></script>
+<script src="{{ url_for('static', filename='js/news.js') }}"></script>
 <script>
-  // Filtro de cards (projetos e certificados)
-  document.querySelectorAll(".filter-bar").forEach(bar => {
-    const scope = bar.closest("section");
-    bar.querySelectorAll("[data-filter]").forEach(button => {
-      button.addEventListener("click", () => {
-        bar.querySelectorAll("[data-filter]").forEach(b => b.classList.remove("is-active"));
-        button.classList.add("is-active");
-
-        const category = button.getAttribute("data-filter");
-        scope.querySelectorAll("[data-category]").forEach(card => {
-          const match = category === "all" || card.getAttribute("data-category") === category;
-          card.hidden = !match;
-        });
-      });
-    });
-  });
-
   // Navbar com fundo reforçado ao rolar a página
   const navbar = document.getElementById("siteNavbar");
   const onScroll = () => navbar.classList.toggle("is-scrolled", window.scrollY > 12);

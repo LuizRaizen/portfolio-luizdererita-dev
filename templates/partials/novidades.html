@@ -1,0 +1,43 @@
+{# Carrossel de novidades. Espera `novidades` (utils.atividade.eventos_atividade). #}
+{% if novidades %}
+<section class="section section--news" id="novidades" aria-labelledby="novidades-titulo">
+  <div class="section__head section__head--split">
+    <div>
+      <h2 id="novidades-titulo" class="text-balance">Novidades</h2>
+      <p class="section__lead">Projetos, artigos e certificações mais recentes.</p>
+    </div>
+    <div class="news__controls" data-news-controls hidden>
+      <button type="button" class="news__btn" data-news-prev aria-label="Novidade anterior"><i class="fas fa-chevron-left" aria-hidden="true"></i></button>
+      <button type="button" class="news__btn" data-news-toggle aria-label="Pausar rotação automática" aria-pressed="false">
+        <i class="fas fa-pause" aria-hidden="true"></i>
+      </button>
+      <button type="button" class="news__btn" data-news-next aria-label="Próxima novidade"><i class="fas fa-chevron-right" aria-hidden="true"></i></button>
+    </div>
+  </div>
+
+  <div class="news" data-news role="region" aria-roledescription="carrossel" aria-label="Novidades">
+    <ul class="news__viewport" data-news-viewport>
+      {% for e in novidades %}
+        <li class="news-slide news-slide--{{ e.tipo }}" data-news-slide role="group" aria-roledescription="slide" aria-label="{{ loop.index }} de {{ loop.length }}">
+          {% if e.imagem %}
+            <a class="news-slide__media" href="{{ url_item(e.link) }}"{% if e.externo %} target="_blank" rel="noopener"{% endif %} tabindex="-1" aria-hidden="true">
+              <img src="{{ url_for('static', filename=e.imagem) }}" alt="" {% if not loop.first %}loading="lazy"{% endif %} width="640" height="400">
+            </a>
+          {% endif %}
+          <div class="news-slide__body">
+            <p class="news-slide__kind">{{ e.rotulo }} <span aria-hidden="true">·</span> <time datetime="{{ e.data.date().isoformat() }}" title="{{ e.data|data_extensa }}">{{ e.relativo }}</time></p>
+            <h3><a href="{{ url_item(e.link) }}"{% if e.externo %} target="_blank" rel="noopener"{% endif %}>{{ e.titulo }}</a></h3>
+            {% if e.contexto %}<p class="news-slide__context">{{ e.contexto }}</p>{% endif %}
+            {% if e.resumo %}<p class="news-slide__summary">{{ e.resumo }}</p>{% endif %}
+            <a class="news-slide__cta" href="{{ url_item(e.link) }}"{% if e.externo %} target="_blank" rel="noopener"{% endif %}>
+              {{ e.cta }} <i class="fas fa-arrow-right" aria-hidden="true"></i>
+              <span class="visually-hidden">: {{ e.titulo }}{% if e.externo %} (abre em nova aba){% endif %}</span>
+            </a>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+    <div class="news__dots" data-news-dots hidden></div>
+  </div>
+</section>
+{% endif %}

@@ -245,12 +245,12 @@ downloads = [
     {
         "nome": "robots.txt (modelo)",
         "descricao": "Modelo usado na configuração inicial para buscadores.",
-        "arquivo": "downloads/convertetudo/convertetudo_robots.txt"
+        "arquivo": "downloads/convertetudo/robots.txt"
     },
     {
         "nome": "ads.txt (modelo)",
         "descricao": "Modelo base para verificação do Google AdSense.",
-        "arquivo": "downloads/convertetudo/convertetudo_ads.txt"
+        "arquivo": "downloads/convertetudo/ads.txt"
     },
 ]
 
@@ -265,4 +265,5 @@ home_card = {
     "imagem": "img/convertetudo_preview.webp",
     "ordem": 10,
     "destaque": True,
+    "publicado_em": datetime(2025, 10, 19),  # data do post de lançamento
 }

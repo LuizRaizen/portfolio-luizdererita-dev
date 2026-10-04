@@ -26,6 +26,8 @@ def carregar_projeto(nome):
             "videos": getattr(modulo, "videos", []),
             "downloads": getattr(modulo, "downloads", []),
             "home_card": getattr(modulo, "home_card", None),
+            # URL do repositório quando o nome dele difere do slug (opcional).
+            "repositorio": getattr(modulo, "repositorio", None),
             "tem_logo": tem_logo,
             "tem_banner": tem_banner,
             # Alguns banners já têm o nome do projeto desenhado na própria imagem

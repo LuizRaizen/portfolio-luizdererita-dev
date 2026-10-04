@@ -105,6 +105,8 @@
   {% include "partials/footer.html" %}
 
   <!-- Scripts -->
+  <script src="{{ url_for('static', filename='js/scroll-reveal.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/carousel.js') }}"></script>
   <script>
     const siteNavbar = document.getElementById("siteNavbar");
     const onNavbarScroll = () => siteNavbar.classList.toggle("is-scrolled", window.scrollY > 12);

@@ -1,0 +1,15 @@
+{# Certificado em linha (lista completa). Espera `c` (enriquecido). #}
+{% set meta = [c.instituicao, c.tipo|capitalize if c.tipo else none]|select|join(' · ') %}
+<li class="cert-row-item" data-tema="{{ c.tema }}" data-busca="{{ (c.titulo ~ ' ' ~ c.instituicao ~ ' ' ~ c.tema)|lower }}">
+  {% if c.link %}<a class="cert-row" href="{{ url_item(c.link) }}" target="_blank" rel="noopener">{% else %}<div class="cert-row">{% endif %}
+    <span class="cert-row__thumb" aria-hidden="true">
+      {% if c.imagem_thumb %}<img src="{{ url_for('static', filename=c.imagem_thumb) }}" alt="" loading="lazy" width="96" height="68">{% endif %}
+    </span>
+    <span class="cert-row__main">
+      <span class="cert-row__title">{{ c.titulo_curto }}{% if c.link %}<span class="visually-hidden"> (abre em nova aba)</span>{% endif %}</span>
+      <span class="cert-row__meta">{{ meta }}</span>
+    </span>
+    <span class="cert-row__hours">{{ c.carga_horaria }}</span>
+    <span class="cert-row__date">{% if c.data %}<time datetime="{{ c.data.date().isoformat() }}">{{ c.data|mes_ano }}</time>{% endif %}</span>
+  {% if c.link %}<i class="fas fa-arrow-up-right-from-square cert-row__icon" aria-hidden="true"></i></a>{% else %}</div>{% endif %}
+</li>

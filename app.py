@@ -1,10 +1,20 @@
 import os
 from datetime import datetime
 from dotenv import load_dotenv
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, url_for
 from flask_compress import Compress
 from data import carregar_projeto, listar_projetos
-from data.perfil import sobre, jornada, habilidades, certificados
+from data.perfil import sobre, jornada, habilidades, certificados, TEMAS_CERTIFICADOS
+from utils.atividade import (
+    enriquecer_certificados,
+    enriquecer_projetos,
+    eventos_atividade,
+    ordenar_por_atividade,
+    posts_recentes,
+    resumo_certificados,
+    rotulo_relativo,
+    separar_certificados,
+)
 from utils.db import db
 from utils.visualizacoes import registrar_visualizacao, obter_visualizacoes
 
@@ -33,15 +43,81 @@ def inject_globals():
     return {"ano_atual": datetime.now().year, "email_contato": EMAIL_CONTATO}
 
 
+def _url_for_com_cache_busting(endpoint, **valores):
+    """Acrescenta `?v=<mtime>` aos links de arquivos estáticos.
+
+    SEND_FILE_MAX_AGE_DEFAULT deixa o navegador cachear CSS/JS/imagens por
+    1h sem revalidar. Sem isso, todo deploy que mexe em style.css deixa
+    visitantes com a versão antiga em cache enquanto o HTML (nunca
+    cacheado) já usa as classes novas — o layout "quebra" em produção até
+    o cache expirar. O `v` muda sempre que o arquivo muda, então o
+    navegador busca a versão nova imediatamente, e arquivos que não
+    mudaram continuam cacheados por 1h normalmente.
+    """
+    if endpoint == "static":
+        nome_arquivo = valores.get("filename")
+        if nome_arquivo:
+            caminho = os.path.join(app.root_path, "static", nome_arquivo)
+            try:
+                valores["v"] = int(os.stat(caminho).st_mtime)
+            except OSError:
+                pass
+    return url_for(endpoint, **valores)
+
+
+@app.context_processor
+def inject_url_for_com_cache_busting():
+    return {"url_for": _url_for_com_cache_busting}
+
+
+@app.template_global()
+def url_item(link):
+    """Resolve links `(endpoint, params)` devolvidos por utils.atividade."""
+    endpoint, params = link
+    return _url_for_com_cache_busting(endpoint, **params)
+
+
+PROJETOS_NA_HOME = 6
+POSTS_NA_HOME = 3
+NOVIDADES_NA_HOME = 6
+
+
 @app.route("/")
 def portfolio():
+    agora = datetime.now()
+    projetos = ordenar_por_atividade(enriquecer_projetos(listar_projetos(), agora))
+    certs = enriquecer_certificados(certificados, agora)
+    cert_destaques, cert_demais = separar_certificados(certs)
     return render_template(
         "index.html",
-        projetos=listar_projetos(),
+        projetos=projetos[:PROJETOS_NA_HOME],
+        total_projetos=len(projetos),
         sobre=sobre,
         jornada=jornada,
         habilidades=habilidades,
-        certificados=certificados,
+        certificados_destaque=cert_destaques,
+        resumo_certs=resumo_certificados(certs, TEMAS_CERTIFICADOS),
+        posts_recentes=posts_recentes(projetos, POSTS_NA_HOME),
+        novidades=eventos_atividade(projetos, certs, NOVIDADES_NA_HOME, agora),
+    )
+
+
+@app.route("/projetos")
+def projetos_lista():
+    projetos = ordenar_por_atividade(enriquecer_projetos(listar_projetos()))
+    categorias = sorted({p["home_card"]["categoria"] for p in projetos})
+    return render_template("projetos.html", projetos=projetos, categorias=categorias)
+
+
+@app.route("/certificados")
+def certificados_lista():
+    certs = enriquecer_certificados(certificados)
+    destaques, _ = separar_certificados(certs)
+    return render_template(
+        "certificados.html",
+        certificados_destaque=destaques,
+        certificados_todos=certs,
+        resumo_certs=resumo_certificados(certs, TEMAS_CERTIFICADOS),
     )
 
 
@@ -65,6 +141,7 @@ def blog_index(projeto):
         "blogs/index.html",
         projeto=dados["projeto"],
         ficha_tecnica=dados["ficha_tecnica"],
+        home_card=dados["home_card"],
         posts=posts_paginados,
         todos_os_posts=dados["posts"],
         pagina_atual=pagina,
@@ -72,7 +149,8 @@ def blog_index(projeto):
         roadmap=dados["roadmap"],
         tem_logo=dados["tem_logo"],
         tem_banner=dados["tem_banner"],
-        banner_tem_titulo=dados["banner_tem_titulo"]
+        banner_tem_titulo=dados["banner_tem_titulo"],
+        repositorio=dados.get("repositorio"),
     )
 
 
@@ -179,6 +257,20 @@ def galeria_downloads(projeto):
 @app.template_filter('data_curta')
 def data_curta(data):
     return data.strftime('%d/%m/%Y')
+
+
+@app.template_filter('relativo')
+def relativo(data):
+    return rotulo_relativo(data)
+
+
+@app.template_filter('mes_ano')
+def mes_ano(data):
+    meses = [
+        'janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho',
+        'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'
+    ]
+    return f"{meses[data.month - 1]} de {data.year}"
 
 
 @app.template_filter('data_extensa')

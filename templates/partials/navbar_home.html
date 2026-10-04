@@ -1,14 +1,15 @@
+{% set base = home_url|default('') %}
 <header class="site-header" id="siteNavbar">
   <div class="site-header__inner">
-    <a class="brand" href="#top">Luiz<span class="brand__dot">.</span>dev</a>
+    <a class="brand" href="{{ base or '' }}#top">luiz<span class="hero__title-highlight">dererita</span><span class="brand__dot">-</span>dev</a>
 
     <nav class="primary-nav" aria-label="Navegação principal">
-      <a href="#sobre">Sobre</a>
-      <a href="#jornada">Jornada</a>
-      <a href="#habilidades">Habilidades</a>
-      <a href="#certificados">Certificados</a>
-      <a href="#projetos">Projetos</a>
-      <a href="#contato" class="primary-nav__cta">Contato</a>
+      <a href="{{ base }}#sobre">Sobre</a>
+      <a href="{{ base }}#jornada">Jornada</a>
+      <a href="{{ base }}#habilidades">Habilidades</a>
+      <a href="{{ base }}#projetos">Projetos</a>
+      <a href="{{ base }}#certificados">Certificados</a>
+      <a href="{{ base }}#contato" class="primary-nav__cta">Contato</a>
     </nav>
 
     <button type="button" class="menu-toggle" popovertarget="mobileMenu" aria-label="Abrir menu">
@@ -19,11 +20,11 @@
 
 <div id="mobileMenu" popover="auto" class="mobile-menu">
   <nav aria-label="Navegação mobile">
-    <a href="#sobre">Sobre</a>
-    <a href="#jornada">Jornada</a>
-    <a href="#habilidades">Habilidades</a>
-    <a href="#certificados">Certificados</a>
-    <a href="#projetos">Projetos</a>
-    <a href="#contato">Contato</a>
+    <a href="{{ base }}#sobre">Sobre</a>
+    <a href="{{ base }}#jornada">Jornada</a>
+    <a href="{{ base }}#habilidades">Habilidades</a>
+    <a href="{{ base }}#projetos">Projetos</a>
+    <a href="{{ base }}#certificados">Certificados</a>
+    <a href="{{ base }}#contato">Contato</a>
   </nav>
 </div>

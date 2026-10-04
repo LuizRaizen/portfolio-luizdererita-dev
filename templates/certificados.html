@@ -1,0 +1,37 @@
+{% extends "pagina_interna.html" %}
+{% block titulo %}Certificações{% endblock %}
+{% block descricao %}{{ resumo_certs.total }} certificações de Luiz R. Dererita em Python, dados, IA, cibersegurança e formação profissional, com documento para verificação.{% endblock %}
+{% block crumb %}Certificações{% endblock %}
+{% block eyebrow %}Formação{% endblock %}
+{% block h1 %}Todas as certificações{% endblock %}
+{% block lead %}{{ resumo_certs.total }} certificações e {{ '{:,}'.format(resumo_certs.horas).replace(',', '.') }} horas de estudo. Cada uma abre o documento original.{% endblock %}
+{% block conteudo %}
+  {% if certificados_destaque %}
+    <ul class="cert-cards">
+      {% for c in certificados_destaque %}{% include "partials/cert_card.html" %}{% endfor %}
+    </ul>
+  {% endif %}
+
+  <h2 class="subsection-title" id="lista-titulo">Todas</h2>
+  <div class="cert-tools" data-cert-tools>
+    <div class="filter-bar" role="group" aria-label="Filtrar por área">
+      <button type="button" class="filter-pill is-active" data-tema="" aria-pressed="true">Todas ({{ resumo_certs.total }})</button>
+      {% for g in resumo_certs.temas %}
+        <button type="button" class="filter-pill" data-tema="{{ g.nome }}" aria-pressed="false">{{ g.nome }} ({{ g.total }})</button>
+      {% endfor %}
+    </div>
+    <label class="cert-search">
+      <span class="visually-hidden">Buscar certificações</span>
+      <i class="fas fa-magnifying-glass" aria-hidden="true"></i>
+      <input type="search" placeholder="Buscar por título ou instituição" data-cert-search autocomplete="off">
+    </label>
+  </div>
+  <p class="cert-status" role="status" aria-live="polite" data-cert-status></p>
+
+  <ul class="cert-rows" data-cert-list aria-labelledby="lista-titulo">
+    {% for c in certificados_todos %}{% include "partials/cert_linha.html" %}{% endfor %}
+  </ul>
+  <p class="cert-empty" data-cert-empty hidden>Nenhuma certificação encontrada. Tente outro termo ou escolha “Todas”.</p>
+  <button type="button" class="btn btn--ghost cert-more" data-cert-more hidden>Mostrar mais</button>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/certificados.js') }}"></script>{% endblock %}

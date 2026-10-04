@@ -13,6 +13,32 @@
  */
 (function () {
   var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /*
+   * Hero: a animação de entrada (título, texto e foto surgindo em sequência)
+   * roda toda vez que a seção fica visível — no carregamento e sempre que o
+   * visitante rola de volta para cima e ela reentra na tela — não só uma
+   * vez. Isso fica de fora do mecanismo .reveal acima de propósito: a Hero
+   * ocupa a primeira tela inteira, então a fase "entry" de uma
+   * scroll-driven animation (animation-timeline: view()) já teria
+   * "acontecido" antes do primeiro frame, sem nada visível para animar. Um
+   * IntersectionObserver simples resolve isso em qualquer navegador.
+   */
+  if (!prefersReducedMotion && 'IntersectionObserver' in window) {
+    var hero = document.querySelector('.hero');
+    if (hero) {
+      hero.classList.add('hero--animate');
+      new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            entry.target.classList.toggle('is-visible', entry.isIntersecting);
+          });
+        },
+        { threshold: 0.3 }
+      ).observe(hero);
+    }
+  }
+
   if (prefersReducedMotion) {
     return;
   }

@@ -61,6 +61,8 @@ ficha_tecnica = {
 # - nome_arquivo (str) - usado na URL para exibição individual
 # - conteudo (str) - HTML com parágrafos, títulos, etc.
 # - imagem (opcional) - caminho relativo à pasta static/
+# - resumo (opcional) - texto curto para a home; sem ele, é gerado a partir do conteudo
+# - tags (opcional) - lista de strings, ex.: ["Arquitetura", "Pygame"]
 # ------------------------------------------------------------------------------
 
 posts = [
@@ -135,3 +137,21 @@ downloads = [
         "arquivo": "downloads/caminho-para-o-arquivo"
     }
 ]
+
+# ------------------------------------------------------------------------------
+# Card na home (opcional — sem ele o projeto não aparece na home)
+# ------------------------------------------------------------------------------
+# - resumo, categoria, tecnologias, imagem, ordem: como nos demais projetos
+# - publicado_em (opcional, datetime): habilita "Novo projeto" no feed de atividade
+# - atualizado_em (opcional, datetime): habilita "Projeto atualizado" no feed
+#   Sem essas datas, o selo "Novo/Atualizado" usa a data dos posts do projeto.
+# ------------------------------------------------------------------------------
+
+# home_card = {
+#     "resumo": "Descrição curta",
+#     "categoria": "web",
+#     "tecnologias": ["Python"],
+#     "imagem": "img/nome_preview.webp",
+#     "ordem": 100,
+#     "publicado_em": datetime(2026, 1, 1),
+# }
